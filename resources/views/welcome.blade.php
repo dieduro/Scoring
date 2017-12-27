@@ -9,11 +9,11 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
        
     </head>
     <body>
-        <h1>Mi mejor APP!</h1>
+        <h1>Scoring App!</h1>
         <div id="root"> </div>
         <script src="{{mix('js/app.js')}}" ></script>
     </body>

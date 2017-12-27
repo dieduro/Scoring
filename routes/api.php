@@ -19,7 +19,8 @@ use App\Team;
 Route::get('teams', function () {
     return response(Team::all(),200);
 });
-Route::post('/teams/agregar', 'ProductsController@store');
+Route::get('/cargarScoresEvento/{id}', 'EventScoresController@index');
+Route::post('/cargarScoresEvento/{id}', 'EventScoresController@store');
 Route::get('/teams/{id}', 'TeamController@show');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

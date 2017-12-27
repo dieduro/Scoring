@@ -4,7 +4,7 @@ import './index.css';
 // import logo from './logo.svg';
 import './App.css';
 import Form from './components/Form';
-// import Team from './components/Team';
+import Btn from './components/Btn';
 import List from './components/List';
 import axios from 'axios';
 
@@ -13,11 +13,12 @@ import { Jumbotron, Col } from 'react-bootstrap';
 class App extends Component {
   constructor(props){
     super(props)
-   
+    this.updateScores = this.updateScores.bind(this)
     this.state= {
         teams : [
           
-        ]  
+        ],
+        eventId : 1  
     }
     // this.componentWillMount = this.componentWillMount.bind(this);
     // this.runAxios= this.runAxios.bind(this);
@@ -33,51 +34,48 @@ class App extends Component {
         .then(teams => {
             let teamsArray = teams
             teamsArray.forEach((team) => {
-            team.updated = false
+            team.updated = 'false'
             })
             //Fetched product is stored in the state
-            console.log(teamsArray)
             this.setState({ teams : teamsArray });
         });
         
   }
-  // componentWillMount(){
-  //  this.runAxios();
 
-  // }
-  // runAxios(){
-     
-  //   axios.get('api/teams')
-  //   .then(function (response) {
-  //     const teamsArray = response.data;
-      
-  //     teamsArray.forEach((team) => {
-  //       team.updated = false
-  //     })
-  //     console.log(teamsArray)
-  //     console.log(this)
-  //     this.setState({
-  //      teams : teamsArray 
-  //     })
-  //   })
-  //   .catch(function (error) {
-  //   console.log(error);
-  //   });
-  // }
+
+  updateScores(e){
+    e.preventDefault()
+    let updatedTeams = this.state.teams.filter((team) => {
+      return team.updated == 'true'
+    })
+    console.log(updatedTeams)
+    let url = '/api/cargarScoresEvento/' + this.state.eventId
+    axios.post(url, {
+      data : updatedTeams,
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
+    });
+    // resultElement.innerHTML = generateSuccessHTMLOutput(response);
+    // resultElement.innerHTML = generateErrorHTMLOutput(error);
+  }
 
   setScore(team_id, score) {
     let team = this.state.teams.find((aTeam)=> aTeam.id == team_id);
     team.score = score;
-    team.updated = true;
+    team.updated = 'true';
     this.forceUpdate();
 }
 
- render() {   
+ render() {  
     let nonUpdatedTeams = this.state.teams.filter(function (team) {
-      return (team.updated === false);
+      return (team.updated === 'false');
     });
     let updatedTeams = this.state.teams.filter(function (team) {
-      return (team.updated === true);
+      return (team.updated === 'true');
     });
     updatedTeams = updatedTeams.sort(function(a, b){return a.score - b.score})
     return (
@@ -89,11 +87,12 @@ class App extends Component {
           <h3>Evento: -id del Evento-</h3>
           <Form update={this.setScore.bind(this)}/>
         </Jumbotron>
-        <Col md={6} sm={6}>
+        <Col className="column" md={6} sm={6}>
           <List  entries={nonUpdatedTeams}/>
         </Col>
-        <Col md={6} sm={6}>  
+        <Col className="column" md={6} sm={6}>  
           <List entries={updatedTeams}/>   
+          <Btn text="Guardar scores" funcion={this.updateScores}/>
         </Col>
       </div>
      
@@ -106,8 +105,3 @@ const rootDiv = document.getElementById('root');
 
 ReactDOM.render(<App />, rootDiv );
 
-
-// {id : 1, name : "A", score : "000", updated : false},
-//           {id : 2, name : "B", score : "111", updated : false},
-//           {id : 3, name : "C", score : "222", updated : false},
-//           {id : 4, name : "D", score : "333", updated : false}
