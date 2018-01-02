@@ -12,15 +12,9 @@ export default class Form extends React.Component {
         
         let team = this.refs.team_id.value;
         let score = this.refs.score.value;
-        console.log(team);
-        console.log(score);
         this.props.update(team, score);
         this.refs.team_id.value = "";
         this.refs.score.value = "" ;
-
-
-
-      
     }
     render ()   {
         return(

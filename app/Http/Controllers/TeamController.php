@@ -24,15 +24,6 @@ class TeamController extends Controller
     public function storeEventPositions(Request $request) {
         dd($request);
         
-        // $team = Team::find($id);
-        // $team->name = $request->input('name');
-        // $team->cost = $request->input('cost');
-        // $team->profit_margin = $request->input('profit_margin');
-        // $team->category()->associate($category);
-        // $team->save();
-    
-        // $product->properties()->sync($request->input('properties'));
-    
-        // return redirect('/productos/' . $id);
+       
     }
 }

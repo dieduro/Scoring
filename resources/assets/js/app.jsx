@@ -8,75 +8,95 @@ import Btn from './components/Btn';
 import List from './components/List';
 import axios from 'axios';
 
-import { Jumbotron, Col } from 'react-bootstrap';
+import { Jumbotron, Col, Panel } from 'react-bootstrap';
 
 class App extends Component {
   constructor(props){
     super(props)
-    this.updateScores = this.updateScores.bind(this)
+    this.fetchUpdatedTeams = this.fetchUpdatedTeams.bind(this);
+    this.fetchNonUpdatedTeams = this.fetchNonUpdatedTeams.bind(this);
     this.state= {
-        teams : [
+        nonUpdatedTeams : [
           
         ],
-        eventId : 1  
-    }
-    // this.componentWillMount = this.componentWillMount.bind(this);
-    // this.runAxios= this.runAxios.bind(this);
-  }
+        updatedTeams : [
 
+        ],
+        eventId : 1,
+        category_id: 1,
+   
+    }
+   
+  }
   componentDidMount() {
-    /* fetch API in action */
-    fetch('/api/teams')
+    this.fetchNonUpdatedTeams();/* fetch API in action */    
+  }
+  fetchNonUpdatedTeams() {
+    fetch('/api/event/'+this.state.eventId)
         .then(response => {
-            
             return response.json();
         })
-        .then(teams => {
-            let teamsArray = teams
+        .then(teams => {   
+            let teamsArray = teams;
             teamsArray.forEach((team) => {
-            team.updated = 'false'
-            })
+              team.show = true
+              })
+              console.log(teamsArray)
+             this.fetchUpdatedTeams();
             //Fetched product is stored in the state
-            this.setState({ teams : teamsArray });
+             this.setState({ nonUpdatedTeams : teamsArray });
         });
-        
   }
-
-
-  updateScores(e){
-    e.preventDefault()
-    let updatedTeams = this.state.teams.filter((team) => {
-      return team.updated == 'true'
+  fetchUpdatedTeams() {
+    
+    fetch('/api/event/'+this.state.eventId + '/scores')
+    .then(response => {
+        console.log(response)
+        return response.json();
     })
-    console.log(updatedTeams)
-    let url = '/api/cargarScoresEvento/' + this.state.eventId
-    axios.post(url, {
-      data : updatedTeams,
-    })
-    .then(function (response) {
-      console.log(response)
-    })
-    .catch(function (error) {
-      console.log(error)
+    .then(eventResults => {
+        let teamsArray = eventResults
+        this.setState({ updatedTeams : teamsArray });
     });
-    // resultElement.innerHTML = generateSuccessHTMLOutput(response);
-    // resultElement.innerHTML = generateErrorHTMLOutput(error);
+
+
   }
 
   setScore(team_id, score) {
-    let team = this.state.teams.find((aTeam)=> aTeam.id == team_id);
-    team.score = score;
-    team.updated = 'true';
-    this.forceUpdate();
-}
+    const teamScore = {
+      team_id,
+      score
+    }
+      
+    this.state.nonUpdatedTeams.forEach((team)=>{
+      if(team.team_id == team_id){
+          team.show=false
+      } 
+    }) 
+    const url = '/api/event/' + this.state.eventId+'/cargarScore/'
+    axios.post(url,teamScore)
+    .then(function(response) {
+      //console.log(response);
+    })
+    .catch(function(error) {
+      //console.log(error);
+    });
+    
+    this.setState({
+      nonUpdatedTeams: this.state.nonUpdatedTeams.filter(function (team) {
+        return (team.show === true);
+      })
+    })
+    this.fetchUpdatedTeams()
+    
+  }
 
+ 
  render() {  
-    let nonUpdatedTeams = this.state.teams.filter(function (team) {
-      return (team.updated === 'false');
+    let nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
+      return (team.show === true);
     });
-    let updatedTeams = this.state.teams.filter(function (team) {
-      return (team.updated === 'true');
-    });
+    let updatedTeams = this.state.updatedTeams
     updatedTeams = updatedTeams.sort(function(a, b){return a.score - b.score})
     return (
       <div className="App">
@@ -90,11 +110,12 @@ class App extends Component {
         <Col className="column" md={6} sm={6}>
           <List  entries={nonUpdatedTeams}/>
         </Col>
+       
         <Col className="column" md={6} sm={6}>  
           <List entries={updatedTeams}/>   
-          <Btn text="Guardar scores" funcion={this.updateScores}/>
-        </Col>
-      </div>
+        </Col> 
+        
+       </div>
      
     );
     

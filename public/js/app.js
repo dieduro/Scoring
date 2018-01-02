@@ -19100,71 +19100,89 @@ var App = function (_Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.updateScores = _this.updateScores.bind(_this);
+    _this.fetchUpdatedTeams = _this.fetchUpdatedTeams.bind(_this);
+    _this.fetchNonUpdatedTeams = _this.fetchNonUpdatedTeams.bind(_this);
     _this.state = {
-      teams: [],
-      eventId: 1
-      // this.componentWillMount = this.componentWillMount.bind(this);
-      // this.runAxios= this.runAxios.bind(this);
-    };return _this;
+      nonUpdatedTeams: [],
+      updatedTeams: [],
+      eventId: 1,
+      category_id: 1
+
+    };
+
+    return _this;
   }
 
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      this.fetchNonUpdatedTeams(); /* fetch API in action */
+    }
+  }, {
+    key: 'fetchNonUpdatedTeams',
+    value: function fetchNonUpdatedTeams() {
       var _this2 = this;
 
-      /* fetch API in action */
-      fetch('/api/teams').then(function (response) {
-
+      fetch('/api/event/' + this.state.eventId).then(function (response) {
         return response.json();
       }).then(function (teams) {
         var teamsArray = teams;
         teamsArray.forEach(function (team) {
-          team.updated = 'false';
+          team.show = true;
         });
+        console.log(teamsArray);
+        _this2.fetchUpdatedTeams();
         //Fetched product is stored in the state
-        _this2.setState({ teams: teamsArray });
+        _this2.setState({ nonUpdatedTeams: teamsArray });
       });
     }
   }, {
-    key: 'updateScores',
-    value: function updateScores(e) {
-      e.preventDefault();
-      var updatedTeams = this.state.teams.filter(function (team) {
-        return team.updated == 'true';
-      });
-      console.log(updatedTeams);
-      var url = '/api/cargarScoresEvento/' + this.state.eventId;
-      __WEBPACK_IMPORTED_MODULE_7_axios___default.a.post(url, {
-        data: updatedTeams
-      }).then(function (response) {
+    key: 'fetchUpdatedTeams',
+    value: function fetchUpdatedTeams() {
+      var _this3 = this;
+
+      fetch('/api/event/' + this.state.eventId + '/scores').then(function (response) {
         console.log(response);
-      }).catch(function (error) {
-        console.log(error);
+        return response.json();
+      }).then(function (eventResults) {
+        var teamsArray = eventResults;
+        _this3.setState({ updatedTeams: teamsArray });
       });
-      // resultElement.innerHTML = generateSuccessHTMLOutput(response);
-      // resultElement.innerHTML = generateErrorHTMLOutput(error);
     }
   }, {
     key: 'setScore',
     value: function setScore(team_id, score) {
-      var team = this.state.teams.find(function (aTeam) {
-        return aTeam.id == team_id;
+      var teamScore = {
+        team_id: team_id,
+        score: score
+      };
+
+      this.state.nonUpdatedTeams.forEach(function (team) {
+        if (team.team_id == team_id) {
+          team.show = false;
+        }
       });
-      team.score = score;
-      team.updated = 'true';
-      this.forceUpdate();
+      var url = '/api/event/' + this.state.eventId + '/cargarScore/';
+      __WEBPACK_IMPORTED_MODULE_7_axios___default.a.post(url, teamScore).then(function (response) {
+        //console.log(response);
+      }).catch(function (error) {
+        //console.log(error);
+      });
+
+      this.setState({
+        nonUpdatedTeams: this.state.nonUpdatedTeams.filter(function (team) {
+          return team.show === true;
+        })
+      });
+      this.fetchUpdatedTeams();
     }
   }, {
     key: 'render',
     value: function render() {
-      var nonUpdatedTeams = this.state.teams.filter(function (team) {
-        return team.updated === 'false';
+      var nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
+        return team.show === true;
       });
-      var updatedTeams = this.state.teams.filter(function (team) {
-        return team.updated === 'true';
-      });
+      var updatedTeams = this.state.updatedTeams;
       updatedTeams = updatedTeams.sort(function (a, b) {
         return a.score - b.score;
       });
@@ -19198,8 +19216,7 @@ var App = function (_Component) {
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_react_bootstrap__["a" /* Col */],
           { className: 'column', md: 6, sm: 6 },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_List__["a" /* default */], { entries: updatedTeams }),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Btn__["a" /* default */], { text: 'Guardar scores', funcion: this.updateScores })
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_List__["a" /* default */], { entries: updatedTeams })
         )
       );
     }
@@ -31303,8 +31320,6 @@ var Form = function (_React$Component) {
 
             var team = this.refs.team_id.value;
             var score = this.refs.score.value;
-            console.log(team);
-            console.log(score);
             this.props.update(team, score);
             this.refs.team_id.value = "";
             this.refs.score.value = "";
@@ -31447,8 +31462,8 @@ var List = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var todoEntries = this.props.entries;
-      var teamList = todoEntries.map(this.createTasks);
+      var entries = this.props.entries;
+      var teamList = entries.map(this.createTasks);
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'ul',
@@ -31460,11 +31475,6 @@ var List = function (_Component) {
 
   return List;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
-// {/* <li onClick={() => this.delete(item.key)} 
-//               key={item.key}><h1> {item.text[0]} </h1>
-//               <p>{item.text[1]} <br/> {item.text[2]} <br/>{item.text[3]}</p></li>
-//      */}
-
 
 /* harmony default export */ __webpack_exports__["a"] = (List);
 
@@ -31508,7 +31518,7 @@ var Team = function (_Component) {
     }, {
         key: 'render',
         value: function render() {
-
+            // console.log(this.props.texto);
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'li',
                 null,
@@ -31522,14 +31532,14 @@ var Team = function (_Component) {
                             'h1',
                             null,
                             ' ',
-                            this.props.texto.name,
+                            this.props.texto.team_name,
                             ' '
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'p',
                             null,
                             'Id: ',
-                            this.props.texto.id,
+                            this.props.texto.team_id,
                             ' ',
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
                             'Score: ',

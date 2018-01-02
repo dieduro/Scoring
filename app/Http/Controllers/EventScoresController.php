@@ -3,58 +3,134 @@
 namespace App\Http\Controllers;
 
 use App\EventScores;
+use App\Team;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection as Collection;
 
 class EventScoresController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        
+    
+    public function index($event_id)
+    {   
+        $teams = Team::all();
+        $eventScores = EventScores::where('event_id','=', $event_id)->get();
+       
+        $teams = $teams->filter(function($team) use($eventScores)
+        {     
+            if($eventScores->contains('team_id', $team->id)){
+                return false;
+            }else {
+                return true;
+            }
+            
+        });
+        foreach ($teams as $team){
+            $nonUpdatedTeams[] = [
+                'team_id' =>$team->id,
+                'team_name' => $team->name,
+                'ath1' => $team->ath1,
+                'ath2' => $team->ath2
+            ];
+        }
+            
+       return response($nonUpdatedTeams, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
+    
+  
+
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        return view('test', $param);
-        
-        $event = Event::find($id);
+    public function setTeamResult(Request $request, $event_id)
+    {   
+        $event_id = $event_id;
+        $team_id = $request->input('team_id');
+        $score = $request->input('score');
+
         $rules = [
-            "team_id" => "required|unique",
-            "event_id" => "required|numeric",
-            
+            "team_id" => "required",
+            "score" => "required",
         ];
     
         $messages = [
             "required" => "El :attribute es requerido!",
             "unique" => "El :attribute tiene que ser único!",
-            "numeric" => "El :attribute tiene que ser numérico!",
-            "between" => "El :attribute tiene que estar entre :min y :max!"
+            "numeric" => "El :attribute tiene que ser numérico!"
         ];
+
+        $team = EventScores::where('team_id', $team_id)->first();
+        if ($team) {
+            $team->score = $score;
+
+            $team->save();
+        }else {
+            $request->validate($rules, $messages);
     
-        $request->validate($rules, $messages);
-        $param = [
-            'data' => $request
-        ];
+            $eventScore = \App\EventScores::create([
+                'event_id' => $event_id,
+                'team_id' => $team_id,
+                'score' => $score
+               
+            ]);
+            return response()->json([
+                'eventScore' => $eventScore
+            ]);
+          
+        }
+       
+    
+    }
+
+    public function showScores($event_id) {
+        $scores= EventScores::where('event_id', $event_id)->get();
+        $updatedTeams = [];
+        if ($scores) {
+        foreach ($scores as $score){
+            $updatedTeams[] = [
+                'team_id' =>$score->team->id,
+                'team_name' => $score->team->name,
+                'ath1' => $score->team->ath1,
+                'ath2' => $score->team->ath2,
+                'score' => $score->score];
+        }
+        return response($updatedTeams, 200);
+       }
+       
+        
+    }
+
+
+    public function store(Request $request)
+    {
+
+        $teams = $request->input('teams');
+
+        dd($teams);
+        
+        
+        // $event = Event::find($id);
+        // $rules = [
+        //     "team_id" => "required|unique",
+        //     "event_id" => "required|numeric",
+            
+        // ];
+    
+        // $messages = [
+        //     "required" => "El :attribute es requerido!",
+        //     "unique" => "El :attribute tiene que ser único!",
+        //     "numeric" => "El :attribute tiene que ser numérico!",
+        //     "between" => "El :attribute tiene que estar entre :min y :max!"
+        // ];
+    
+        // $request->validate($rules, $messages);
+        // $param = [
+        //     'data' => $request
+        // ];
         
         // $scores = \App\Product::create([
             

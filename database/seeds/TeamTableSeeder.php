@@ -21,7 +21,8 @@ class TeamTableSeeder extends Seeder
                 'name' => $faker->word,
                 'ath1' => $faker->name,
                 'ath2' => $faker->name,
-                'code' => $faker->randomDigit
+                'code' => $faker->numberBetween($min = 1, $max = 160),
+                'category_id' => $faker->numberBetween($min = 1, $max = 4)
             ]);
         }
     }

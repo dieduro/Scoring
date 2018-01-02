@@ -14,17 +14,15 @@ export default class List extends Component {
     
       return  <div key={item.key}> 
                 <Team  texto={item}/>
-                {/* <button  onClick={()=> this.delete(item.key)}>Borrar</button> */}
               </div>
   } 
   delete(key) {
     this.props.delete(key);
   }
   render() {
-    var todoEntries = this.props.entries;
-    var teamList = todoEntries.map(this.createTasks);
+    var entries = this.props.entries;
+    var teamList = entries.map(this.createTasks);
 
- 
     return (
       <ul className="theList">
           {teamList}
@@ -34,7 +32,3 @@ export default class List extends Component {
 
     
 }
-// {/* <li onClick={() => this.delete(item.key)} 
-//               key={item.key}><h1> {item.text[0]} </h1>
-//               <p>{item.text[1]} <br/> {item.text[2]} <br/>{item.text[3]}</p></li>
-//      */}

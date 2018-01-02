@@ -16,14 +16,17 @@ use App\Team;
 
 
 //  Route::get('/teams', 'TeamController@index');
-Route::get('teams', function () {
-    return response(Team::all(),200);
-});
-Route::get('/cargarScoresEvento/{id}', 'EventScoresController@index');
-Route::post('/cargarScoresEvento/{id}', 'EventScoresController@store');
+
+Route::get('/event/{id}', 'EventScoresController@index');
+Route::post('event/{id}/cargarScore', 'EventScoresController@setTeamResult');
+Route::get('/event/{id}/scores', 'EventScoresController@showScores');
+
 Route::get('/teams/{id}', 'TeamController@show');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// function () {
+//     return response(Team::all(),200);
+// });
