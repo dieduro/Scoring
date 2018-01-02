@@ -59,7 +59,6 @@ class App extends Component {
         this.setState({ updatedTeams : teamsArray });
     });
 
-
   }
 
   setScore(team_id, score) {
@@ -67,7 +66,6 @@ class App extends Component {
       team_id,
       score
     }
-      
     this.state.nonUpdatedTeams.forEach((team)=>{
       if(team.team_id == team_id){
           team.show=false
@@ -75,19 +73,19 @@ class App extends Component {
     }) 
     const url = '/api/event/' + this.state.eventId+'/cargarScore/'
     axios.post(url,teamScore)
-    .then(function(response) {
+    .then(response=> {
+      this.fetchUpdatedTeams()
       //console.log(response);
     })
     .catch(function(error) {
       //console.log(error);
     });
-    
     this.setState({
       nonUpdatedTeams: this.state.nonUpdatedTeams.filter(function (team) {
         return (team.show === true);
       })
     })
-    this.fetchUpdatedTeams()
+    
     
   }
 

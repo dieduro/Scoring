@@ -19152,11 +19152,12 @@ var App = function (_Component) {
   }, {
     key: 'setScore',
     value: function setScore(team_id, score) {
+      var _this4 = this;
+
       var teamScore = {
         team_id: team_id,
         score: score
       };
-
       this.state.nonUpdatedTeams.forEach(function (team) {
         if (team.team_id == team_id) {
           team.show = false;
@@ -19164,17 +19165,16 @@ var App = function (_Component) {
       });
       var url = '/api/event/' + this.state.eventId + '/cargarScore/';
       __WEBPACK_IMPORTED_MODULE_7_axios___default.a.post(url, teamScore).then(function (response) {
+        _this4.fetchUpdatedTeams();
         //console.log(response);
       }).catch(function (error) {
         //console.log(error);
       });
-
       this.setState({
         nonUpdatedTeams: this.state.nonUpdatedTeams.filter(function (team) {
           return team.show === true;
         })
       });
-      this.fetchUpdatedTeams();
     }
   }, {
     key: 'render',
