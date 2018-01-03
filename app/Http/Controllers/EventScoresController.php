@@ -89,17 +89,18 @@ class EventScoresController extends Controller
     public function showScores($event_id) {
         $scores= EventScores::where('event_id', $event_id)->get();
         $updatedTeams = [];
-        if ($scores) {
+   
         foreach ($scores as $score){
             $updatedTeams[] = [
-                'team_id' =>$score->team->id,
+                'team_id' => $score->team->id,
                 'team_name' => $score->team->name,
                 'ath1' => $score->team->ath1,
                 'ath2' => $score->team->ath2,
-                'score' => $score->score];
+                'score' => $score->score
+            ];
         }
         return response($updatedTeams, 200);
-       }
+       
        
         
     }

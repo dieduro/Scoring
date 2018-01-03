@@ -10,8 +10,12 @@ class EventController extends Controller
 
     public function index()
     {
-       return Event::all(); 
-        
+        $categories = [];
+        $events = Event::all(); 
+        foreach ($events as $event) {
+            $categories[] = $event->category->nivel;
+        };
+        return $categories;
     }
 
     public function create()

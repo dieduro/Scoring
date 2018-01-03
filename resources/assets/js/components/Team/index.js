@@ -17,7 +17,7 @@ export default class Team extends Component {
                 <Panel>
                     <div>
                         <h1> {this.props.texto.team_name} </h1>
-                        {/* <h3>{this.props.text.ath1} y {this.props.text.ath2}</h3> */}
+                        {/* <h3>{this.props.texto.ath1} y {this.props.texto.ath2}</h3> */}
                         <p>Id: {this.props.texto.team_id} <br/>Score: {this.props.texto.score}<br/>Updated: {this.props.texto.updated}</p>
                         {/* <Btn  text="Borrar" funcion={this.delete.bind(this)} /> */}
                     </div>

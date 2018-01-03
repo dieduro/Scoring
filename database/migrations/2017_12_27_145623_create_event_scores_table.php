@@ -17,7 +17,7 @@ class CreateEventScoresTable extends Migration
             $table->increments('id');
             $table->integer('team_id');
             $table->integer('event_id');
-            $table->integer('score')->nullable();
+            $table->decimal('score')->nullable();
             $table->timestamps();
         });
     }
