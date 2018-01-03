@@ -12,9 +12,10 @@ Route::get('/event/{id}/scores', 'EventScoresController@showScores');
 
 
 // TEAM ROUTES
-Route::get('/teams', function () {
-    return response(Team::all(),200);
-});
+// Route::get('/teams', function () {
+//     return response(Team::all(),200);
+// });
+Route::get('/teams','TeamController@index' );
 Route::post('/teams/create', 'TeamController@store');
 Route::get('/teams/{id}', 'TeamController@show');
 

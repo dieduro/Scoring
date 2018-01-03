@@ -15179,7 +15179,7 @@ var List = function (_Component) {
     value: function createTasks(item) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { key: item.id },
+        { key: item.team_id },
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Team__["a" /* default */], { className: 'team', texto: item })
       );
     }
@@ -19249,7 +19249,7 @@ var App = function (_Component) {
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
         { className: 'App' },
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__components_EventScores__["a" /* default */], null)
+        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_Teams__["a" /* default */], { categoria: 'RXD', sexo: 'Hombres' })
       );
     }
   }]);
@@ -31424,7 +31424,7 @@ var EventScores = function (_Component) {
   return EventScores;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* harmony default export */ __webpack_exports__["a"] = (EventScores);
+/* unused harmony default export */ var _unused_webpack_default_export = (EventScores);
 
 /***/ }),
 /* 323 */
@@ -43902,7 +43902,7 @@ var Teams = function (_Component) {
     return Teams;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
-/* unused harmony default export */ var _unused_webpack_default_export = (Teams);
+/* harmony default export */ __webpack_exports__["a"] = (Teams);
 
 /***/ }),
 /* 483 */

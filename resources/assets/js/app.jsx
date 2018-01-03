@@ -25,8 +25,8 @@ class App extends Component {
  render() {  
     return (
       <div className="App">
-        {/* <Teams categoria="RXD" sexo="Hombres" /> */}
-        <EventScores />
+        <Teams categoria="RXD" sexo="Hombres" />
+        {/* <EventScores /> */}
       
        </div>
      

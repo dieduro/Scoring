@@ -13,7 +13,19 @@ class TeamController extends Controller
     
     public function index()
     {
-        return new TeamResource(Team::all());
+        $teams = Team::all();
+        $teamsArray = [];
+        foreach ($teams as $team){
+            $teamsArray[] = [
+                'team_id' =>$team->id,
+                'team_name' => $team->name,
+                'ath1' => $team->ath1,
+                'ath2' => $team->ath2,
+                'box' => $team->box,
+                'category_id' => $team->category_id
+            ];
+        }
+        return response($teamsArray, 200);
     }
 
     public function show($id)

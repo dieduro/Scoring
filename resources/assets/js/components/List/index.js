@@ -11,7 +11,7 @@ export default class List extends Component {
     }
 
   createTasks(item) {
-      return  <div key={item.id}> 
+      return  <div key={item.team_id}> 
                 <Team className="team" texto={item}/>
               </div>
   } 
