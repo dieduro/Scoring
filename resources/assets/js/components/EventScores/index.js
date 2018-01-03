@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../../index.css';
-
 import '../../App.css';
-import Form from '../Form';
+import SetScoreForm from '../SetScoreForm';
 import Btn from '../Btn';
 import List from '../List';
 import axios from 'axios';
@@ -41,7 +40,7 @@ class EventScores extends Component {
             teamsArray.forEach((team) => {
               team.show = true
               })
-              console.log(teamsArray)
+           
              this.fetchUpdatedTeams();
             //Fetched product is stored in the state
              this.setState({ nonUpdatedTeams : teamsArray });
@@ -51,7 +50,7 @@ class EventScores extends Component {
     
     fetch('/api/event/'+this.state.eventId + '/scores')
     .then(response => {
-        console.log(response)
+        
         return response.json();
     })
     .then(eventResults => {
@@ -59,8 +58,7 @@ class EventScores extends Component {
         this.setState({ updatedTeams : teamsArray });
     }) .catch(function(error) {
       console.log(error);
-    });;
-
+    });
   }
 
   setScore(team_id, score) {
@@ -86,9 +84,7 @@ class EventScores extends Component {
       nonUpdatedTeams: this.state.nonUpdatedTeams.filter(function (team) {
         return (team.show === true);
       })
-    })
-    
-    
+    }) 
   }
 
  
@@ -105,7 +101,7 @@ class EventScores extends Component {
         </header>
         <Jumbotron>
           <h3>Evento: -id del Evento-</h3>
-          <Form update={this.setScore.bind(this)}/>
+          <SetScoreForm update={this.setScore.bind(this)}/>
         </Jumbotron>
         <Col className="column" md={6} sm={6}>
           <List  entries={nonUpdatedTeams}/>
@@ -117,7 +113,7 @@ class EventScores extends Component {
         
        </div>
      
-    );
+    )
     
   }
 }

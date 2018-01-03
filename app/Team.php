@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Team extends Model
 {
+    protected $fillable = [ 'name', 'ath1', 'ath2', 'box', 'category_id' ];
+
     public function category() {
         return $this->belongsTo('\App\Category', 'category_id', 'id');
     }

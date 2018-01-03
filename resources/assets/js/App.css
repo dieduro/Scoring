@@ -2,6 +2,7 @@
 
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -22,6 +23,11 @@
 
 .App-intro {
   font-size: large;
+}
+.team {
+
+  background-color: green;
+
 }
 
 @keyframes App-logo-spin {

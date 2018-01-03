@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Team from '../Team'
-// import Btn from '../Btn'
+import '../../App.css';
 
 
 export default class List extends Component {
@@ -11,9 +11,8 @@ export default class List extends Component {
     }
 
   createTasks(item) {
-    
-      return  <div key={item.key}> 
-                <Team  texto={item}/>
+      return  <div key={item.id}> 
+                <Team className="team" texto={item}/>
               </div>
   } 
   delete(key) {

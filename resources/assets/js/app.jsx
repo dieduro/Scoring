@@ -3,10 +3,11 @@ import React, { Component } from 'react';
 import './index.css';
 
 import './App.css';
-import Form from './components/Form';
 import EventScores from './components/EventScores';
+import Teams from './components/Teams';
+
 import Btn from './components/Btn';
-import List from './components/List';
+
 import axios from 'axios';
 
 import { Jumbotron, Col, Panel } from 'react-bootstrap';
@@ -24,11 +25,12 @@ class App extends Component {
  render() {  
     return (
       <div className="App">
-       <EventScores/>
+        {/* <Teams categoria="RXD" sexo="Hombres" /> */}
+        <EventScores />
       
        </div>
      
-    );
+    )
     
   }
 }
