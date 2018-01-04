@@ -18,7 +18,7 @@ class CreateTeamsTable extends Migration
             $table->string('name');
             $table->string('ath1');
             $table->string('ath2');
-            $table->string('box');
+            $table->string('box')->nullable();
             $table->integer('category_id');
             $table->integer('totalScore')->nullable();
             $table->timestamps();

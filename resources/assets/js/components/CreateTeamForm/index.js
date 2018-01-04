@@ -6,13 +6,11 @@ export default class CreateTeamForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           
+            error: null
         }    
     } 
 
-    createTeam(e) { //verifica {team} e invoca la funcion update() del parent, con parametros team y score
-        e.preventDefault();
-
+    getCategoryId() {
         let gender = document.getElementsByName('gender');
         for (var i = 0, length = gender.length; i < length; i++)
         {
@@ -44,36 +42,40 @@ export default class CreateTeamForm extends React.Component {
             }else {
                 category_id = 4
             }
-
         }
+        return category_id
+
+    }
+
+    createTeam(e) { //verifica {team} e invoca la funcion create() del parent, con parametro teamData
+        e.preventDefault();
         let name = this.refs.name.value;
         let ath1 = this.refs.ath1.value;
         let ath2 = this.refs.ath2.value;
         let box = this.refs.box.value;
-    
-        const teamData = {
-            name, 
-            ath1,
-            ath2,
-            box,
-            category_id
-        }
-        this.props.create(teamData);
-        this.setState(this.state)
+        let category_id = this.getCategoryId()
+        
+        if (name == "" || ath1== "" || ath2== "" )  {
+            this.setState({error:"Revisá los campos. Hay un error en ellos." })
 
-        this.refs.name.value = "";
-        this.refs.ath1.value = "" ;
-        this.refs.ath2.value = "" ;
-        this.refs.box.value = "" ;
+        }else {       
+            this.setState({error: null })
+            const teamData = {
+                name, 
+                ath1,
+                ath2,
+                box,
+                category_id
+            }
+            this.props.create(teamData); //invoca método del parent component
+            this.setState(this.state)
     
-        // if (team == "" || score== "" )  {
-        //     this.setState({error:"Revisá los campos. Hay un error en ellos." })
-
-        // }else {
-             
-       
-        //     this.setState({error: null })
-        // }   
+            //RESETEAMOS EL VALUE DE LOS INPUTS
+            this.refs.name.value = "";
+            this.refs.ath1.value = "" ;
+            this.refs.ath2.value = "" ;
+            this.refs.box.value = "" ;
+        }      
     }
     render ()   {
         

@@ -63,4 +63,9 @@ class TeamController extends Controller
             'team' => $team 
         ]);
     }
+
+    public function leaderboard($category_id) {
+        $teams = Team::where('category_id', $category_id)->orderBy('totalScore')->get();
+        return response($teams, 200);
+    }
 }
