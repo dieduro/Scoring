@@ -3,7 +3,7 @@ import '../../index.css';
 import '../../App.css';
 import SetScoreForm from '../SetScoreForm';
 import Btn from '../Btn';
-import List from '../List';
+import TeamList from '../TeamList';
 import axios from 'axios';
 
 import { Jumbotron, Col, Panel } from 'react-bootstrap';
@@ -15,21 +15,23 @@ class EventScores extends Component {
     this.fetchNonUpdatedTeams = this.fetchNonUpdatedTeams.bind(this);
 
     this.state= {
-        nonUpdatedTeams : null,
-        updatedTeams : null,
+        nonUpdatedTeams : [],
+        updatedTeams : [],
         eventId : this.props.event,
+        categoryId: this.props.category_id
     }
    
   }
 
   componentDidMount() {
     let event = this.state.eventId
+    let category = this.state.categoryId
     this.fetchNonUpdatedTeams(event);
     /* fetch API in action */    
   }
 
-  fetchNonUpdatedTeams(event) {
-    fetch('/api/event/'+event)
+  fetchNonUpdatedTeams(category, event) {
+    fetch('/api/event/c'+category+'e'+event)
         .then(response => {
             return response.json();
         })
@@ -58,7 +60,7 @@ class EventScores extends Component {
       console.log(error);
     });
   }
-
+  
   setScore(team_id, score) {
     const teamScore = {
       team_id,
@@ -86,6 +88,11 @@ class EventScores extends Component {
     })
 
   }
+  storePositions(){
+    console.log('guardando posiciones')
+  }
+
+
 
  
  render() {  
@@ -100,6 +107,7 @@ class EventScores extends Component {
   if (updatedTeams){
     updatedTeams = updatedTeams.sort(function(a, b){return a.score - b.score})
   }
+    
     return (
       <div>
         <header className="App-header">
@@ -108,13 +116,17 @@ class EventScores extends Component {
         <Jumbotron>
           <h3>Evento: {this.state.eventId}</h3>
           <SetScoreForm update={this.setScore.bind(this)}/>
+         
+         { nonUpdatedTeams.length == 0 && 
+          <Btn text="Guardar Posiciones" funcion={this.storePositions.bind(this)}/>
+         }
+  
         </Jumbotron>
-        
         {this.state.nonUpdatedTeams ?
         
         <div>
           <Col className="column" md={6} sm={6}>
-            <List  entries={nonUpdatedTeams}/>
+            <TeamList  entries={nonUpdatedTeams}/>
           </Col>
         </div>
           :
@@ -122,17 +134,14 @@ class EventScores extends Component {
           <h3>Cargando Equipos y Resultados</h3> 
         </div>
         }
-        {this.state.updatedTeams ?
+        {this.state.updatedTeams &&
         <div>
           <Col className="column" md={6} sm={6}>  
-            <List entries={updatedTeams}/>   
+            <TeamList entries={updatedTeams}/>   
           </Col>
         </div>
-          :
-        <div>
-         
-        </div>
         }
+        
        
          
       

@@ -30,7 +30,42 @@
 
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.leftNav {
+  width: 20%;
+  height: 100vh;
+  position: fixed;
+  float: left;
 }
+.section {
+  width:80%;
+  float:right;
+}
+
+
+.table {
+  width:80%;
+  border: 1px solid black;
+  margin-top: 30px;
+}
+.thead {
+  position: relative;
+  top:0;
+  left:0;
+  display:flex;
+  justify-content: space-between;
+}
+.theading {
+  flex-basis: 15%;
+  display:inline-block;
+  font-weight: 600;
+  margin: 0 10px;
+}
+.trow {
+  display:flex;
+}
+.cell {
+  flex-basis: 15%;
+  display:inline-block;
+  margin: 0 10px;
+}
+

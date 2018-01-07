@@ -10,9 +10,10 @@ use Illuminate\Support\Collection as Collection;
 class EventScoresController extends Controller
 {
     
-    public function index($event_id)
+    public function index($category_id, $event_id)
     {   
-        $teams = Team::all();
+        $teams = Team::where('category_id', $category_id)->get();
+     
         $eventScores = EventScores::where('event_id','=', $event_id)->get();
        
         $teams = $teams->filter(function($team) use($eventScores)

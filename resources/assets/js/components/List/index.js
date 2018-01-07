@@ -11,20 +11,28 @@ export default class List extends Component {
     }
 
   createTasks(item) {
-      return  <div key={item.team_id}> 
-                <Team className="team" texto={item}/>
-              </div>
+     console.log(item)
+      return <li key={item.id}>
+                <div className="cell" id="category">{item.category}</div>
+                <div className="cell" id="eventNumber">{item.eventNumber}</div>
+                <div className="cell" id="name">{item.name}</div>
+                <div className="cell" id="wod">{item.wod}</div>
+                <div className="cell" id="type">{item.midePor}</div>
+                <div className="cell" id="tiebreak">{item.tiebreak}</div>
+                <div className="cell" id="tiebreak">{item.qTiebreaks}</div>
+             </li>
+      
   } 
   delete(key) {
     this.props.delete(key);
   }
   render() {
     var entries = this.props.entries;
-    var teamList = entries.map(this.createTasks);
+    var list = entries.map(this.createTasks);
 
     return (
       <ul className="theList">
-          {teamList}
+          {list}
       </ul>
     );
   }

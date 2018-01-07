@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import './index.css';
 
 import './App.css';
-import Event from './components/Event';
+import EventsAdmin from './components/EventsAdmin';
+import EventsDash from './components/EventsDash';
 import Teams from './components/Teams';
 
 import List from './components/List';
@@ -18,6 +19,7 @@ class App extends Component {
     super(props)
  
     this.state= {
+      section : 0
       
     }
    
@@ -35,12 +37,48 @@ class App extends Component {
   }
   componentDidMount() {
   }
+  backToThis() {
+    this.setState({
+      section : 0
+    })
+  }
+  teamSection() {
+    this.state.section == 1 ? this.setState({section:0}): this.setState({section: 1})
+  }
+  eventSection() {
+    this.state.section == 2 ? this.setState({section:0}): this.setState({section: 2})
+  }
+  leaderboardSection() {
+    this.state.section == 3 ? this.setState({section:0}): this.setState({section: 3})
+  }
 
  render() {  
     return (
       <div className="App">
-        {/* <Teams /> */}
-        <Event category="1" />
+        <header className="App-header">
+          <h1 className="App-title">Scoring App</h1>
+        </header>
+      <div className="leftNav">
+        <Btn text="Equipos" funcion={this.teamSection.bind(this)}/>
+        <Btn text="Eventos" funcion={this.eventSection.bind(this)}/>
+        <Btn text="Leaderboards" funcion={this.leaderboardSection.bind(this)}/>
+      </div>
+      <div className="section">
+        { (()=>{ switch (this.state.section){
+          case 1: 
+            return <Teams backToApp={this.backToThis.bind(this)}/>;
+            break;
+          case 2: 
+            return <EventsDash backToApp={this.backToThis.bind(this)}/>
+            //<Event category="1" backToApp={this.backToThis.bind(this)}/>;
+            break;
+          default:
+            return null   
+        }
+        })()}
+      </div>
+        
+        
         {/* <div>
           <Col className="column" md={3} sm={3}>
             <h2>Hombres RXD</h2>

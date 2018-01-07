@@ -10,12 +10,24 @@ class EventController extends Controller
 
     public function index()
     {
-        $categories = [];
-        $events = Event::all(); 
-        foreach ($events as $event) {
-            $categories[] = $event->category->nivel;
-        };
-        return $categories;
+        $allEvents = Event::all();
+
+        $eventsArray = [];
+        foreach ($allEvents as $event){
+            $eventsArray[] = [
+                'id' => $event->id,
+                'category' => $event->category->sexo.' '.$event->category->nivel ,
+                'name' => $event->name,
+                'wod' =>$event->wod,
+                'eventNumber' => $event->eventNumber,
+                'tiebreak' => $event->tiebreak,
+                'qTiebreaks' => $event->qTiebreaks,
+                'midePor' => $event->midePor,
+            ];
+        }
+
+        return response($eventsArray, 200);
+      
     }
 
     public function create()
@@ -24,8 +36,35 @@ class EventController extends Controller
     }
 
 
-    public function store(Request $request, $id)
+    public function store(Request $request)
     {
+       
+        $rules = [
+            "category_id" => "required",
+            "wod" => "required",
+            "midePor" => "required",
+        ];
+    
+        $messages = [
+            "required" => "El :attribute es requerido!",
+        ];
+    
+        $request->validate($rules, $messages);
+    
+        $event = \App\Event::create([
+            'category_id' => $request->input('category_id'),
+            'name' => $request->input('name'),
+            'wod' => $request->input('wod'),
+            'eventNumber' => $request->input('eventNumber'),
+            'tiebreak' => $request->input('tiebreak'),
+            'qTiebreaks' => $request->input('qTiebreaks'),
+            'midePor' => $request->input('midePor')
+        ]);
+        
+      
+        return response()->json([
+            'event' => $event 
+        ]);
         
     }
 

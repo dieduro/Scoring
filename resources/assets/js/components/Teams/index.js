@@ -3,7 +3,7 @@ import '../../index.css';
 import '../../App.css';
 import CreateTeamForm from '../CreateTeamForm';
 import Btn from '../Btn';
-import List from '../List';
+import TeamList from '../TeamList';
 import axios from 'axios';
 import { Jumbotron, Col, Panel } from 'react-bootstrap';
 
@@ -44,6 +44,9 @@ class Teams extends Component {
         });
         
       }
+      back() {
+        this.props.backToApp()
+    }
 
     render(){
         let teams_cat1 = this.state.teams.filter(function (team) {
@@ -71,22 +74,22 @@ class Teams extends Component {
                 <div>
                 <Col className="column" md={3} sm={3}>
                 <h2>Hombres RXD</h2>
-                <List  entries={teams_cat1}/>
+                <TeamList  entries={teams_cat1}/>
               </Col>
                 <Col className="column" md={3} sm={3}>
                 <h2>Mujeres RXD</h2>
-                <List  entries={teams_cat2}/>
+                <TeamList  entries={teams_cat2}/>
               </Col>
                 <Col className="column" md={3} sm={3}>
                 <h2>Hombres Scaled</h2>
-                <List  entries={teams_cat3}/>
+                <TeamList  entries={teams_cat3}/>
               </Col>
                 <Col className="column" md={3} sm={3}>
                 <h2>Mujeres Scaled</h2>
-                <List  entries={teams_cat4}/>
+                <TeamList  entries={teams_cat4}/>
               </Col>
                 </div>
-
+                <Btn text="Volver" funcion={this.back.bind(this)}/>  
             </div>
         )
     }
