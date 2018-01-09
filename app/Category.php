@@ -10,6 +10,10 @@ class Category extends Model
         return $this->hasMany('\App\Team', 'category_id', 'id');
     }
 
+    public function eventScores() {
+        return $this->hasMany('\App\EventScores', 'category_id', 'id');
+    }
+
     public function events() {
         return $this->hasMany('\App\Event', 'category_id', 'id');
     }

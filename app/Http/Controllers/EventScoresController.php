@@ -25,6 +25,7 @@ class EventScoresController extends Controller
             }
             
         });
+        $nonUpdatedTeams = [];
         foreach ($teams as $team){
             $nonUpdatedTeams[] = [
                 'team_id' =>$team->id,

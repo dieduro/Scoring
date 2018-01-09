@@ -64,9 +64,7 @@ class Teams extends Component {
          
         return (
             <div>
-                <header className="App-header">
                 <h1 className="App-title">Registrar Equipo</h1>
-                </header>
                 <Jumbotron>
                     <h3>Inscribir Equipo</h3>
                     <CreateTeamForm create={this.storeTeam.bind(this)}/>

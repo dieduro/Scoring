@@ -17,16 +17,16 @@ class EventScores extends Component {
     this.state= {
         nonUpdatedTeams : [],
         updatedTeams : [],
-        eventId : this.props.event,
+        event : this.props.event,
         categoryId: this.props.category_id
     }
    
   }
 
   componentDidMount() {
-    let event = this.state.eventId
+    let event_id = this.state.event.id
     let category = this.state.categoryId
-    this.fetchNonUpdatedTeams(event);
+    this.fetchNonUpdatedTeams(category, event);
     /* fetch API in action */    
   }
 
@@ -54,6 +54,7 @@ class EventScores extends Component {
         return response.json();
     })
     .then(eventResults => {
+      
       this.setState({ updatedTeams : eventResults });
 
     }) .catch(function(error) {
@@ -71,10 +72,10 @@ class EventScores extends Component {
           team.show=false
       }
     }) 
-    const url = '/api/event/' + this.state.eventId+'/cargarScore/'
+    const url = '/api/event/' + this.state.event.id+'/cargarScore/'
     axios.post(url,teamScore)
     .then(response=> {
-      this.fetchUpdatedTeams(this.state.eventId)
+      this.fetchUpdatedTeams(this.state.event.id)
       //console.log(response);
     })
     .catch(function(error) {
@@ -89,13 +90,26 @@ class EventScores extends Component {
 
   }
   storePositions(){
-    console.log('guardando posiciones')
+    
+    let teams = this.state.updatedTeams
+    for (let i=0; i < teams.length ; i++) {
+      let p = i + 1
+      if (!teams[i].pos){
+        teams[i].pts = p
+        for (let j=i+1; j < teams.length ; j++) {
+          if (teams[i].score == teams[j].score) {
+            teams[j].pts = i
+          }  
+        }
+      }
+    }
   }
 
 
 
  
  render() {  
+   
   let nonUpdatedTeams
   if (this.state.nonUpdatedTeams) {
     nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
@@ -110,11 +124,10 @@ class EventScores extends Component {
     
     return (
       <div>
-        <header className="App-header">
           <h1 className="App-title">Cargar Resultados</h1>
-        </header>
+ 
         <Jumbotron>
-          <h3>Evento: {this.state.eventId}</h3>
+          <h3>Evento: {this.state.event.name}</h3>
           <SetScoreForm update={this.setScore.bind(this)}/>
          
          { nonUpdatedTeams.length == 0 && 

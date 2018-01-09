@@ -13,6 +13,12 @@ Route::get('/event/{id}/scores', 'EventScoresController@showScores');
 Route::post('/event/store', 'EventController@store');
 
 
+// CATEGORIES ROUTES
+
+Route::get('/categories', 'CategoriesController@index');
+Route::get('/categories/{id}/events', 'CategoriesController@events');
+Route::get('/categories/{id}/scores', 'CategoriesController@scores');
+
 // TEAM ROUTES
 
 Route::get('/teams','TeamController@index' );

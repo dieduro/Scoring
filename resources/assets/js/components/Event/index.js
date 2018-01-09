@@ -15,25 +15,91 @@ class Event extends Component {
         super(props)
         
         this.state= {
-            eventId : null,
+            event : null,
             categoryId: null,
+            events : [],
+            categories: []
         }
+    }
+    componentDidMount(){
+        this.categories()
     }
 
     showEvent() {
-       let event = this.refs.event_id.value
-        
+       let event_id = this.refs.event_id.value
+       let events = this.state.events
+       let findEvent = (event) => event.id == event_id
+       let eventChosen = events.find(findEvent)
         this.setState({
-            eventId : event
+            event : eventChosen
         })
         
     }
 
     categoryChosen() {
        let category = this.refs.category_id.value
+       let events = this.events(category)
        this.setState({
-        categoryId : category
+        categoryId : category,
+        events: events
     }) 
+    }
+    categories() {
+    
+        fetch('/api/categories/')
+        .then(response => {
+            return response.json();
+        })
+        .then(categories => {
+            
+            this.setState({ categories : categories });
+    
+        }) .catch(function(error) {
+            console.log(error);
+        });
+          
+    }
+    events(categoryId) {
+    
+        fetch('/api/categories/'+ categoryId + '/events')
+        .then(response => {
+            return response.json();
+        })
+        .then(events => {
+            
+            this.setState({ events : events });
+    
+        }) .catch(function(error) {
+            console.log(error);
+        });
+          
+    }
+
+    setCategoryOptions() {
+        let categories = this.state.categories
+        let selectCategories = document.querySelector('#category_id')
+        if (selectCategories){
+            categories.forEach(category => {
+                let optionElement = document.createElement('option')
+                optionElement.value = category.id
+                optionElement.innerHTML = category.sexo +' ' + category.nivel
+                selectCategories.appendChild(optionElement)
+                
+            })
+        }
+    }
+    setEventOptions() {
+        let events = this.state.events
+        let selectEvents = document.querySelector('#event_id')
+        if (selectEvents){
+            events.forEach(event => {
+                let optionElement = document.createElement('option')
+                optionElement.value = event.id
+                optionElement.innerHTML = event.eventNumber +'º - ' + event.name
+                selectEvents.appendChild(optionElement)
+                
+            })
+        }
     }
     back() {
         this.props.backToApp()
@@ -41,26 +107,23 @@ class Event extends Component {
 
     render() {
         console.log(this.state)
+        this.setCategoryOptions()
+        this.setEventOptions()
         return (
             <div>
-                {this.state.eventId ? 
-                <EventScores event={this.state.eventId} category_id={this.state.categoryId}/>
-                :
                 <div>
-                    <header className="App-header">
                     <h1 className="App-title">Eventos</h1>
-                    </header>
-                    
                     <Jumbotron>
                     <h3>Elegí una categoría</h3>
                     <form action="">
-                            <label htmlFor="category_id">Evento</label>
-                            <select name="category_id" id="category_id" ref="category_id" onInput={this.categoryChosen.bind(this)} >
-                                <option value="1">Hombres RxD</option>
-                                <option value="2">Mujeres RxD</option>
-                                <option value="3">Hombres Scaled</option>
-                                <option value="4">Mujeres Scaled</option>
-                            </select>
+                        <label htmlFor="category_id">Evento</label>
+                        <select name="category_id" id="category_id" ref="category_id" onInput={this.categoryChosen.bind(this)} >
+                            <option value="0">Categoría</option>
+                            {/* <option value="1">Hombres RxD</option>
+                            <option value="2">Mujeres RxD</option>
+                            <option value="3">Hombres Scaled</option>
+                            <option value="4">Mujeres Scaled</option> */}
+                        </select>
                         </form>
                     { this.state.categoryId &&
                     <div>
@@ -69,19 +132,15 @@ class Event extends Component {
                                 <label htmlFor="event_id">Evento</label>
                                 <select name="event_id" id="event_id" ref="event_id" onInput={this.showEvent.bind(this)} >
                                     <option value="0">No Event</option>
-                                    <option value="1">Evento 1</option>
-                                    <option value="2">Evento 2</option>
-                                    <option value="3">Evento 3</option>
-                                    <option value="4">Evento 4</option>
-                                    <option value="5">Evento 5</option>
-                                    <option value="6">Evento 6</option>
                                 </select>
                             </form>
                     </div>
                     }
                     </Jumbotron> 
+                    {this.state.event && 
+                        <EventScores event={this.state.event} category_id={this.state.categoryId}/>
+                    }
                 </div>
-                 }
                  <Btn text="Volver" funcion={this.back.bind(this)}/>  
             </div>
         )
