@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EventScores;
 use App\Team;
+use App\Positions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection as Collection;
 
@@ -53,6 +54,7 @@ class EventScoresController extends Controller
         $event_id = $event_id;
         $team_id = $request->input('team_id');
         $score = $request->input('score');
+        $category_id = $request->input('category_id');
 
         $rules = [
             "team_id" => "required",
@@ -76,7 +78,8 @@ class EventScoresController extends Controller
             $eventScore = \App\EventScores::create([
                 'event_id' => $event_id,
                 'team_id' => $team_id,
-                'score' => $score
+                'score' => $score,
+                'category_id' => $category_id
                
             ]);
             return response()->json([
@@ -107,38 +110,6 @@ class EventScoresController extends Controller
         
     }
 
-
-    public function store(Request $request)
-    {
-
-        $teams = $request->input('teams');
-
-        dd($teams);
-        
-        
-        // $event = Event::find($id);
-        // $rules = [
-        //     "team_id" => "required|unique",
-        //     "event_id" => "required|numeric",
-            
-        // ];
-    
-        // $messages = [
-        //     "required" => "El :attribute es requerido!",
-        //     "unique" => "El :attribute tiene que ser único!",
-        //     "numeric" => "El :attribute tiene que ser numérico!",
-        //     "between" => "El :attribute tiene que estar entre :min y :max!"
-        // ];
-    
-        // $request->validate($rules, $messages);
-        // $param = [
-        //     'data' => $request
-        // ];
-        
-        // $scores = \App\Product::create([
-            
-        // ]);
-    }
 
     /**
      * Display the specified resource.

@@ -17,3 +17,7 @@ Route::get('/', function () {
 
 Route::get('/events', 'EventController@index');
 Route::get('/event/{id}', 'EventScoresController@index');
+
+Route::get('/test', function () {
+    return phpinfo();
+});

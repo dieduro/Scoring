@@ -6,12 +6,10 @@ import './App.css';
 import EventsAdmin from './components/EventsAdmin';
 import EventsDash from './components/EventsDash';
 import Teams from './components/Teams';
-
+import LeaderboardDash from './components/LeaderboardDash';
 import List from './components/List';
 import Btn from './components/Btn';
-
 import axios from 'axios';
-
 import { Jumbotron, Col, Panel } from 'react-bootstrap';
 
 class App extends Component {
@@ -71,6 +69,9 @@ class App extends Component {
           case 2: 
             return <EventsDash backToApp={this.backToThis.bind(this)}/>
             //<Event category="1" backToApp={this.backToThis.bind(this)}/>;
+            break;
+          case 3:
+            return <LeaderboardDash />
             break;
           default:
             return null   
