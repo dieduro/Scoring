@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Positions;
 use App\Team;
+use App\Event;
 use Illuminate\Http\Request;
 
 class PositionsController extends Controller
@@ -46,7 +47,7 @@ class PositionsController extends Controller
     public function storePositions(Request $request)
     {   
         $positions = $request->data;
-        //$pos = json_encode($positions, true);
+        $eventId = null;
         foreach($positions as $position) {
             $event_id = $position['event_id'];
             $team_id =$position['team_id'];
@@ -63,7 +64,12 @@ class PositionsController extends Controller
                 $team->totalScore += $points ;
                 $team->save();
             }
+            $eventId = $event_id;
         }
+        
+        $event = Event::find($eventId);
+        $event->loaded = true;
+        $event->save();
         return response($eventPositions, 200);
     }
 

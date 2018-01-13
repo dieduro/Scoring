@@ -66,6 +66,10 @@ class TeamController extends Controller
 
     public function leaderboard($category_id) {
         $teams = Team::where('category_id', $category_id)->orderBy('totalScore')->get();
-        return response($teams, 200);
+        foreach ( $teams as $team) {
+            dd($team->eventScores);
+        }
+        
+        // return response($teams, 200);
     }
 }

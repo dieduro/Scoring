@@ -5,7 +5,7 @@ import Btn from '../Btn';
 import List from '../List';
 import EventScores from '../EventScores';
 import EventsAdmin from '../EventsAdmin';
-import Event from '../Event';
+import EventMenu from '../Event';
 import axios from 'axios';
 
 class EventsDash extends Component {
@@ -43,7 +43,7 @@ class EventsDash extends Component {
                 <div className="section">
                     { (()=>{ switch (this.state.section){
                     case 1: 
-                        return <Event backToApp={this.backToThis.bind(this)} />
+                        return <EventMenu backToApp={this.backToThis.bind(this)} />
                         break;
                     case 2: 
                         return <EventsAdmin />

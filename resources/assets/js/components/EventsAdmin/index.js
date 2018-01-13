@@ -14,7 +14,8 @@ class EventsAdmin extends Component {
         this.fetchEvents = this.fetchEvents.bind(this)
         this.state= {
             hasTiebreak : false,
-            events:[]
+            events:[],
+            culo: false
             
             
         }
@@ -70,7 +71,7 @@ class EventsAdmin extends Component {
               qTiebreaks,
               midePor
             }
-            console.log(event)
+            
             const url = '/api/event/store'
             axios.post(url,event)
             .then(response=> {
@@ -82,8 +83,9 @@ class EventsAdmin extends Component {
             });
 
     }
-
     render() {
+         console.log(this.state.events)  
+        let events = this.state.events;
         return (
             <div>
                 <div>
@@ -140,9 +142,10 @@ class EventsAdmin extends Component {
                     </div>
                     <div className="tbody">
                        
-                            <List entries={this.state.events}/>
+                            <List entries={events} itemType='event'/>
                     
-                    </div>        
+                    </div>  
+                        
 
 
                     {/* <div >

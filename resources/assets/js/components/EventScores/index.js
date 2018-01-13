@@ -79,13 +79,14 @@ class EventScores extends Component {
         team_id,
         score,
         category_id
-        
       }
       this.state.nonUpdatedTeams.forEach((team)=>{
         if(team.team_id == team_id){
             team.show=false
         }
       }) 
+      console.log('evento: '+ this.state.event.id)
+      console.log( teamScore)
       const url = '/api/event/' + this.state.event.id+'/cargarScore/'
       axios.post(url,teamScore)
       .then(response=> {
@@ -155,10 +156,12 @@ class EventScores extends Component {
       data : teamArray
     }
     
-     this.axiosPost(url, config)
+    this.axiosPost(url, config)
         // let response = this.axiosPost(url, data).then((response)=>{
         //   responses.push(response)
         // })
+    alert('Resultados de evento: '+event_id+', cargados satisfactoriamente.')
+    setTimeout(this.props.back(), 3000)
  
   }
 
@@ -177,7 +180,7 @@ class EventScores extends Component {
   if (updatedTeams){
     updatedTeams = updatedTeams.sort(function(a, b){return a.score - b.score})
   }
-    
+  
     return (
       <div>
           <h1 className="App-title">Cargar Resultados</h1>
@@ -205,6 +208,7 @@ class EventScores extends Component {
         }
         {this.state.updatedTeams &&
         <div>
+          
           <Col className="column" md={6} sm={6}>  
             <TeamList entries={updatedTeams}/>   
           </Col>

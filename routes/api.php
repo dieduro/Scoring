@@ -10,7 +10,7 @@ Route::get('/event', 'EventController@index');
 Route::get('/event/c{category_id}e{event_id}', 'EventScoresController@index');
 Route::post('event/{id}/cargarScore', 'EventScoresController@setTeamResult');
 Route::get('/event/{id}/scores', 'EventScoresController@showScores');
-Route::post('/event/{id}/storePositions', 'PositionsController@storePositions');
+Route::post('/event/{id}/storePositions', 'EventScoresController@storePositions');
 Route::post('/event/store', 'EventController@store');
 
 Route::get('/validatePosition/{team_id}/{event_id}', 'PositionsController@existPosition');
@@ -30,7 +30,7 @@ Route::get('/teams/{id}', 'TeamController@show');
 
 // LEADERBOARD ROUTES
 
-Route::get('/leaderboards/{category_id}', 'TeamController@leaderboard');
+Route::get('/leaderboard/{category_id}', 'TeamController@leaderboard');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

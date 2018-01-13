@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\EventScores;
+use App\Event;
 use App\Team;
 use App\Positions;
 use Illuminate\Http\Request;
@@ -51,23 +52,26 @@ class EventScoresController extends Controller
 
     public function setTeamResult(Request $request, $event_id)
     {   
-        $event_id = $event_id;
         $team_id = $request->input('team_id');
         $score = $request->input('score');
         $category_id = $request->input('category_id');
-
+        
         $rules = [
             "team_id" => "required",
             "score" => "required",
         ];
-    
+        
         $messages = [
             "required" => "El :attribute es requerido!",
             "unique" => "El :attribute tiene que ser único!",
             "numeric" => "El :attribute tiene que ser numérico!"
         ];
-
-        $team = EventScores::where('team_id', $team_id)->first();
+        
+        $team = EventScores::where([
+            ['team_id','=', $team_id],
+            ['event_id','=', $event_id]
+        ])->first();
+        
         if ($team) {
             $team->score = $score;
 
@@ -111,46 +115,57 @@ class EventScoresController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\EventScores  $eventScores
-     * @return \Illuminate\Http\Response
-     */
+
+    public function storePositions(Request $request)
+    {   
+        $positions = $request->data;
+        $eventId = null;
+        foreach($positions as $position) {
+            $event_id = $position['event_id'];
+            $team_id =$position['team_id'];
+            $points = $position['points']; 
+            $eventPositions = [];
+           
+            $pos = EventScores::where([
+                ['team_id','=', $team_id],
+                ['event_id','=', $event_id]
+            ])->first();
+            $pos->points = $points;
+            $pos->save(); 
+            array_push($eventPositions, $pos);
+            $team = \App\Team::find($team_id);
+            $team->totalScore += $points ;
+            $team->save();
+            
+            $eventId = $event_id;
+        }
+        
+        $event = Event::find($eventId);
+        $event->loaded = true;
+        $event->save();
+        return response($eventPositions, 200);
+    }
+
+
+   
     public function show(EventScores $eventScores)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\EventScores  $eventScores
-     * @return \Illuminate\Http\Response
-     */
+  
     public function edit(EventScores $eventScores)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EventScores  $eventScores
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function update(Request $request, EventScores $eventScores)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\EventScores  $eventScores
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(EventScores $eventScores)
     {
         //

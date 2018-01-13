@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->boolean('tiebreak');
             $table->integer('qTiebreaks')->nullable();
             $table->string('midePor');
+            $table->boolean('loaded');
             $table->timestamps();
         });
     }
