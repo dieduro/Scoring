@@ -68,7 +68,6 @@ class App extends Component {
             break;
           case 2: 
             return <EventsDash backToApp={this.backToThis.bind(this)}/>
-            //<Event category="1" backToApp={this.backToThis.bind(this)}/>;
             break;
           case 3:
             return <LeaderboardDash />

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import Team from '../Team'
+import LeaderboardTeam from '../LeaderboardTeam'
 import Event from '../Event'
 import '../../App.css';
 
@@ -13,24 +14,27 @@ export default class List extends Component {
       
       
       createTasks(item) {
-       
         switch (this.props.itemType) {
           case 'event':
-          
-          return (<li key={item.id}>
-            <Event data={item}/>
-      </li>) 
-          
-        break;
-        case 'team' :
-        console.log('teaaammmsmsmsmisnin')
-        return(  
-        <li key={item.id}>
-                  <Team data={item}/>
-        </li> )
-        break
-        default:
-        return null   
+            return 
+              (<li key={item.id}>
+                <Event data={item}/>
+              </li>)    
+          break;
+          case 'team' :
+            return(  
+              <li key={item.id}>
+                <Team data={item}/>
+              </li> )
+            break;
+            case 'leaderboardTeam' :
+            return(  
+              <li key={item.team.id}>
+                <LeaderboardTeam data={item}/>
+              </li> )
+            break;
+          default:
+            return null   
       }
     }
 

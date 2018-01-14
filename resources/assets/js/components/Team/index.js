@@ -8,14 +8,14 @@ export default class Team extends Component {
     }
 
     render() {
-        console.log('data:' +  this.props.data);
+        
         return (
           
                 <Panel>
                     <div>
-                        <h1> {this.props.data.team_name} </h1>
+                        <h1> {this.props.data.name} </h1>
                         <h3>{this.props.data.ath1} y {this.props.data.ath2}</h3>
-                        <p>Id: {this.props.data.team_id} </p><br/> 
+                        <p>Id: {this.props.data.id} </p><br/> 
                         {this.props.data.score ? 
                         <p> { `Score: ${this.props.data.score}` }</p> : <p> No hay score registrado</p> 
                         }

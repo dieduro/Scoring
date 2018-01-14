@@ -5,7 +5,7 @@ import Btn from '../Btn';
 import List from '../List';
 import EventScores from '../EventScores';
 import EventsAdmin from '../EventsAdmin';
-import EventMenu from '../Event';
+import EventMenu from '../EventMenu';
 import axios from 'axios';
 
 class EventsDash extends Component {

@@ -49,24 +49,20 @@ class Teams extends Component {
 
     render(){
         
-        if (this.state.teams != []) {
-        console.log('hay teams aparentmente')    
+        if (this.state.teams != []) {   
             let teams_cat1 = this.state.teams.filter(function (team) {
                 return (team.category_id === 1);
-              });
-            console.log(teams_cat1)  
+              }); 
             let teams_cat2 = this.state.teams.filter(function (team) {
                 return (team.category_id === 2);
               });
-              console.log(teams_cat2)
+
             let teams_cat3 = this.state.teams.filter(function (team) {
                 return (team.category_id === 3);
               });
-              console.log(teams_cat3)
             let teams_cat4 = this.state.teams.filter(function (team) {
                 return (team.category_id === 4);
               });
-              console.log(teams_cat4)
              
             return (
                 <div>

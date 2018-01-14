@@ -9,7 +9,6 @@ export default class Event extends Component {
 
 
     render() {
-        console.log(this.props.data)
         let event = this.props.data
         return (
             <div>

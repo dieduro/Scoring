@@ -128,8 +128,6 @@ class EventMenu extends Component {
         if (this.state.events) {
             this.setEventOptions()
         }
-        console.log(this.state)
-        
         return (
             <div>
                 <div>

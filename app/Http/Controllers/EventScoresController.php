@@ -27,28 +27,10 @@ class EventScoresController extends Controller
             }
             
         });
-        $nonUpdatedTeams = [];
-        foreach ($teams as $team){
-            $nonUpdatedTeams[] = [
-                'team_id' =>$team->id,
-                'team_name' => $team->name,
-                'ath1' => $team->ath1,
-                'ath2' => $team->ath2
-            ];
-        }
-            
-       return response($nonUpdatedTeams, 200);
+        
+       return response($teams, 200);
     }
 
-    
-    
-  
-
-
-    public function create()
-    {
-        //
-    }
 
     public function setTeamResult(Request $request, $event_id)
     {   
@@ -101,16 +83,15 @@ class EventScoresController extends Controller
    
         foreach ($scores as $score){
             $updatedTeams[] = [
-                'team_id' => $score->team->id,
-                'team_name' => $score->team->name,
+                'id' => $score->team->id,
+                'name' => $score->team->name,
                 'ath1' => $score->team->ath1,
                 'ath2' => $score->team->ath2,
                 'score' => $score->score
             ];
         }
         return response($updatedTeams, 200);
-       
-       
+  
         
     }
 

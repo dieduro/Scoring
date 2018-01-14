@@ -3,7 +3,7 @@ import '../../index.css';
 import '../../App.css';
 import SetScoreForm from '../SetScoreForm';
 import Btn from '../Btn';
-import TeamList from '../TeamList';
+import List from '../List';
 import axios from 'axios';
 
 import { Jumbotron, Col, Panel } from 'react-bootstrap';
@@ -65,7 +65,7 @@ class EventScores extends Component {
   validateTeamId(id) {
     let flag = false
     this.state.nonUpdatedTeams.forEach((team)=>{
-      if (team.team_id == id) {
+      if (team.id == id) {
         flag = true
       }
     })
@@ -85,8 +85,7 @@ class EventScores extends Component {
             team.show=false
         }
       }) 
-      console.log('evento: '+ this.state.event.id)
-      console.log( teamScore)
+
       const url = '/api/event/' + this.state.event.id+'/cargarScore/'
       axios.post(url,teamScore)
       .then(response=> {
@@ -120,7 +119,6 @@ class EventScores extends Component {
         }
       }
     }
-
     return teams
   }
 
@@ -198,7 +196,7 @@ class EventScores extends Component {
         
         <div>
           <Col className="column" md={6} sm={6}>
-            <TeamList  entries={nonUpdatedTeams}/>
+            <List  entries={nonUpdatedTeams} itemType='team'/>
           </Col>
         </div>
           :
@@ -210,7 +208,7 @@ class EventScores extends Component {
         <div>
           
           <Col className="column" md={6} sm={6}>  
-            <TeamList entries={updatedTeams}/>   
+            <List entries={updatedTeams} itemType='team'/>   
           </Col>
         </div>
         }

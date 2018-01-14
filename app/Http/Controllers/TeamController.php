@@ -11,21 +11,29 @@ class TeamController extends Controller
 {
     
     
-    public function index()
+    public function allTeams()
     {
         $teams = Team::all();
-        $teamsArray = [];
-        foreach ($teams as $team){
-            $teamsArray[] = [
-                'team_id' =>$team->id,
-                'team_name' => $team->name,
-                'ath1' => $team->ath1,
-                'ath2' => $team->ath2,
-                'box' => $team->box,
-                'category_id' => $team->category_id
-            ];
-        }
-        return response($teamsArray, 200);
+        return response($teams, 200);
+    }
+
+    public function eventTeams($category_id, $event_id)
+    {   
+        $teams = Team::where('category_id', $category_id)->get();
+     
+        $eventScores = EventScores::where('event_id','=', $event_id)->get();
+       
+        $teams = $teams->filter(function($team) use($eventScores)
+        {     
+            if($eventScores->contains('team_id', $team->id)){
+                return false;
+            }else {
+                return true;
+            }
+            
+        });
+        
+       return response($teams, 200);
     }
 
     public function show($id)
@@ -66,10 +74,21 @@ class TeamController extends Controller
 
     public function leaderboard($category_id) {
         $teams = Team::where('category_id', $category_id)->orderBy('totalScore')->get();
+        $teamsArray = [];
+        
+        
         foreach ( $teams as $team) {
-            dd($team->eventScores);
+            $teamsArray[] = [
+                'team' => $team,
+                'eventScores' => $team->eventScores,
+            ];
+          
+        }
+        for ($i=0; $i<count($teamsArray); $i++) {
+            $p = $i+1;
+            $teamsArray[$i]['position'] = $p; 
         }
         
-        // return response($teams, 200);
+        return response($teamsArray, 200);
     }
 }

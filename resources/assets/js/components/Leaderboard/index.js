@@ -34,7 +34,7 @@ class Leaderboard extends Component {
                     </div>
                     <div className="tbody">
                        
-                            <List entries={this.state.leaderboard}/>
+                            <List entries={this.state.leaderboard} itemType='leaderboardTeam'/>
                     
                     </div>        
 

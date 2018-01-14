@@ -40,18 +40,16 @@ class LeaderboardDash extends Component {
 
     render(){
       
-         
+        console.log(this.state)
         return (
             <div>
                 <Jumbotron>
                     <h1 className="App-title">Leaderboards</h1>
                 </Jumbotron>
-
-                <h2>HOla Mundo</h2>
                
-
-                <Leaderboard data={this.state.leaderboard} />
-               
+            {this.state.leaderboard &&
+                <Leaderboard data={this.state.leaderboard}/>
+            }
             </div>
         )
     }
