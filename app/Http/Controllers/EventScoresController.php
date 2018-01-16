@@ -37,7 +37,7 @@ class EventScoresController extends Controller
         $team_id = $request->input('team_id');
         $score = $request->input('score');
         $category_id = $request->input('category_id');
-        
+        // $event = Event::find($event_id);
         $rules = [
             "team_id" => "required",
             "score" => "required",
@@ -49,10 +49,12 @@ class EventScoresController extends Controller
             "numeric" => "El :attribute tiene que ser numérico!"
         ];
         
+
         $team = EventScores::where([
             ['team_id','=', $team_id],
             ['event_id','=', $event_id]
         ])->first();
+        
         
         if ($team) {
             $team->score = $score;

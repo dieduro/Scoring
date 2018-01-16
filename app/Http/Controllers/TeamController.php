@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Team;
+use App\EventScores;
 use App\Http\Resources\Team as TeamResource;
 
 
@@ -17,31 +18,27 @@ class TeamController extends Controller
         return response($teams, 200);
     }
 
+ 
     public function eventTeams($category_id, $event_id)
     {   
-        $teams = Team::where('category_id', $category_id)->get();
-     
+        $teams = Team::where('category_id', $category_id)->get()->toArray();
         $eventScores = EventScores::where('event_id','=', $event_id)->get();
-       
-        $teams = $teams->filter(function($team) use($eventScores)
-        {     
-            if($eventScores->contains('team_id', $team->id)){
-                return false;
-            }else {
-                return true;
-            }
-            
-        });
-        
-       return response($teams, 200);
+        $teams = Team::whereDoesntHave('eventScores', function ($query) use ($event_id) {
+            $query->where('event_id', $event_id);
+        })->where('category_id', $category_id)
+            ->get();
+        return response()->json($teams);
     }
+    
+  
 
     public function show($id)
     {
         return new TeamResource(Team::find($id));
     }
 
-    public function store(Request $request) {
+    public function store(Request $request) 
+    {
         $rules = [
             "name" => "required|unique:teams",
             "ath1" => "required",

@@ -48,7 +48,10 @@ class LeaderboardDash extends Component {
                 </Jumbotron>
                
             {this.state.leaderboard &&
+                <div>
+                    <h2>Categoria</h2>
                 <Leaderboard data={this.state.leaderboard}/>
+                </div>
             }
             </div>
         )

@@ -6,11 +6,19 @@ export default class SetScoreForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error : false
+            error : false,
         }    
     }  
-   
-     updateTeam(e) { //verifica {team} e invoca la funcion update() del parent, con parametros team y score
+    
+
+    addTieInput() {
+        const setScore = document.querySelector('#setScore')
+        const tiebreakInput = document.createElement('input')
+        tiebreakInput.placeholder = 'Tiebreak'
+        tiebreakInput.ref = 'tiebreak'
+        setScore.appendChild(tiebreakInput)
+    }
+    updateTeam(e) { //verifica {team} e invoca la funcion update() del parent, con parametros team y score
         e.preventDefault();
     
         let team = this.refs.team_id.value;
@@ -29,15 +37,21 @@ export default class SetScoreForm extends React.Component {
         
     }
     render ()   {
-        
+        const event = this.props.event
+        if (event.tiebreak) {
+            this.addTieInput()
+        }   
+
         return(
         <div>
             <form id="setScore">
                 <input  type="text" ref="team_id" placeholder="Id del Equipo" />
-                <input  type="text" ref="score" placeholder="Score" />  
+                <input  type="text" ref="score" placeholder="Score" />
+
+            
+            </form>
                 <Btn text="Cargar" funcion={this.updateTeam.bind(this)} />
                 <p id="error"> {this.state.error} </p>
-            </form>
         </div>    
         )
     }

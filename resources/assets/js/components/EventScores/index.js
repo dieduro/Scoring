@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import '../../index.css';
 import '../../App.css';
 import SetScoreForm from '../SetScoreForm';
@@ -22,11 +23,14 @@ class EventScores extends Component {
     }
 
   }
+  componentWillReceiveProps(nextProps) {
+    this.setState({ event: nextProps.event });  
+  }
 
   componentDidMount() {
     let event = this.state.event
     this.fetchNonUpdatedTeams(event);
-    /* fetch API in action */    
+   
   }
 
   fetchNonUpdatedTeams(event) {
@@ -72,7 +76,27 @@ class EventScores extends Component {
     return flag
   }
   
+  
+  convertToSeconds(time){
+    let arr = time.split(':')
+    let mToS = arr[0] * 60
+    let sec = arr[1]
+    let total = mToS + sec
+    return total
+  
+  }
+  
+
+  validateScore(score){
+
+
+  }
+  
   setScore(team_id, score) {
+   
+    // if (this.state.event.midePor == 'time') {
+    //   score = this.convertToSeconds(score)
+    // }
     if (this.validateTeamId(team_id)){
       let category_id = this.state.event.category_id
       const teamScore = {
@@ -81,7 +105,7 @@ class EventScores extends Component {
         category_id
       }
       this.state.nonUpdatedTeams.forEach((team)=>{
-        if(team.team_id == team_id){
+        if(team.id == team_id){
             team.show=false
         }
       }) 
@@ -137,7 +161,7 @@ class EventScores extends Component {
     let teamArray =[]
     teams.forEach((team)=>{
       let data = {
-        team_id : team.team_id,
+        team_id : team.id,
         event_id : event_id,
         points : team.pts
       }
@@ -167,6 +191,8 @@ class EventScores extends Component {
 
  
  render() {  
+  const event = this.state.event
+  const eventScores = this
   let nonUpdatedTeams
   if (this.state.nonUpdatedTeams) {
     nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
@@ -176,16 +202,29 @@ class EventScores extends Component {
   }
   let updatedTeams = this.state.updatedTeams
   if (updatedTeams){
-    updatedTeams = updatedTeams.sort(function(a, b){return a.score - b.score})
+    
+    updatedTeams = updatedTeams.sort(function(a, b){
+      switch (event.midePor){
+        case 'time':
+        return eventScores.convertToSeconds(a.score) - eventScores.convertToSeconds(b.score)
+          break;
+        case 'reps':
+        return parseInt(b.score,10) - parseInt(a.score,10)
+          break;
+      default:
+      return $score
+      }
+    })
   }
   
+   
     return (
       <div>
           <h1 className="App-title">Cargar Resultados</h1>
  
         <Jumbotron>
           <h3>Evento: {this.state.event.name}</h3>
-          <SetScoreForm update={this.setScore.bind(this)}/>
+          <SetScoreForm update={this.setScore.bind(this)} event={event}/>
          
          { nonUpdatedTeams.length == 0 && 
           <Btn text="Guardar Posiciones" funcion={this.storePositions.bind(this)}/>

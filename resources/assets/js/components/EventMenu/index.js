@@ -96,15 +96,17 @@ class EventMenu extends Component {
     }
 
     setEventOptions() {
-
+       
         let selectEvents = document.querySelector('#event_id')
         let events = this.state.events
         if(selectEvents.length > 1) {  
             for (let i=1; i<selectEvents.length ; i++){
                 let e = i-1
+                if (events[e].loaded == 0) {    
                 selectEvents[i].value =  events[e].id
                 selectEvents[i].innerHTML = events[e].eventNumber +'º - ' + events[e].name
                 }
+            }
         }
         else {  
             events.forEach(event => {
@@ -125,6 +127,7 @@ class EventMenu extends Component {
     
 
     render() {
+        const event = this.state.event
         if (this.state.events) {
             this.setEventOptions()
         }
@@ -154,7 +157,7 @@ class EventMenu extends Component {
                     </Jumbotron> 
                    
                     {this.state.event && 
-                        <EventScores event={this.state.event} back={this.back.bind(this)} />
+                        <EventScores event={event} back={this.back.bind(this)} />
                     }
                 </div>
                  <Btn text="Volver" funcion={this.back.bind(this)}/>  
