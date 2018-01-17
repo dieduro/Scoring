@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class EventScores extends Model
 {
-    protected $fillable = [ 'event_id', 'team_id', 'category_id', 'score', 'points' ];
+    protected $fillable = [ 'event_id', 'team_id', 'category_id', 'score','tiebreak', 'points' ];
 
     public function team() {
         return $this->belongsTo('\App\Team', 'team_id', 'id');

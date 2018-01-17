@@ -59,9 +59,7 @@ class EventScores extends Component {
         return response.json();
     })
     .then(eventResults => {
-      
       this.setState({ updatedTeams : eventResults });
-
     }) .catch(function(error) {
       console.log(error);
     });
@@ -92,32 +90,21 @@ class EventScores extends Component {
 
   }
   
-  setScore(team_id, score) {
-   
-    // if (this.state.event.midePor == 'time') {
-    //   score = this.convertToSeconds(score)
-    // }
-    if (this.validateTeamId(team_id)){
+  setScore(teamScore) {
+ 
+    if (this.validateTeamId(teamScore.team)){
       let category_id = this.state.event.category_id
-      const teamScore = {
-        team_id,
-        score,
-        category_id
-      }
+      teamScore.category_id = category_id
+      
       this.state.nonUpdatedTeams.forEach((team)=>{
-        if(team.id == team_id){
+        if(team.id == teamScore.team){
             team.show=false
         }
       }) 
-
       const url = '/api/event/' + this.state.event.id+'/cargarScore/'
-      axios.post(url,teamScore)
-      .then(response=> {
+      axios.post(url,teamScore).then(response=> {
         this.fetchUpdatedTeams(this.state.event.id)
-        //console.log(response);
-      })
-      .catch(function(error) {
-        //console.log(error);
+      }).catch(function(error) {
       });
       let teams = this.state.nonUpdatedTeams.filter(function (team) {
         return (team.show === true);
@@ -168,8 +155,6 @@ class EventScores extends Component {
       teamArray.push(data)
     })
     let teamJsonString = JSON.stringify(teamArray)
-    console.log(teamJsonString)
-
     const url = '/api/event/'+event_id+'/storePositions'
     const config = {
       headers : {
@@ -186,27 +171,30 @@ class EventScores extends Component {
     setTimeout(this.props.back(), 3000)
  
   }
-
-
-
- 
- render() {  
-  const event = this.state.event
-  const eventScores = this
-  let nonUpdatedTeams
-  if (this.state.nonUpdatedTeams) {
-    nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
-      return (team.show === true);
-    });
-  
-  }
-  let updatedTeams = this.state.updatedTeams
-  if (updatedTeams){
-    
+  sortTeams(event, updatedTeams) {
+    const eventScores = this
     updatedTeams = updatedTeams.sort(function(a, b){
       switch (event.midePor){
         case 'time':
-        return eventScores.convertToSeconds(a.score) - eventScores.convertToSeconds(b.score)
+          if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)){
+            console.log(1)
+            return 1
+          } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)){
+            if (event.tiebreak) {
+              console.log(a.tiebreak)
+              console.log(b.tiebreak)
+              if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)){
+                return 1
+              } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
+                return -1
+              } else {
+                return 0
+              }
+            }
+          } else {
+            return -1
+            console.log(-1)
+          }
           break;
         case 'reps':
         return parseInt(b.score,10) - parseInt(a.score,10)
@@ -215,15 +203,30 @@ class EventScores extends Component {
       return $score
       }
     })
+
+  }
+
+ render() {  
+  const event = this.state.event
+  let nonUpdatedTeams = this.state.nonUpdatedTeams
+  if (nonUpdatedTeams) {
+    nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
+      return (team.show === true);
+    });
+  
+  }
+  const updatedTeams = this.state.updatedTeams
+  if (updatedTeams){
+    this.sortTeams(event, updatedTeams)
   }
   
-   
     return (
       <div>
           <h1 className="App-title">Cargar Resultados</h1>
  
         <Jumbotron>
-          <h3>Evento: {this.state.event.name}</h3>
+          <h3>Evento: {event.name}</h3>
+          <p>Mide Por: {event.midePor}</p>
           <SetScoreForm update={this.setScore.bind(this)} event={event}/>
          
          { nonUpdatedTeams.length == 0 && 

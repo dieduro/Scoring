@@ -34,19 +34,19 @@ class EventScoresController extends Controller
 
     public function setTeamResult(Request $request, $event_id)
     {   
-        $team_id = $request->input('team_id');
+        
+        $team_id = $request->input('team');
         $score = $request->input('score');
+        $tiebreak = $request->input('tiebreak');
         $category_id = $request->input('category_id');
-        // $event = Event::find($event_id);
+        
         $rules = [
-            "team_id" => "required",
+            "team" => "required",
             "score" => "required",
         ];
         
         $messages = [
             "required" => "El :attribute es requerido!",
-            "unique" => "El :attribute tiene que ser único!",
-            "numeric" => "El :attribute tiene que ser numérico!"
         ];
         
 
@@ -67,6 +67,7 @@ class EventScoresController extends Controller
                 'event_id' => $event_id,
                 'team_id' => $team_id,
                 'score' => $score,
+                'tiebreak' => $tiebreak,
                 'category_id' => $category_id
                
             ]);
@@ -76,7 +77,6 @@ class EventScoresController extends Controller
           
         }
        
-    
     }
 
     public function showScores($event_id) {
@@ -89,7 +89,8 @@ class EventScoresController extends Controller
                 'name' => $score->team->name,
                 'ath1' => $score->team->ath1,
                 'ath2' => $score->team->ath2,
-                'score' => $score->score
+                'score' => $score->score,
+                'tiebreak'=>$score->tiebreak
             ];
         }
         return response($updatedTeams, 200);

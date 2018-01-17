@@ -4,7 +4,7 @@ import '../../App.css';
 import Btn from '../Btn';
 import Leaderboard from '../Leaderboard';
 import axios from 'axios';
-import { Jumbotron, Col, Panel } from 'react-bootstrap';
+import { Jumbotron, Col, Panel, Button  } from 'react-bootstrap';
 
 class LeaderboardDash extends Component {
     constructor(props){
@@ -39,13 +39,17 @@ class LeaderboardDash extends Component {
     }
 
     render(){
-      
-        console.log(this.state)
+
         return (
+            
             <div>
                 <Jumbotron>
                     <h1 className="App-title">Leaderboards</h1>
                 </Jumbotron>
+            <Button bsStyle="primary">Hombres RXD</Button>
+            <Button bsStyle="primary">Mujeres RXD</Button>
+            <Button bsStyle="primary">Hombres Scaled</Button>
+            <Button bsStyle="primary">Mujeres Scaled</Button>
                
             {this.state.leaderboard &&
                 <div>

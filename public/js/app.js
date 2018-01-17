@@ -7776,7 +7776,7 @@ if(false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__BreadcrumbItem__ = __webpack_require__(306);
 /* unused harmony reexport BreadcrumbItem */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Button__ = __webpack_require__(69);
-/* unused harmony reexport Button */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_5__Button__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ButtonGroup__ = __webpack_require__(128);
 /* unused harmony reexport ButtonGroup */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__ButtonToolbar__ = __webpack_require__(491);
@@ -7794,7 +7794,7 @@ if(false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ControlLabel__ = __webpack_require__(497);
 /* unused harmony reexport ControlLabel */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__Col__ = __webpack_require__(498);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_14__Col__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_14__Col__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__Collapse__ = __webpack_require__(130);
 /* unused harmony reexport Collapse */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__Dropdown__ = __webpack_require__(85);
@@ -7820,7 +7820,7 @@ if(false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__InputGroup__ = __webpack_require__(526);
 /* unused harmony reexport InputGroup */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__Jumbotron__ = __webpack_require__(529);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_27__Jumbotron__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_27__Jumbotron__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__Label__ = __webpack_require__(530);
 /* unused harmony reexport Label */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__ListGroup__ = __webpack_require__(531);
@@ -7866,7 +7866,7 @@ if(false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__PaginationButton__ = __webpack_require__(333);
 /* unused harmony reexport PaginationButton */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__Panel__ = __webpack_require__(572);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_50__Panel__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_50__Panel__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__PanelGroup__ = __webpack_require__(303);
 /* unused harmony reexport PanelGroup */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__Popover__ = __webpack_require__(573);
@@ -14324,29 +14324,30 @@ var SetScoreForm = function (_React$Component) {
     }
 
     _createClass(SetScoreForm, [{
-        key: 'addTieInput',
-        value: function addTieInput() {
-            var setScore = document.querySelector('#setScore');
-            var tiebreakInput = document.createElement('input');
-            tiebreakInput.placeholder = 'Tiebreak';
-            tiebreakInput.ref = 'tiebreak';
-            setScore.appendChild(tiebreakInput);
-        }
-    }, {
         key: 'updateTeam',
         value: function updateTeam(e) {
             //verifica {team} e invoca la funcion update() del parent, con parametros team y score
             e.preventDefault();
 
-            var team = this.refs.team_id.value;
-            var score = this.refs.score.value;
+            var teamScore = {
+                team: this.refs.team_id.value,
+                score: this.refs.score.value
+            };
+            if (this.refs.tiebreak) {
+                teamScore.tiebreak = this.refs.tiebreak.value;
+            }
+            console.log(teamScore);
 
-            if (team == "" || score == "") {
+            if (teamScore.team == "" || teamScore.score == "") {
                 this.setState({ error: "Revisá los campos. Hay un error en ellos." });
             } else {
-                this.props.update(team, score);
+                this.props.update(teamScore);
+
                 this.refs.team_id.value = "";
                 this.refs.score.value = "";
+                if (this.refs.tiebreak) {
+                    this.refs.tiebreak.value = "";
+                }
                 this.setState({ error: null });
             }
         }
@@ -14354,14 +14355,16 @@ var SetScoreForm = function (_React$Component) {
         key: 'render',
         value: function render() {
             var event = this.props.event;
-            if (event.tiebreak) {
-                this.addTieInput();
-            }
-
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                event.tiebreak == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'form',
+                    { id: 'setScore' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'team_id', placeholder: 'Id del Equipo' }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'score', placeholder: 'Score' }),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'tiebreak', placeholder: 'Tiebreak' })
+                ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'form',
                     { id: 'setScore' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'team_id', placeholder: 'Id del Equipo' }),
@@ -15772,7 +15775,6 @@ var EventScores = function (_Component) {
       fetch('/api/event/' + event + '/scores').then(function (response) {
         return response.json();
       }).then(function (eventResults) {
-
         _this3.setState({ updatedTeams: eventResults });
       }).catch(function (error) {
         console.log(error);
@@ -15803,32 +15805,22 @@ var EventScores = function (_Component) {
     value: function validateScore(score) {}
   }, {
     key: 'setScore',
-    value: function setScore(team_id, score) {
+    value: function setScore(teamScore) {
       var _this4 = this;
 
-      // if (this.state.event.midePor == 'time') {
-      //   score = this.convertToSeconds(score)
-      // }
-      if (this.validateTeamId(team_id)) {
+      if (this.validateTeamId(teamScore.team)) {
         var category_id = this.state.event.category_id;
-        var teamScore = {
-          team_id: team_id,
-          score: score,
-          category_id: category_id
-        };
+        teamScore.category_id = category_id;
+
         this.state.nonUpdatedTeams.forEach(function (team) {
-          if (team.id == team_id) {
+          if (team.id == teamScore.team) {
             team.show = false;
           }
         });
-
         var url = '/api/event/' + this.state.event.id + '/cargarScore/';
         __WEBPACK_IMPORTED_MODULE_8_axios___default.a.post(url, teamScore).then(function (response) {
           _this4.fetchUpdatedTeams(_this4.state.event.id);
-          //console.log(response);
-        }).catch(function (error) {
-          //console.log(error);
-        });
+        }).catch(function (error) {});
         var teams = this.state.nonUpdatedTeams.filter(function (team) {
           return team.show === true;
         });
@@ -15899,8 +15891,6 @@ var EventScores = function (_Component) {
         teamArray.push(data);
       });
       var teamJsonString = JSON.stringify(teamArray);
-      console.log(teamJsonString);
-
       var url = '/api/event/' + event_id + '/storePositions';
       var config = {
         headers: {
@@ -15917,31 +15907,53 @@ var EventScores = function (_Component) {
       setTimeout(this.props.back(), 3000);
     }
   }, {
+    key: 'sortTeams',
+    value: function sortTeams(event, updatedTeams) {
+      var eventScores = this;
+      updatedTeams = updatedTeams.sort(function (a, b) {
+        switch (event.midePor) {
+          case 'time':
+            if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)) {
+              console.log(1);
+              return 1;
+            } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)) {
+              if (event.tiebreak) {
+                console.log(a.tiebreak);
+                console.log(b.tiebreak);
+                if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)) {
+                  return 1;
+                } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
+                  return -1;
+                } else {
+                  return 0;
+                }
+              }
+            } else {
+              return -1;
+              console.log(-1);
+            }
+            break;
+          case 'reps':
+            return parseInt(b.score, 10) - parseInt(a.score, 10);
+            break;
+          default:
+            return $score;
+        }
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var event = this.state.event;
-      var eventScores = this;
-      var nonUpdatedTeams = void 0;
-      if (this.state.nonUpdatedTeams) {
+      var nonUpdatedTeams = this.state.nonUpdatedTeams;
+      if (nonUpdatedTeams) {
         nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
           return team.show === true;
         });
       }
       var updatedTeams = this.state.updatedTeams;
       if (updatedTeams) {
-
-        updatedTeams = updatedTeams.sort(function (a, b) {
-          switch (event.midePor) {
-            case 'time':
-              return eventScores.convertToSeconds(a.score) - eventScores.convertToSeconds(b.score);
-              break;
-            case 'reps':
-              return parseInt(b.score, 10) - parseInt(a.score, 10);
-              break;
-            default:
-              return $score;
-          }
-        });
+        this.sortTeams(event, updatedTeams);
       }
 
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -15953,13 +15965,19 @@ var EventScores = function (_Component) {
           'Cargar Resultados'
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["b" /* Jumbotron */],
+          __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["c" /* Jumbotron */],
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h3',
             null,
             'Evento: ',
-            this.state.event.name
+            event.name
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'p',
+            null,
+            'Mide Por: ',
+            event.midePor
           ),
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__SetScoreForm__["a" /* default */], { update: this.setScore.bind(this), event: event }),
           nonUpdatedTeams.length == 0 && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__Btn__["a" /* default */], { text: 'Guardar Posiciones', funcion: this.storePositions.bind(this) })
@@ -15968,7 +15986,7 @@ var EventScores = function (_Component) {
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["a" /* Col */],
+            __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["b" /* Col */],
             { className: 'column', md: 6, sm: 6 },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__List__["a" /* default */], { entries: nonUpdatedTeams, itemType: 'team' })
           )
@@ -15985,7 +16003,7 @@ var EventScores = function (_Component) {
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["a" /* Col */],
+            __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["b" /* Col */],
             { className: 'column', md: 6, sm: 6 },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__List__["a" /* default */], { entries: updatedTeams, itemType: 'team' })
           )
@@ -48385,7 +48403,7 @@ var Team = function (_Component) {
         value: function render() {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_2_react_bootstrap__["c" /* Panel */],
+                __WEBPACK_IMPORTED_MODULE_2_react_bootstrap__["d" /* Panel */],
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -62030,7 +62048,7 @@ var EventMenu = function (_Component) {
                         'Eventos'
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["b" /* Jumbotron */],
+                        __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["c" /* Jumbotron */],
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h3',
@@ -62204,7 +62222,7 @@ var Teams = function (_Component) {
                         'Registrar Equipo'
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["b" /* Jumbotron */],
+                        __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["c" /* Jumbotron */],
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'h3',
@@ -62217,7 +62235,7 @@ var Teams = function (_Component) {
                         'div',
                         null,
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["a" /* Col */],
+                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["b" /* Col */],
                             { className: 'column', md: 3, sm: 3 },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h2',
@@ -62227,7 +62245,7 @@ var Teams = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__List__["a" /* default */], { entries: teams_cat1, itemType: 'team' })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["a" /* Col */],
+                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["b" /* Col */],
                             { className: 'column', md: 3, sm: 3 },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h2',
@@ -62237,7 +62255,7 @@ var Teams = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__List__["a" /* default */], { entries: teams_cat2, itemType: 'team' })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["a" /* Col */],
+                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["b" /* Col */],
                             { className: 'column', md: 3, sm: 3 },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h2',
@@ -62247,7 +62265,7 @@ var Teams = function (_Component) {
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__List__["a" /* default */], { entries: teams_cat3, itemType: 'team' })
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["a" /* Col */],
+                            __WEBPACK_IMPORTED_MODULE_7_react_bootstrap__["b" /* Col */],
                             { className: 'column', md: 3, sm: 3 },
                             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                                 'h2',
@@ -62497,18 +62515,37 @@ var LeaderboardDash = function (_Component) {
         key: 'render',
         value: function render() {
 
-            console.log(this.state);
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["b" /* Jumbotron */],
+                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["c" /* Jumbotron */],
                     null,
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'h1',
                         { className: 'App-title' },
                         'Leaderboards'
                     )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                    { bsStyle: 'primary' },
+                    'Hombres RXD'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                    { bsStyle: 'primary' },
+                    'Mujeres RXD'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                    { bsStyle: 'primary' },
+                    'Hombres Scaled'
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                    { bsStyle: 'primary' },
+                    'Mujeres Scaled'
                 ),
                 this.state.leaderboard && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',

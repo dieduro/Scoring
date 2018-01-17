@@ -19,6 +19,7 @@ class CreateEventScoresTable extends Migration
             $table->integer('event_id');
             $table->integer('category_id');
             $table->string('score')->nullable();
+            $table->string('tiebreak')->nullable();
             $table->integer('points')->nullable();
             $table->timestamps();
         });
