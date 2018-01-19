@@ -5,16 +5,22 @@
 // Variables
 @import "variables";
 
-// Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+// // Bootstrap
+// @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+$primary-color: #88C542;
 
 .App {
     display: flex;
 
 }
+.sectionContainer {
+    background-color: $primary-color;
+}
 
 .column {
     flex-basis: 48%;
+    
 }
 
 

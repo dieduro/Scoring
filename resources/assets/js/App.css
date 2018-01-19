@@ -1,4 +1,6 @@
-
+/* #88C542  verde
+#30499B  azul
+#EB7B2D  naranja  */
 
 .App {
   text-align: center;
@@ -24,10 +26,93 @@
 .App-intro {
   font-size: large;
 }
-.team {
+.teamCard {
+ width: 100%;
+ height: 70px;
+ border: 1.5px solid #EB7B2D;
+ margin: 5px 0;
+ position: relative;
+ background-color: #88C542;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+ 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+ 
+}
+.teamCard h2,
+.teamCard h3,
+.teamCard .id,
+.teamCard .score {
+  color: rgba(65, 63, 63, 0.966)
+}
+.teamCard .teamName {
+  font-size: 1.2em;
+  margin: 0px;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+  .teamCard .athletes {
+  font-size: 1em;
+  margin: 5px 0;
+}
+.teamCard .id{
+  font-size: 1em;
+  margin: 0px;
+  display: inline;
+  position: absolute;
+  top: 0;
+  right: 5px;
+}
+.teamCard .score {
+   font-size: 1em;
+   margin: 0px;
+   display: inline;
+   position: absolute;
+   bottom: 0;
+   right: 0;
+}
+.cell {
+  flex-basis: 15%;
+  display: inline-block;
+  font-weight: 600;
+  margin: 0 10px;
+}
+/* #teamInfo {
+  width: 100%;
+  height: 70px;
+  border: 1.5px solid #EB7B2D;
+  margin: 5px 0;
+  position: relative;
+  background-color: #88C542;
+} */
 
-  background-color: green;
 
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.theList {
+  padding: 0px;
+  margin: 0px;
+  width:100%;
+}
+
+.listItem {
+  list-style: none;
+}
+.itemDiv {
+  display:flex;
+  border-bottom: 1px solid black;
+}
+.itemDiv:nth-last-child(1) {
+  display: flex;
+  border-bottom: 0px solid #FFF;
+}
+.tiebreakCell {
+  flex-basis: 5%;
+}
+#wod {
+  overflow: hidden;
 }
 
 .leftNav {
@@ -36,9 +121,14 @@
   position: fixed;
   float: left;
 }
-.section {
+.sectionContainer {
   width:80%;
   float:right;
+}
+
+.section {
+  margin: 0 auto;
+  
 }
 
 
@@ -53,12 +143,23 @@
   left:0;
   display:flex;
   justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
 }
+.tbody {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
 .theading {
   flex-basis: 15%;
   display:inline-block;
   font-weight: 600;
   margin: 0 10px;
+ 
 }
 .trow {
   display:flex;
@@ -66,6 +167,12 @@
 .cell {
   flex-basis: 15%;
   display:inline-block;
-  margin: 0 10px;
+  margin: 0;
+  overflow: hidden;
+  border-right: 1px solid black;
+}
+
+.cell:nth-last-child(1) {
+  border: 0 solid #FFF;
 }
 

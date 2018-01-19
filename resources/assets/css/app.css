@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+.App {
+  display: flex; }
+
+.sectionContainer {
+  background-color: #88C542; }
+
+.column {
+  flex-basis: 48%; }
+
+/*# sourceMappingURL=app.css.map */

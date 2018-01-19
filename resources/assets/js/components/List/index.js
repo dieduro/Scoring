@@ -15,27 +15,24 @@ export default class List extends Component {
       
       createTasks(item) {
         switch (this.props.itemType) {
-          case 'event':
-            return 
-              (<li key={item.id}>
-                <Event data={item}/>
-              </li>)    
-          break;
-          case 'team' :
-            return(  
-              <li key={item.id}>
-                <Team data={item}/>
-              </li> )
+          case "event":
+            return <li className="listItem" key={item.id}>
+                <Event data={item} />
+              </li>;
             break;
-            case 'leaderboardTeam' :
-            return(  
-              <li key={item.team.id}>
-                <LeaderboardTeam data={item}/>
-              </li> )
+          case "team":
+            return <li className="listItem" key={item.id}>
+                <Team data={item} />
+              </li>;
+            break;
+          case "leaderboardTeam":
+            return <li className="listItem"  key={item.team.id}>
+                <LeaderboardTeam data={item} />
+              </li>;
             break;
           default:
-            return null   
-      }
+            return null;
+        }
     }
 
     render() {

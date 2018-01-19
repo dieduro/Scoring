@@ -7866,7 +7866,7 @@ if(false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_49__PaginationButton__ = __webpack_require__(333);
 /* unused harmony reexport PaginationButton */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_50__Panel__ = __webpack_require__(572);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_50__Panel__["a"]; });
+/* unused harmony reexport Panel */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_51__PanelGroup__ = __webpack_require__(303);
 /* unused harmony reexport PanelGroup */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_52__Popover__ = __webpack_require__(573);
@@ -8644,25 +8644,24 @@ var List = function (_Component) {
     key: 'createTasks',
     value: function createTasks(item) {
       switch (this.props.itemType) {
-        case 'event':
-          return;
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        case "event":
+          return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
-            { key: item.id },
+            { className: 'listItem', key: item.id },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Event__["a" /* default */], { data: item })
           );
           break;
-        case 'team':
+        case "team":
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
-            { key: item.id },
+            { className: 'listItem', key: item.id },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Team__["a" /* default */], { data: item })
           );
           break;
-        case 'leaderboardTeam':
+        case "leaderboardTeam":
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
-            { key: item.team.id },
+            { className: 'listItem', key: item.team.id },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__LeaderboardTeam__["a" /* default */], { data: item })
           );
           break;
@@ -15724,11 +15723,13 @@ var EventScores = function (_Component) {
 
     _this.fetchUpdatedTeams = _this.fetchUpdatedTeams.bind(_this);
     _this.fetchNonUpdatedTeams = _this.fetchNonUpdatedTeams.bind(_this);
+    _this.convertToSeconds = _this.convertToSeconds.bind(_this);
 
     _this.state = {
       nonUpdatedTeams: [],
       updatedTeams: [],
-      event: _this.props.event
+      event: null
+
       // categoryId: this.props.category_id
     };
 
@@ -15739,12 +15740,16 @@ var EventScores = function (_Component) {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       this.setState({ event: nextProps.event });
+      this.fetchNonUpdatedTeams(nextProps.event);
     }
   }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      var event = this.state.event;
+      var event = this.props.event;
       this.fetchNonUpdatedTeams(event);
+      this.setState({
+        event: event
+      });
     }
   }, {
     key: 'fetchNonUpdatedTeams',
@@ -15796,7 +15801,7 @@ var EventScores = function (_Component) {
     value: function convertToSeconds(time) {
       var arr = time.split(':');
       var mToS = arr[0] * 60;
-      var sec = arr[1];
+      var sec = parseInt(arr[1], 10);
       var total = mToS + sec;
       return total;
     }
@@ -15808,6 +15813,7 @@ var EventScores = function (_Component) {
     value: function setScore(teamScore) {
       var _this4 = this;
 
+      console.log(this.convertToSeconds(teamScore.score));
       if (this.validateTeamId(teamScore.team)) {
         var category_id = this.state.event.category_id;
         teamScore.category_id = category_id;
@@ -15857,7 +15863,7 @@ var EventScores = function (_Component) {
             switch (_context.prev = _context.next) {
               case 0:
                 __WEBPACK_IMPORTED_MODULE_8_axios___default.a.post(url, data).then(function (response) {
-                  console.log(response.data);
+                  // console.log(response.data); 
                 }).catch(function (error) {
                   console.log(error);
                 });
@@ -15880,6 +15886,7 @@ var EventScores = function (_Component) {
     key: 'storePositions',
     value: function storePositions() {
       var teams = this.setPositions();
+      console.log(teams);
       var event_id = this.state.event.id;
       var teamArray = [];
       teams.forEach(function (team) {
@@ -15900,9 +15907,6 @@ var EventScores = function (_Component) {
       };
 
       this.axiosPost(url, config);
-      // let response = this.axiosPost(url, data).then((response)=>{
-      //   responses.push(response)
-      // })
       alert('Resultados de evento: ' + event_id + ', cargados satisfactoriamente.');
       setTimeout(this.props.back(), 3000);
     }
@@ -15911,15 +15915,13 @@ var EventScores = function (_Component) {
     value: function sortTeams(event, updatedTeams) {
       var eventScores = this;
       updatedTeams = updatedTeams.sort(function (a, b) {
+
         switch (event.midePor) {
           case 'time':
             if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)) {
-              console.log(1);
               return 1;
             } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)) {
               if (event.tiebreak) {
-                console.log(a.tiebreak);
-                console.log(b.tiebreak);
                 if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)) {
                   return 1;
                 } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
@@ -15930,7 +15932,6 @@ var EventScores = function (_Component) {
               }
             } else {
               return -1;
-              console.log(-1);
             }
             break;
           case 'reps':
@@ -15945,6 +15946,7 @@ var EventScores = function (_Component) {
     key: 'render',
     value: function render() {
       var event = this.state.event;
+
       var nonUpdatedTeams = this.state.nonUpdatedTeams;
       if (nonUpdatedTeams) {
         nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
@@ -15964,7 +15966,7 @@ var EventScores = function (_Component) {
           { className: 'App-title' },
           'Cargar Resultados'
         ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+        this.state.event && __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_9_react_bootstrap__["c" /* Jumbotron */],
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
@@ -20485,7 +20487,7 @@ var EventsAdmin = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'theading' },
-                            'TieBreaks'
+                            'TieBreak'
                         )
                     ),
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -35876,6 +35878,8 @@ ToggleButton.propTypes = propTypes;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_css__ = __webpack_require__(32);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__App_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__App_css__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -35883,6 +35887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 
 
 
@@ -35896,46 +35901,47 @@ var Event = function (_Component) {
     }
 
     _createClass(Event, [{
-        key: "render",
+        key: 'render',
         value: function render() {
             var event = this.props.data;
+            var tiebreak = null;
+            if (event.tiebreak == 1) {
+                tiebreak = 'Sí';
+            } else {
+                tiebreak = 'No';
+            }
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                "div",
-                null,
+                'div',
+                { className: 'itemDiv' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "category" },
+                    'div',
+                    { className: 'cell', id: 'category' },
                     event.category
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "eventNumber" },
+                    'div',
+                    { className: 'cell', id: 'eventNumber' },
                     event.eventNumber
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "name" },
+                    'div',
+                    { className: 'cell', id: 'name' },
                     event.name
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "wod" },
+                    'div',
+                    { className: 'cell', id: 'wod' },
                     event.wod
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "type" },
+                    'div',
+                    { className: 'cell', id: 'type' },
                     event.midePor
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "tiebreak" },
-                    event.tiebreak
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    "div",
-                    { className: "cell", id: "tiebreak" },
-                    event.qTiebreaks
+                    'div',
+                    { className: 'tiebreakCell cell ', id: 'tiebreak' },
+                    tiebreak
                 )
             );
         }
@@ -36347,7 +36353,7 @@ var App = function (_Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
           'div',
-          { className: 'section' },
+          { className: 'sectionContainer' },
           function () {
             switch (_this3.state.section) {
               case 1:
@@ -48362,7 +48368,7 @@ exports = module.exports = __webpack_require__(170)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n.App {\n  text-align: center;\n  \n}\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white;\n}\n\n.App-title {\n  font-size: 1.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n.team {\n\n  background-color: green;\n\n}\n\n.leftNav {\n  width: 20%;\n  height: 100vh;\n  position: fixed;\n  float: left;\n}\n.section {\n  width:80%;\n  float:right;\n}\n\n\n.table {\n  width:80%;\n  border: 1px solid black;\n  margin-top: 30px;\n}\n.thead {\n  position: relative;\n  top:0;\n  left:0;\n  display:flex;\n  justify-content: space-between;\n}\n.theading {\n  flex-basis: 15%;\n  display:inline-block;\n  font-weight: 600;\n  margin: 0 10px;\n}\n.trow {\n  display:flex;\n}\n.cell {\n  flex-basis: 15%;\n  display:inline-block;\n  margin: 0 10px;\n}\n\n", ""]);
+exports.push([module.i, "/* #88C542  verde\n#30499B  azul\n#EB7B2D  naranja  */\n\n.App {\n  text-align: center;\n  \n}\n\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #222;\n  height: 150px;\n  padding: 20px;\n  color: white;\n}\n\n.App-title {\n  font-size: 1.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n.teamCard {\n width: 100%;\n height: 70px;\n border: 1.5px solid #EB7B2D;\n margin: 5px 0;\n position: relative;\n background-color: #88C542;\n box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),\n 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n \n}\n.teamCard h2,\n.teamCard h3,\n.teamCard .id,\n.teamCard .score {\n  color: rgba(65, 63, 63, 0.966)\n}\n.teamCard .teamName {\n  font-size: 1.2em;\n  margin: 0px;\n  position: relative;\n  top: 0;\n  left: 0;\n}\n  .teamCard .athletes {\n  font-size: 1em;\n  margin: 5px 0;\n}\n.teamCard .id{\n  font-size: 1em;\n  margin: 0px;\n  display: inline;\n  position: absolute;\n  top: 0;\n  right: 5px;\n}\n.teamCard .score {\n   font-size: 1em;\n   margin: 0px;\n   display: inline;\n   position: absolute;\n   bottom: 0;\n   right: 0;\n}\n.cell {\n  flex-basis: 15%;\n  display: inline-block;\n  font-weight: 600;\n  margin: 0 10px;\n}\n/* #teamInfo {\n  width: 100%;\n  height: 70px;\n  border: 1.5px solid #EB7B2D;\n  margin: 5px 0;\n  position: relative;\n  background-color: #88C542;\n} */\n\n\n.flex {\n  display: flex;\n  justify-content: space-between;\n}\n\n.theList {\n  padding: 0px;\n  margin: 0px;\n  width:100%;\n}\n\n.listItem {\n  list-style: none;\n}\n.itemDiv {\n  display:flex;\n  border-bottom: 1px solid black;\n}\n.itemDiv:nth-last-child(1) {\n  display: flex;\n  border-bottom: 0px solid #FFF;\n}\n.tiebreakCell {\n  flex-basis: 5%;\n}\n#wod {\n  overflow: hidden;\n}\n\n.leftNav {\n  width: 20%;\n  height: 100vh;\n  position: fixed;\n  float: left;\n}\n.sectionContainer {\n  width:80%;\n  float:right;\n}\n\n.section {\n  margin: 0 auto;\n  \n}\n\n\n.table {\n  width:80%;\n  border: 1px solid black;\n  margin-top: 30px;\n}\n.thead {\n  position: relative;\n  top:0;\n  left:0;\n  display:flex;\n  justify-content: space-between;\n  border-bottom: 1px solid black;\n  padding-bottom: 15px;\n}\n.tbody {\n  position: relative;\n  top: 0;\n  left: 0;\n  display: flex;\n  justify-content: space-between;\n}\n\n.theading {\n  flex-basis: 15%;\n  display:inline-block;\n  font-weight: 600;\n  margin: 0 10px;\n \n}\n.trow {\n  display:flex;\n}\n.cell {\n  flex-basis: 15%;\n  display:inline-block;\n  margin: 0;\n  overflow: hidden;\n  border-right: 1px solid black;\n}\n\n.cell:nth-last-child(1) {\n  border: 0 solid #FFF;\n}\n\n", ""]);
 
 // exports
 
@@ -48403,43 +48409,39 @@ var Team = function (_Component) {
         value: function render() {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_2_react_bootstrap__["d" /* Panel */],
-                null,
+                'div',
+                { className: 'teamCard' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h1',
-                        null,
-                        ' ',
-                        this.props.data.name,
-                        ' '
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h3',
-                        null,
-                        this.props.data.ath1,
-                        ' y ',
-                        this.props.data.ath2
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'p',
-                        null,
-                        'Id: ',
-                        this.props.data.id,
-                        ' '
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-                    this.props.data.score ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'p',
-                        null,
-                        ' ',
-                        'Score: ' + this.props.data.score
-                    ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'p',
-                        null,
-                        ' No hay score registrado'
-                    )
+                    'h2',
+                    { className: 'teamName' },
+                    ' ',
+                    this.props.data.name,
+                    ' '
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'id' },
+                    '#',
+                    this.props.data.id,
+                    ' '
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'h3',
+                    { className: 'athletes' },
+                    this.props.data.ath1,
+                    ' y ',
+                    this.props.data.ath2
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+                this.props.data.score ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'score' },
+                    " ",
+                    'Score: ' + this.props.data.score
+                ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'p',
+                    { className: 'score' },
+                    ' No hay score registrado'
                 )
             );
         }
@@ -58310,7 +58312,7 @@ var Panel = function (_React$Component) {
 Panel.propTypes = propTypes;
 Panel.defaultProps = defaultProps;
 
-/* harmony default export */ __webpack_exports__["a"] = (Object(__WEBPACK_IMPORTED_MODULE_10__utils_bootstrapUtils__["a" /* bsClass */])('panel', Object(__WEBPACK_IMPORTED_MODULE_10__utils_bootstrapUtils__["c" /* bsStyles */])([].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default()(__WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["d" /* State */]), [__WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].DEFAULT, __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].PRIMARY]), __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].DEFAULT, Panel)));
+/* unused harmony default export */ var _unused_webpack_default_export = (Object(__WEBPACK_IMPORTED_MODULE_10__utils_bootstrapUtils__["a" /* bsClass */])('panel', Object(__WEBPACK_IMPORTED_MODULE_10__utils_bootstrapUtils__["c" /* bsStyles */])([].concat(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_core_js_object_values___default()(__WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["d" /* State */]), [__WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].DEFAULT, __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].PRIMARY]), __WEBPACK_IMPORTED_MODULE_11__utils_StyleConfig__["e" /* Style */].DEFAULT, Panel)));
 
 /***/ }),
 /* 573 */
@@ -60012,88 +60014,75 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var LeaderboardTeam = function (_Component) {
-    _inherits(LeaderboardTeam, _Component);
+  _inherits(LeaderboardTeam, _Component);
 
-    function LeaderboardTeam(props) {
-        _classCallCheck(this, LeaderboardTeam);
+  function LeaderboardTeam(props) {
+    _classCallCheck(this, LeaderboardTeam);
 
-        return _possibleConstructorReturn(this, (LeaderboardTeam.__proto__ || Object.getPrototypeOf(LeaderboardTeam)).call(this, props));
+    return _possibleConstructorReturn(this, (LeaderboardTeam.__proto__ || Object.getPrototypeOf(LeaderboardTeam)).call(this, props));
+  }
+
+  _createClass(LeaderboardTeam, [{
+    key: 'render',
+    value: function render() {
+      var data = this.props.data;
+      console.log(data);
+
+      var ev1 = data.eventScores[0] ? data.eventScores[0].score : '--';
+      var ev2 = data.eventScores[1] ? data.eventScores[1].score : '--';
+      var ev3 = data.eventScores[2] ? data.eventScores[2].score : '--';
+      var ev4 = data.eventScores[3] ? data.eventScores[3].score : '--';
+      var ev5 = data.eventScores[4] ? data.eventScores[4].score : '--';
+      var ts = data.team.totalScore ? data.team.totalScore : "--";
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'itemDiv' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', id: 'teamName' },
+          data.team.name
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', id: 'pos' },
+          data.position
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev1' },
+          ev1
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev2' },
+          ev2
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev3' },
+          ev3
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev4' },
+          ev4
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev5' },
+          ev5
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', id: 'wod' },
+          ts
+        )
+      );
     }
+  }]);
 
-    _createClass(LeaderboardTeam, [{
-        key: 'render',
-        value: function render() {
-            var data = this.props.data;
-            var ev1 = data.eventScores[0] ? data.eventScores[0].score : '--';
-            var ev2 = data.eventScores[1] ? data.eventScores[1].score : '--';
-            var ev3 = data.eventScores[2] ? data.eventScores[2].score : '--';
-            var ev4 = data.eventScores[3] ? data.eventScores[3].score : '--';
-            var ev5 = data.eventScores[4] ? data.eventScores[4].score : '--';
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', id: 'teamInfo' },
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'h4',
-                        null,
-                        data.team.name
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'p',
-                        null,
-                        data.team.id
-                    ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'p',
-                        null,
-                        data.team.ath1,
-                        ' & ',
-                        data.team.ath2
-                    )
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', id: 'pos' },
-                    data.position
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', name: 'eventScores', id: 'ev1' },
-                    ev1
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', name: 'eventScores', id: 'ev2' },
-                    ev2
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', name: 'eventScores', id: 'ev3' },
-                    ev3
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', name: 'eventScores', id: 'ev4' },
-                    ev4
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', name: 'eventScores', id: 'ev5' },
-                    ev5
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'cell', id: 'wod' },
-                    data.team.totalScore
-                )
-            );
-        }
-    }]);
-
-    return LeaderboardTeam;
+  return LeaderboardTeam;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (LeaderboardTeam);
@@ -61839,7 +61828,7 @@ var EventsDash = function (_Component) {
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
-                null,
+                { className: 'section' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
                     null,
@@ -61848,7 +61837,7 @@ var EventsDash = function (_Component) {
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'section' },
+                    { className: 'Ev_section' },
                     function () {
                         switch (_this2.state.section) {
                             case 1:
@@ -62481,18 +62470,18 @@ var LeaderboardDash = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LeaderboardDash.__proto__ || Object.getPrototypeOf(LeaderboardDash)).call(this, props));
 
+        _this.showCat_1 = _this.showCat_1.bind(_this);
+        _this.showCat_2 = _this.showCat_2.bind(_this);
+        _this.showCat_3 = _this.showCat_3.bind(_this);
+        _this.showCat_4 = _this.showCat_4.bind(_this);
         _this.state = {
-            leaderboard: null
+            leaderboard: null,
+            category: null
         };
         return _this;
     }
 
     _createClass(LeaderboardDash, [{
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.fetchLeaderboard(1);
-        }
-    }, {
         key: 'fetchLeaderboard',
         value: function fetchLeaderboard(categoryId) {
             var _this2 = this;
@@ -62500,8 +62489,27 @@ var LeaderboardDash = function (_Component) {
             fetch('/api/leaderboard/' + categoryId).then(function (response) {
                 return response.json();
             }).then(function (leaderboard) {
-
-                _this2.setState({ leaderboard: leaderboard });
+                var category = void 0;
+                switch (categoryId) {
+                    case 1:
+                        category = "Hombres RXD";
+                        break;
+                    case 2:
+                        category = "Mujeres RXD";
+                        break;
+                    case 3:
+                        category = "Hombres Scaled";
+                        break;
+                    case 4:
+                        category = "Mujeres Scaled";
+                        break;
+                    default:
+                        null;
+                }
+                _this2.setState({
+                    leaderboard: leaderboard,
+                    category: category
+                });
             }).catch(function (error) {
                 console.log(error);
             });
@@ -62512,9 +62520,30 @@ var LeaderboardDash = function (_Component) {
             this.props.backToApp();
         }
     }, {
+        key: 'showCat_1',
+        value: function showCat_1() {
+            this.fetchLeaderboard(1);
+        }
+    }, {
+        key: 'showCat_2',
+        value: function showCat_2() {
+            this.fetchLeaderboard(2);
+        }
+    }, {
+        key: 'showCat_3',
+        value: function showCat_3() {
+            this.fetchLeaderboard(3);
+        }
+    }, {
+        key: 'showCat_4',
+        value: function showCat_4() {
+            this.fetchLeaderboard(4);
+        }
+    }, {
         key: 'render',
         value: function render() {
-
+            var leaderboard = this.state.leaderboard;
+            var category = this.state.category;
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
                 null,
@@ -62528,24 +62557,28 @@ var LeaderboardDash = function (_Component) {
                     )
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
-                    { bsStyle: 'primary' },
-                    'Hombres RXD'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
-                    { bsStyle: 'primary' },
-                    'Mujeres RXD'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
-                    { bsStyle: 'primary' },
-                    'Hombres Scaled'
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
-                    { bsStyle: 'primary' },
-                    'Mujeres Scaled'
+                    'div',
+                    { className: 'flex' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                        { bsStyle: 'primary', onClick: this.showCat_1 },
+                        'Hombres RXD'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                        { bsStyle: 'primary', onClick: this.showCat_2 },
+                        'Mujeres RXD'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                        { bsStyle: 'primary', onClick: this.showCat_3 },
+                        'Hombres Scaled'
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        __WEBPACK_IMPORTED_MODULE_6_react_bootstrap__["a" /* Button */],
+                        { bsStyle: 'primary', onClick: this.showCat_4 },
+                        'Mujeres Scaled'
+                    )
                 ),
                 this.state.leaderboard && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -62553,9 +62586,11 @@ var LeaderboardDash = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'h2',
                         null,
-                        'Categoria'
+                        'Categoria: ',
+                        category,
+                        ' '
                     ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Leaderboard__["a" /* default */], { data: this.state.leaderboard })
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Leaderboard__["a" /* default */], { data: leaderboard })
                 )
             );
         }
@@ -62599,19 +62634,13 @@ var Leaderboard = function (_Component) {
     function Leaderboard(props) {
         _classCallCheck(this, Leaderboard);
 
-        var _this = _possibleConstructorReturn(this, (Leaderboard.__proto__ || Object.getPrototypeOf(Leaderboard)).call(this, props));
-
-        _this.state = {
-
-            leaderboard: _this.props.data
-        };
-
-        return _this;
+        return _possibleConstructorReturn(this, (Leaderboard.__proto__ || Object.getPrototypeOf(Leaderboard)).call(this, props));
     }
 
     _createClass(Leaderboard, [{
         key: 'render',
         value: function render() {
+            var leaderboard = this.props.data;
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -62666,7 +62695,7 @@ var Leaderboard = function (_Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         { className: 'tbody' },
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__List__["a" /* default */], { entries: this.state.leaderboard, itemType: 'leaderboardTeam' })
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__List__["a" /* default */], { entries: leaderboard, itemType: 'leaderboardTeam' })
                     )
                 )
             );

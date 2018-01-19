@@ -7,23 +7,21 @@ export default class Team extends Component {
         super(props)
         
     }
+    
 
     render() {
         
-        return (
-          
-                <Panel>
-                    <div>
-                        <h1> {this.props.data.name} </h1>
-                        <h3>{this.props.data.ath1} y {this.props.data.ath2}</h3>
-                        <p>Id: {this.props.data.id} </p><br/> 
-                        {this.props.data.score ? 
-                        <p> { `Score: ${this.props.data.score}` }</p> : <p> No hay score registrado</p> 
-                        }
-                    </div>
-                </Panel>
-
-            
-        )
+        return <div className="teamCard">
+            <h2 className="teamName"> {this.props.data.name} </h2>
+            <p className="id">#{this.props.data.id} </p>
+            <h3 className="athletes">
+              {this.props.data.ath1} y {this.props.data.ath2}
+            </h3>
+            <br />
+            {this.props.data.score ? <p className="score">
+                {" "}
+                {`Score: ${this.props.data.score}`}
+              </p> : <p className="score"> No hay score registrado</p>}
+          </div>;
     }
 }

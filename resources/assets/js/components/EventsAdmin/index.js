@@ -85,7 +85,7 @@ class EventsAdmin extends Component {
     }
     render() {
          console.log(this.state.events)  
-        let events = this.state.events;
+        const events = this.state.events;
         return (
             <div>
                 <div>
@@ -116,7 +116,6 @@ class EventsAdmin extends Component {
                         { this.state.hasTiebreak &&
                             <div><label htmlFor="qTiebreaks">¿Cuántos?</label><input type="number" ref="qTiebreaks" name="qTiebreaks" id="qTiebreaks" min="1" max="5"/></div>
                         }
-                        
 
                         <label htmlFor="midePor">Mide por:</label>
                         <select name="midePor" id="midePor" ref="midePor">
@@ -124,8 +123,6 @@ class EventsAdmin extends Component {
                             <option value="reps">Reps</option>
                             <option value="weight">Peso</option>
                         </select>
-
-                      
                         <Btn text="Guardar Evento" funcion={this.storeEvent.bind(this)}/>
                     </form>
                 </div>
@@ -138,27 +135,13 @@ class EventsAdmin extends Component {
                         <div className="theading">Evento Nº</div>
                         <div className="theading">Workout</div>
                         <div className="theading">Mide por</div>
-                        <div className="theading">TieBreaks</div>
+                        <div className="theading">TieBreak</div>
                     </div>
                     <div className="tbody">
                        
                             <List entries={events} itemType='event'/>
                     
                     </div>  
-                        
-
-
-                    {/* <div >
-                        <div >
-                            <div className="cell" id="id">1</div>
-                            <div className="cell" id="category">H RxD</div>
-                            <div className="cell" id="eventNumber">1</div>
-                            <div className="cell" id="wod">Max C&J</div>
-                            <div className="cell" id="type">Peso</div>
-                            <div className="cell" id="timebreaks">No</div>
-                        </div>
-                        
-                    </div> */}
                 </div>
             </div>
         )

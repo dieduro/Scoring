@@ -61,13 +61,13 @@ class App extends Component {
         <Btn text="Eventos" funcion={this.eventSection.bind(this)}/>
         <Btn text="Leaderboards" funcion={this.leaderboardSection.bind(this)}/>
       </div>
-      <div className="section">
+      <div className="sectionContainer">
         { (()=>{ switch (this.state.section){
           case 1: 
-            return <Teams backToApp={this.backToThis.bind(this)}/>;
+            return <Teams  backToApp={this.backToThis.bind(this)}/>;
             break;
           case 2: 
-            return <EventsDash backToApp={this.backToThis.bind(this)}/>
+            return <EventsDash  backToApp={this.backToThis.bind(this)}/>
             break;
           case 3:
             return <LeaderboardDash />

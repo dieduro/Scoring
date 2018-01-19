@@ -14,22 +14,28 @@ class EventScores extends Component {
     super(props)
     this.fetchUpdatedTeams = this.fetchUpdatedTeams.bind(this);
     this.fetchNonUpdatedTeams = this.fetchNonUpdatedTeams.bind(this);
+    this.convertToSeconds = this.convertToSeconds.bind(this); 
 
     this.state= {
         nonUpdatedTeams : [],
         updatedTeams : [],
-        event : this.props.event,
+        event: null
+        
         // categoryId: this.props.category_id
     }
 
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({ event: nextProps.event });  
+    this.setState({ event: nextProps.event });
+    this.fetchNonUpdatedTeams(nextProps.event);  
   }
 
   componentDidMount() {
-    let event = this.state.event
+    let event = this.props.event
     this.fetchNonUpdatedTeams(event);
+    this.setState({
+      event: event
+    })
    
   }
 
@@ -78,7 +84,7 @@ class EventScores extends Component {
   convertToSeconds(time){
     let arr = time.split(':')
     let mToS = arr[0] * 60
-    let sec = arr[1]
+    let sec = parseInt(arr[1],10)
     let total = mToS + sec
     return total
   
@@ -91,7 +97,7 @@ class EventScores extends Component {
   }
   
   setScore(teamScore) {
- 
+    console.log(this.convertToSeconds(teamScore.score))
     if (this.validateTeamId(teamScore.team)){
       let category_id = this.state.event.category_id
       teamScore.category_id = category_id
@@ -136,7 +142,7 @@ class EventScores extends Component {
   async axiosPost(url, data) {
     axios.post(url,data)
     .then(response=> {
-       console.log(response.data); 
+      // console.log(response.data); 
     })
     .catch(function(error) {
       console.log(error);
@@ -144,6 +150,7 @@ class EventScores extends Component {
   }
   storePositions() {
     let teams = this.setPositions()
+    console.log(teams)
     let event_id = this.state.event.id
     let teamArray =[]
     teams.forEach((team)=>{
@@ -164,9 +171,6 @@ class EventScores extends Component {
     }
     
     this.axiosPost(url, config)
-        // let response = this.axiosPost(url, data).then((response)=>{
-        //   responses.push(response)
-        // })
     alert('Resultados de evento: '+event_id+', cargados satisfactoriamente.')
     setTimeout(this.props.back(), 3000)
  
@@ -174,15 +178,13 @@ class EventScores extends Component {
   sortTeams(event, updatedTeams) {
     const eventScores = this
     updatedTeams = updatedTeams.sort(function(a, b){
+
       switch (event.midePor){
         case 'time':
           if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)){
-            console.log(1)
             return 1
           } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)){
             if (event.tiebreak) {
-              console.log(a.tiebreak)
-              console.log(b.tiebreak)
               if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)){
                 return 1
               } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
@@ -193,7 +195,6 @@ class EventScores extends Component {
             }
           } else {
             return -1
-            console.log(-1)
           }
           break;
         case 'reps':
@@ -208,6 +209,7 @@ class EventScores extends Component {
 
  render() {  
   const event = this.state.event
+
   let nonUpdatedTeams = this.state.nonUpdatedTeams
   if (nonUpdatedTeams) {
     nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
@@ -223,7 +225,7 @@ class EventScores extends Component {
     return (
       <div>
           <h1 className="App-title">Cargar Resultados</h1>
- 
+      { this.state.event &&
         <Jumbotron>
           <h3>Evento: {event.name}</h3>
           <p>Mide Por: {event.midePor}</p>
@@ -234,6 +236,7 @@ class EventScores extends Component {
          }
   
         </Jumbotron>
+      }
         {this.state.nonUpdatedTeams ?
         
         <div>
@@ -256,7 +259,7 @@ class EventScores extends Component {
         }
         
        
-         
+      
       
 
         
