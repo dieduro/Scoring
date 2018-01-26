@@ -18,7 +18,7 @@ $primary-color: #88C542;
     padding: 20px;
     position:relative;
     margin: 0 auto;
-    background-color:#e7e7e7;
+    background-color:#ffffff;
 }
 
 .header {
@@ -28,7 +28,8 @@ $primary-color: #88C542;
     .logo{
         height:75px;
         width:auto;
-        float:right;
+        position: absolute;
+        right: 50px;
     }
 }
 .title {
@@ -48,6 +49,11 @@ $primary-color: #88C542;
     display: block;
     overflow: hidden;
     text-align: center;
+}
+.media {
+    display: block;
+    width: 150px;
+    margin: 0 auto;
 }
 .location {
     margin: 0 auto;
@@ -101,9 +107,11 @@ $primary-color: #88C542;
 }
 
 .smalltext {
-    padding-top: 5px;
-    font-size: 20px;
-    font-family: Roboto, sans-serif;
+   padding-top: 5px;
+   font-size: 20px;
+   font-family: Roboto,
+   sans-serif;
+   color: #FFF;
 }
 
 // ----------------------------

@@ -4,7 +4,7 @@
   padding: 20px;
   position: relative;
   margin: 0 auto;
-  background-color: #e7e7e7;
+  background-color: #ffffff;
 }
 
 .header {
@@ -16,7 +16,8 @@
 .header .logo {
   height: 75px;
   width: auto;
-  float: right;
+  position: absolute;
+  right: 50px;
 }
 
 .title {
@@ -37,6 +38,12 @@
   display: block;
   overflow: hidden;
   text-align: center;
+}
+
+.media {
+  display: block;
+  width: 150px;
+  margin: 0 auto;
 }
 
 .location {
@@ -105,6 +112,7 @@
   padding-top: 5px;
   font-size: 20px;
   font-family: Roboto, sans-serif;
+  color: #FFF;
 }
 
 .sponsors {
