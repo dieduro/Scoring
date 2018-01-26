@@ -198,6 +198,7 @@ class EventScores extends Component {
           }
           break;
         case 'reps':
+        case 'peso':
         return parseInt(b.score,10) - parseInt(a.score,10)
           break;
       default:

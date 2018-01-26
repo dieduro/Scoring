@@ -18,7 +18,7 @@ export default class Event extends Component {
             tiebreak = 'No'
         }
         return (
-            <div className="itemDiv">
+            <div className="gridEvents itemDiv">
                 <div className="cell" id="category">{event.category}</div>
                 <div className="cell" id="eventNumber">{event.eventNumber}</div>
                 <div className="cell" id="name">{event.name}</div>

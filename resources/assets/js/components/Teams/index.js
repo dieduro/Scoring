@@ -73,19 +73,19 @@ class Teams extends Component {
                     </Jumbotron>
                     <div>
                     <Col className="column" md={3} sm={3}>
-                    <h2>Hombres RXD</h2>
+                    <h2 className="teamHeading">Hombres RXD</h2>
                     <List  entries={teams_cat1} itemType='team'/>
                   </Col>
                     <Col className="column" md={3} sm={3}>
-                    <h2>Mujeres RXD</h2>
+                    <h2 className="teamHeading">Mujeres RXD</h2>
                     <List  entries={teams_cat2} itemType='team'/>
                   </Col>
                     <Col className="column" md={3} sm={3}>
-                    <h2>Hombres Scaled</h2>
+                    <h2 className="teamHeading">Hombres Scaled</h2>
                     <List  entries={teams_cat3} itemType='team'/>
                   </Col>
                     <Col className="column" md={3} sm={3}>
-                    <h2>Mujeres Scaled</h2>
+                    <h2 className="teamHeading">Mujeres Scaled</h2>
                     <List  entries={teams_cat4} itemType='team'/>
                   </Col>
                     </div>

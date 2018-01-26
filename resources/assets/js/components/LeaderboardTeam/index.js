@@ -9,25 +9,23 @@ export default class LeaderboardTeam extends Component {
 
     render() {
         const data = this.props.data
-        console.log(data)
 
-        let ev1 = data.eventScores[0]? data.eventScores[0].score : '--'
-        let ev2 = data.eventScores[1]? data.eventScores[1].score : '--'
-        let ev3 = data.eventScores[2]? data.eventScores[2].score : '--'
-        let ev4 = data.eventScores[3]? data.eventScores[3].score : '--'
-        let ev5 = data.eventScores[4]? data.eventScores[4].score : '--'
+        let ev1 = data.eventScores[0] ? `${data.eventScores[0].points} pts - ${data.eventScores[0].score}`  : '--'
+        let ev2 = data.eventScores[1] ? `${data.eventScores[1].points} pts - ${data.eventScores[1].score}`  : '--'
+        let ev3 = data.eventScores[2] ? `${data.eventScores[2].points} pts - ${data.eventScores[2].score}`  : '--'
+        let ev4 = data.eventScores[3] ? `${data.eventScores[3].points} pts - ${data.eventScores[3].score}`  : '--'
+        let ev5 = data.eventScores[4] ? `${data.eventScores[4].points} pts - ${data.eventScores[4].score}`  : '--'
+      
         let ts = data.team.totalScore ? data.team.totalScore : "--";
 
         
         
-        return <div className="itemDiv">
-            {/* <div className="cell" id="team_id">
-              <p className="id">{data.team.id}</p>
-            </div> */}
-            <div className="cell" id="teamName">{data.team.name}
-            </div>
-            <div className="cell" id="pos">
+      return <div className="itemDiv">
+              <div className="cell" id="pos">
               {data.position}
+            </div>
+            <div className="cell" id="teamName">
+              {data.team.name}
             </div>
             <div className="cell" name="eventScores" id="ev1">
               {ev1}

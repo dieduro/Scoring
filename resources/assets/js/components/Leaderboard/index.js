@@ -16,10 +16,10 @@ class Leaderboard extends Component {
          
         return (
             <div>
-                <div className="table">
+                <div className="table leaderboard_table">
                     <div className="thead">
-                        <div className="theading">Equipo</div>
                         <div className="theading">Posición</div>
+                        <div className="theading">Equipo</div>
                         <div className="theading">Evento #1</div>
                         <div className="theading">Evento #2</div>
                         <div className="theading">Evento #3</div>

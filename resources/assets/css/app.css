@@ -1,11 +1,44 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-.App {
-  display: flex; }
+.lead_container {
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+  position: relative;
+  margin: 0 auto;
+  background-color: #E1E1E2; }
 
-.sectionContainer {
-  background-color: #88C542; }
+.header {
+  height: 50px;
+  width: 100%; }
+  .header .logo {
+    height: 50px;
+    width: auto;
+    float: right; }
 
-.column {
-  flex-basis: 48%; }
+.title {
+  width: 60%;
+  overflow: hidden;
+  position: relative;
+  margin: 0 auto; }
+  .title img {
+    width: 100%; }
+
+.sponsors {
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.sponsor_item img {
+  height: 48px;
+  width: auto;
+  display: inline-block; }
+
+#trs {
+  width: 100%;
+  height: 25px;
+  margin-top: 10px; }
 
 /*# sourceMappingURL=app.css.map */

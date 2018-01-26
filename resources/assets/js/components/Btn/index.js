@@ -3,9 +3,14 @@ import PropTypes from 'prop-types'
 
 export default class Btn extends Component {
     render() {
+        const style = {
+            width:'100%',
+            margin: '15px 0',
+            'textAlign': 'center'
+        }
         return (
-            <div>
-                <button type="button" onClick={this.props.funcion}> {this.props.text} </button>
+            <div style={style} >
+                <button type="button" className="btn btn_section" onClick={this.props.funcion}> {this.props.text} </button>
             </div>
            
         )

@@ -1,3 +1,5 @@
+
+
 /* #88C542  verde
 #30499B  azul
 #EB7B2D  naranja  */
@@ -6,21 +8,21 @@
   text-align: center;
   
 }
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
 
 .App-header {
-  background-color: #222;
+  background-color: #2e6da4;
   height: 150px;
   padding: 20px;
-  color: white;
+  color: #FFF;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-weight: bold;
+  font-size: 2.5em;
 }
 
 .App-intro {
@@ -28,11 +30,11 @@
 }
 .teamCard {
  width: 100%;
- height: 70px;
- border: 1.5px solid #EB7B2D;
+ height: 80px;
+ border: 1.5px solid #2e6da4;
  margin: 5px 0;
  position: relative;
- background-color: #88C542;
+ background-color: rgb(246, 252, 240);
  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
  0 6px 20px 0 rgba(0, 0, 0, 0.19);
  
@@ -45,14 +47,17 @@
 }
 .teamCard .teamName {
   font-size: 1.2em;
+  font-weight: bold;
   margin: 0px;
   position: relative;
   top: 0;
   left: 0;
+  padding: 5px;
 }
   .teamCard .athletes {
   font-size: 1em;
   margin: 5px 0;
+  padding: 5px;
 }
 .teamCard .id{
   font-size: 1em;
@@ -61,6 +66,7 @@
   position: absolute;
   top: 0;
   right: 5px;
+  padding: 5px;
 }
 .teamCard .score {
    font-size: 1em;
@@ -69,26 +75,75 @@
    position: absolute;
    bottom: 0;
    right: 0;
+   padding: 5px;
 }
-.cell {
-  flex-basis: 15%;
-  display: inline-block;
-  font-weight: 600;
-  margin: 0 10px;
-}
-/* #teamInfo {
-  width: 100%;
-  height: 70px;
-  border: 1.5px solid #EB7B2D;
-  margin: 5px 0;
+
+
+.eventForm {
   position: relative;
-  background-color: #88C542;
-} */
-
-
-.flex {
+  width: 100%;
+  margin: 0;
+  padding: 0 15px;
+  height: auto;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 1.05em;
+  overflow: hidden;
+  border: 1px solid black;
+}
+.eventFormField {
+  flex-basis: 37%;
+  margin:0 15px;
+  padding: 5px;
+}
+.eventFormField label {
+  float: left;
+  margin: 0 10px;
+  padding: 10px 0;
+}
+.eventFormField .input {
+  margin: 10px;
+  float: left;
+}
+#tiebreakCheck {
+  position: relative;
+  top: 5px;
+  right: 5px;
+}
+.qtiebreaks {
+ position: absolute;
+ bottom: 75px;
+ left: 170px;
+}
+.submitEvent {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+
+.radioTeam {
+  display:inline-block;
+  margin: 10px 20px;
+}
+
+/* .leaderboard_table {
+  background-color:#91C3FF;
+} */
+.btn_leaderboard {
+  font-size: 1.6em;
+}
+
+.btn_section {
+  display:block;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  margin: 0 auto;
+  width: 80%;
 }
 
 .theList {
@@ -99,14 +154,20 @@
 
 .listItem {
   list-style: none;
+  border-bottom: 1px solid black;
+}
+.listItem:nth-child(2n) {
+  background-color: lavender;
+}
+.listItem:nth-child(2n+1) {
+  background-color: #F2F1EF;
+}
+.listItem:nth-last-child(1) {
+  border-bottom: 0px solid #FFF;
 }
 .itemDiv {
   display:flex;
-  border-bottom: 1px solid black;
-}
-.itemDiv:nth-last-child(1) {
-  display: flex;
-  border-bottom: 0px solid #FFF;
+  
 }
 .tiebreakCell {
   flex-basis: 5%;
@@ -122,8 +183,9 @@
   float: left;
 }
 .sectionContainer {
-  width:80%;
-  float:right;
+  width: 75%;
+  float: right;
+  margin-right: 5%;
 }
 
 .section {
@@ -131,9 +193,16 @@
   
 }
 
+.teamHeading {
+  height:66px;
+}
+.gridEvents {
+  display: grid !important;
+  grid-template-columns: 15% 10% 15% 40% 10% 10%;
+}
 
 .table {
-  width:80%;
+  /* width:80%; */
   border: 1px solid black;
   margin-top: 30px;
 }
@@ -144,7 +213,6 @@
   display:flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
-  padding-bottom: 15px;
 }
 .tbody {
   position: relative;
@@ -158,21 +226,43 @@
   flex-basis: 15%;
   display:inline-block;
   font-weight: 600;
-  margin: 0 10px;
+  padding:10px;
  
 }
+  .theading:nth-last-child(1),
+.cell:nth-last-child(1) {
+  flex-basis: 10%;
+}
+  .theading:nth-child(1),
+.cell:nth-child(1) {
+  flex-basis: 10%;
+}
+  .theading:nth-child(2),
+.cell:nth-child(2) {
+  flex-basis: 25%;
+}
+
 .trow {
   display:flex;
 }
+#teamName {
+  font-weight: bold;
+}
 .cell {
-  flex-basis: 15%;
-  display:inline-block;
-  margin: 0;
-  overflow: hidden;
-  border-right: 1px solid black;
+ flex-basis: 15%;
+ display: flex;
+ padding: 10px;
+ overflow: hidden;
+ border-right: 1px solid black;
+ overflow: hidden;
+ justify-content: center;
+ align-items: center;
 }
 
 .cell:nth-last-child(1) {
-  border: 0 solid #FFF;
+  border-right: 0 solid #FFF;
+}
+.cell:nth-first-child(1) {
+  flex-basis: 8%; 
 }
 

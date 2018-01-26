@@ -79,25 +79,31 @@ export default class CreateTeamForm extends React.Component {
     }
     render ()   {
         
-        return(
-        <div>
+        return <div>
             <form id="registerTeam">
+              <div className="radioTeam">
                 <div>
-                    <input type="radio" name="gender" value="male"/> Masculino<br/>
-                    <input type="radio" name="gender" value="female"/> Femenino
+                  <label htmlFor="gender">Sexo</label>
                 </div>
+                <input type="radio" name="gender" value="male" /> Masculino<br />
+                <input type="radio" name="gender" value="female" /> Femenino
+              </div>
+              <div className="radioTeam">
                 <div>
-                    <input type="radio" name="category" value="rxd"/> RXD<br/>
-                    <input type="radio" name="category" value="scaled"/> Scaled<br/>
+                  <label htmlFor="categroy">Nivel</label>
                 </div>
-                <input  type="text" ref="name" placeholder="Nombre del Equipo" />
-                <input  type="text" ref="ath1" placeholder="Atleta #1" />
-                <input  type="text" ref="ath2" placeholder="Atleta #2" />
-                <input  type="text" ref="box" placeholder="Box" />  
-                <Btn text="Crear Equipo" funcion={this.createTeam.bind(this)} />
-                <p id="error"> {this.state.error} </p>
-         </form>
-        </div>    
-        )
+                <input type="radio" name="category" value="rxd" /> RXD<br />
+                <input type="radio" name="category" value="scaled" /> Scaled<br />
+              </div>
+              <div>
+                <input type="text" ref="name" placeholder="Nombre del Equipo" />
+                <input type="text" ref="ath1" placeholder="Atleta #1" />
+                <input type="text" ref="ath2" placeholder="Atleta #2" />
+                <input type="text" ref="box" placeholder="Box" />
+              </div>
+              <Btn text="Crear Equipo" funcion={this.createTeam.bind(this)} />
+              <p id="error"> {this.state.error} </p>
+            </form>
+          </div>;
     }
 }

@@ -76,17 +76,17 @@ class LeaderboardDash extends Component {
             <Jumbotron>
               <h1 className="App-title">Leaderboards</h1>
             </Jumbotron>
-            <div className="flex">
-              <Button bsStyle="primary" onClick={this.showCat_1}>
+            <div className="flex-around">
+              <Button bsStyle="primary" className="btn_leaderboard" onClick={this.showCat_1}>
                 Hombres RXD
               </Button>
-              <Button bsStyle="primary" onClick={this.showCat_2}>
+                <Button bsStyle="primary" className="btn_leaderboard" onClick={this.showCat_2}>
                 Mujeres RXD
               </Button>
-              <Button bsStyle="primary" onClick={this.showCat_3}>
+                <Button bsStyle="primary" className="btn_leaderboard" onClick={this.showCat_3}>
                 Hombres Scaled
               </Button>
-              <Button bsStyle="primary" onClick={this.showCat_4}>
+                <Button bsStyle="primary" className="btn_leaderboard" onClick={this.showCat_4}>
                 Mujeres Scaled
               </Button>
             </div>
