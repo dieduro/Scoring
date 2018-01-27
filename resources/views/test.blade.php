@@ -93,7 +93,7 @@
                         <img id="trs" src="{{ asset('storage/sponsors/taurus2.png') }}" alt="Taurus">
                         </div>    
                     </div>
-                </section>  --}}
+                </section> 
         </div>
         <footer>
             <span>Powered by DMD Live Scoring</span>
