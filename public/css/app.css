@@ -47,7 +47,7 @@
 }
 
 .img_container {
-  max-width: 176.8172888px;
+  max-width: 137.52455796px;
   height: auto;
 }
 
@@ -59,8 +59,8 @@
 .promo {
   position: relative;
   top: 120px;
-  width: 450px;
-  height: 290.32258065px;
+  width: 350px;
+  height: 225.80645161px;
   overflow: auto;
   margin: 0 auto;
 }
@@ -78,7 +78,7 @@
 }
 
 #choco {
-  left: 135.0000135px;
+  left: 105.0000105px;
 }
 
 #coco {
@@ -86,13 +86,13 @@
 }
 
 #prote {
-  bottom: 64.51612903px;
-  left: 73.92804337px;
+  bottom: 50.17921147px;
+  left: 57.49958929px;
 }
 
 #cookie {
-  bottom: 64.51612903px;
-  right: 75.54137989px;
+  bottom: 50.17921147px;
+  right: 58.75440658px;
 }
 
 .location {
