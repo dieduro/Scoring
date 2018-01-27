@@ -1,59 +1,36 @@
 window.onload = function() {
-
-
-function myCountDown(){
-
-    var countdown = document.querySelector('#countdown');
+                             
     var today = new Date();
-    var hc_date = new Date(today.getFullYear(), 01, 03); 
-    var one_day = 1000 * 60 * 60 * 24;
-    var daysLeft = Math.floor((hc_date - today)/one_day)
-    countdown.innerHTML = 'Faltan ' + daysLeft + ' días!';
-}
+    var target_date = new Date(Date.parse(new Date(today.getFullYear(), 01, 03, 09))); // set the countdown date
+    var days, hours, minutes, seconds; // variables for time units
 
+    var countdown = document.getElementById("tiles"); // get tag element
 
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var seconds = Math.floor((t / 1000) % 60);
-  var minutes = Math.floor((t / 1000 / 60) % 60);
-  var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-  var days = Math.floor(t / (1000 * 60 * 60 * 24));
-  return {
-    total: t,
-    days: days,
-    hours: hours,
-    minutes: minutes,
-    seconds: seconds
-  };
-}
+    getCountdown();
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var daysSpan = clock.querySelector(".days");
-  var hoursSpan = clock.querySelector(".hours");
-  var minutesSpan = clock.querySelector(".minutes");
-  var secondsSpan = clock.querySelector(".seconds");
+    setInterval(function() {
+    getCountdown();
+    }, 1000);
 
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
+    function getCountdown() {
+    // find the amount of "seconds" between now and target
+    var current_date = new Date().getTime();
+    var seconds_left = (target_date - current_date) / 1000;
 
-    daysSpan.innerHTML = t.days;
-    hoursSpan.innerHTML = ("0" + t.hours).slice(-2);
-    minutesSpan.innerHTML = ("0" + t.minutes).slice(-2);
-    secondsSpan.innerHTML = ("0" + t.seconds).slice(-2);
+    days = pad(parseInt(seconds_left / 86400));
+    seconds_left = seconds_left % 86400;
 
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
+    hours = pad(parseInt(seconds_left / 3600));
+    seconds_left = seconds_left % 3600;
+
+    minutes = pad(parseInt(seconds_left / 60));
+    seconds = pad(parseInt(seconds_left % 60));
+
+    // format countdown string + set tag value
+    countdown.innerHTML = "<span>" + days + "</span><span>" + hours + "</span><span>" + minutes + "</span><span>" + seconds + "</span>";
     }
-  }
 
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
-}
-var today = new Date();
-var deadline = new Date(Date.parse(new Date(today.getFullYear(), 01, 03, 09)));
-console.log(deadline)
-initializeClock("clockdiv", deadline);
-  
-
+    function pad(n) {
+    return (n < 10 ? "0" : "") + n;
+    }
 }

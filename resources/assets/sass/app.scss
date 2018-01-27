@@ -54,16 +54,25 @@ $cookie-right:$promo-width/5.957;
 }
 .section {
     width: 100%;
-    height: 500px;
+    height: auto;
     position: relative;
     display: block;
     overflow: hidden;
     text-align: center;
 }
-.media {
+.alto {
+    height: 240px;
+}
+.inner {
+    float: left;
+    width: auto;
+    padding: 10px;
+    margin-right: auto;
+}
+.social {
     display: block;
     width: 150px;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 .img_container {
     max-width:$img_container_max-width;
@@ -75,7 +84,6 @@ $cookie-right:$promo-width/5.957;
 }
 .promo {
     position: relative;
-    top:120px;
     width:$promo-width;
     height: $promo-height;
     overflow:auto;
@@ -122,44 +130,168 @@ $cookie-right:$promo-width/5.957;
 //     font-size : 2em;
 //     font-weight : bold;
 // }
-#clockdiv {
-    width: 100%;
-    margin: 50px auto;
-    display:flex;
-    align-items:center;
-    justify-content: space-between;
+// #clockdiv {
+//     width: 100%;
+//     margin: 50px auto;
+//     display:flex;
+//     align-items:center;
+//     justify-content: space-between;
    
 
-}
-#clockdiv>div {
-    padding: 10px;
-    flex-basis:20%;
-    border-radius: 3px;
-    background: #38a9fb;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+// }
+// #clockdiv>div {
+//     padding: 10px;
+//     flex-basis:20%;
+//     border-radius: 3px;
+//     background: #38a9fb;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+// }
+
+// #clockdiv div>span {
+//     padding: 15px;
+//     position: relative;
+//     margin: 0 auto;
+//     border-radius: 3px;
+//     background: #e7e7e7;
+//     display: inline-block;
+//     color: #1c1c1b;
+//     font-weight: bold;
+//     font-size: 1.5em;
+// }
+
+// .smalltext {
+//    padding-top: 5px;
+//    font-size: 20px;
+//    font-family: Roboto,
+//    sans-serif;
+//    color: #FFF;
+// }
+#countdown {
+    width: 95%                     ;
+    height: 140px;
+    text-align: center;
+    background: #222;
+    background-image: -webkit-linear-gradient(top, #222, #333, #333, #222);
+    background-image: -moz-linear-gradient(top, #222, #333, #333, #222);
+    background-image: -ms-linear-gradient(top, #222, #333, #333, #222);
+    background-image: -o-linear-gradient(top, #222, #333, #333, #222);
+    border: 1px solid #111;
+    border-radius: 5px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+    margin: auto;
+    padding: 10px 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }
 
-#clockdiv div>span {
-    padding: 15px;
+#countdown:before {
+    content: "";
+    width: 8px;
+    height: 65px;
+    background: #444;
+    background-image: -webkit-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -moz-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -ms-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -o-linear-gradient(top, #555, #444, #444, #555);
+    border: 1px solid #111;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    display: block;
+    position: absolute;
+    top: 48px;
+    left: -10px;
+}
+
+#countdown:after {
+    content: "";
+    width: 8px;
+    height: 65px;
+    background: #444;
+    background-image: -webkit-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -moz-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -ms-linear-gradient(top, #555, #444, #444, #555);
+    background-image: -o-linear-gradient(top, #555, #444, #444, #555);
+    border: 1px solid #111;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    display: block;
+    position: absolute;
+    top: 48px;
+    right: -10px;
+}
+
+#countdown #tiles {
     position: relative;
-    margin: 0 auto;
-    border-radius: 3px;
-    background: #e7e7e7;
-    display: inline-block;
-    color: #1c1c1b;
-    font-weight: bold;
-    font-size: 1.5em;
+    z-index: 1;
 }
 
-.smalltext {
-   padding-top: 5px;
-   font-size: 20px;
-   font-family: Roboto,
-   sans-serif;
-   color: #FFF;
+#countdown #tiles>span {
+    width: 20%;
+    max-width: 92px;
+    font: bold 48px 'Droid Sans', Arial, sans-serif;
+    text-align: center;
+    color: #111;
+    background-color: #ddd;
+    background-image: -webkit-linear-gradient(top, #bbb, #eee);
+    background-image: -moz-linear-gradient(top, #bbb, #eee);
+    background-image: -ms-linear-gradient(top, #bbb, #eee);
+    background-image: -o-linear-gradient(top, #bbb, #eee);
+    border-top: 1px solid #fff;
+    border-radius: 3px;
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.7);
+    margin: 0 7px;
+    padding: 18px 0;
+    display: inline-block;
+    position: relative;
+}
+
+#countdown #tiles>span:before {
+    content: "";
+    width: 100%;
+    height: 13px;
+    background: #111;
+    display: block;
+    padding: 0 3px;
+    position: absolute;
+    top: 41%;
+    left: -3px;
+    z-index: -1;
+}
+
+#countdown #tiles>span:after {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #eee;
+    border-top: 1px solid #333;
+    display: block;
+    position: absolute;
+    top: 48%;
+    left: 0;
+}
+
+#countdown .labels {
+    width: 100%;
+    height: 25px;
+    text-align: center;
+    position: absolute;
+    bottom: 8px;
+}
+
+#countdown .labels li {
+    width: 24%;
+    font: bold 15px 'Droid Sans', Arial, sans-serif;
+    color: #ff7361e8;
+    text-shadow: 1px 1px 0px #000;
+    text-align: center;
+    text-transform: uppercase;
+    display: inline-block;
 }
 
 // ----------------------------
@@ -168,8 +300,6 @@ $cookie-right:$promo-width/5.957;
     height: auto;
     width:100%;
     overflow:hidden;
-    position: absolute;
-    bottom: 80px;
     padding: 10px;
     display:flex;
     flex-direction: column;
@@ -187,12 +317,11 @@ $cookie-right:$promo-width/5.957;
 
 }
 .date_img {
-    width:100%;
+    width:70%;
 }
 .sponsor_item{
     width: 18%;
     padding: 3%;
-    // border-right: 1px black solid;
     img {
         width:100%;
         height:auto;
@@ -247,5 +376,11 @@ footer {
         font-size:1.2em;
         font-weight: bold;
         color:#FFF;
+    }
+}
+
+@media (min-width: 620px) {
+    #countdown .labels li {
+    width: 17%;
     }
 }

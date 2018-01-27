@@ -29,7 +29,18 @@
             
             <h1 class="title"><img src="{{ asset('storage/hc_tit.png') }}" alt="Hardy Challenge"></h1>
             <div><img class="date_img" src="{{ asset('storage/hc_fecha.png') }}" alt=""></div>
-            <div id="clockdiv">
+            <section class="alto section">
+                <div id="countdown">
+                    <div id='tiles'></div>
+                    <div class="labels">
+                        <li>Days</li>
+                        <li>Hours</li>
+                        <li>Mins</li>
+                        <li>Secs</li>
+                    </div>
+                </div>
+            </section>
+            {{--  <div id="clockdiv">
                 <div>
                     <span class="days"></span>
                     <div class="smalltext">Días</div>
@@ -46,12 +57,14 @@
                     <span class="seconds"></span>
                     <div class="smalltext">Segundos</div>
                 </div>
-            </div>
+            </div>  --}}
             <section class="section">    
                 <div class="location">
-                    
+                    <div class="inner">
+                        <img src="{{ asset('storage/location.png') }}" alt="Location">
+                        <span><strong>Las Brusquitas</strong>, Club de Playa</span>
+                    </div>
                     <iframe width="600" height="450" frameborder="0" style="border:0;width: 100%;height: 400px;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
-                  {{--  <img id="map" src="{{ asset('storage/brusqui_map4.jpg') }}" alt="Mapa Las Brusquitas">  --}}
                 </div>
             </section>
             
@@ -65,8 +78,8 @@
                     <div class="tbody">
                     </div>        
                 </div>  --}}
-                <section class="">
-                    <div class="media">
+                <section class="section">
+                    <div class="social">
                         <a href="https://www.instagram.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/instagram.png') }}" alt=""></a>
                         <a href="https://www.facebook.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/facebook.png') }}" alt=""></a>
                     </div>
