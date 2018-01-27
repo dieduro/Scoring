@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Scoring</title>
+    <title>Hardy Challenge</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -22,6 +24,9 @@
             <img class="logo" src="{{ asset('storage/hc_logo.png') }}" alt="Hardy Challenge Logo">
         </header>
         <div class="lead_container">
+
+
+            
             <h1 class="title"><img src="{{ asset('storage/hc_tit.png') }}" alt="Hardy Challenge"></h1>
             <div><img class="date_img" src="{{ asset('storage/hc_fecha.png') }}" alt=""></div>
             <div id="clockdiv">
@@ -44,11 +49,12 @@
             </div>
             <section class="section">    
                 <div class="location">
-                            <img id="brsq" src="{{ asset('storage/brusquitas_negro.png') }}" alt="Las Brusquitas">
-                            <iframe width="600" height="450" frameborder="0" style="border:0;width: 100%;height: 400px;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
-                            {{--  <img id="map" src="{{ asset('storage/brusqui_map4.jpg') }}" alt="Mapa Las Brusquitas">  --}}
+                    <img id="brsq" src="{{ asset('storage/brusquitas_negro.png') }}" alt="Las Brusquitas">
+                    <iframe width="600" height="450" frameborder="0" style="border:0;width: 100%;height: 400px;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
+                  {{--  <img id="map" src="{{ asset('storage/brusqui_map4.jpg') }}" alt="Mapa Las Brusquitas">  --}}
                 </div>
             </section>
+            
             {{--  <div class="countdown"><p id="countdown"></p></div>  --}}
                 {{--  <div class="">
                     <div class="thead">
@@ -59,12 +65,19 @@
                     <div class="tbody">
                     </div>        
                 </div>  --}}
-                <section>
+                <section class="">
                     <div class="media">
                         <a href="https://www.instagram.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/instagram.png') }}" alt=""></a>
                         <a href="https://www.facebook.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/facebook.png') }}" alt=""></a>
                     </div>
                 </section>
+                <div class="promo">
+                        <div class="img_container" id="natu"><img  src="{{ asset('storage/pote_natural-rojo.png') }}" alt=""></div>
+                        <div class="img_container" id="choco"><img  src="{{ asset('storage/pote_chocolate.png') }}" alt=""></div>
+                        <div class="img_container" id="coco"><img  src="{{ asset('storage/pote_coco.png') }}" alt=""></div>
+                        <div class="img_container" id="prote"><img  src="{{ asset('storage/pote_proteica.png') }}" alt=""></div>
+                        <div class="img_container" id="cookie"><img  src="{{ asset('storage/pote_cookie-cream.png') }}" alt=""></div>
+                    </div>
                 <section class="section">
                     <div class="sponsors">
                         <div class="sponsor_item">
@@ -80,7 +93,7 @@
                         <img id="trs" src="{{ asset('storage/sponsors/taurus2.png') }}" alt="Taurus">
                         </div>    
                     </div>
-                </section>
+                </section>  --}}
         </div>
         <footer>
             <span>Powered by DMD Live Scoring</span>

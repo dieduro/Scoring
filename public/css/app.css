@@ -46,6 +46,55 @@
   margin: 0 auto;
 }
 
+.img_container {
+  max-width: 176.8172888px;
+  height: auto;
+}
+
+.img_container img {
+  width: 100%;
+  height: auto;
+}
+
+.promo {
+  position: relative;
+  top: 120px;
+  width: 450px;
+  height: 290.32258065px;
+  overflow: auto;
+  margin: 0 auto;
+}
+
+#natu,
+#choco,
+#coco,
+#prote,
+#cookie {
+  position: absolute;
+}
+
+#natu {
+  left: 0;
+}
+
+#choco {
+  left: 135.0000135px;
+}
+
+#coco {
+  right: 0;
+}
+
+#prote {
+  bottom: 64.51612903px;
+  left: 73.92804337px;
+}
+
+#cookie {
+  bottom: 64.51612903px;
+  right: 75.54137989px;
+}
+
 .location {
   margin: 0 auto;
   display: block;

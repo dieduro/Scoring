@@ -10,6 +10,16 @@
 
 $primary-color: #88C542;
 
+$promo-width: 450px;
+$promo-height:$promo-width/1.55;
+$img_container_max-width: $promo-width/2.545;
+$choco-left:$promo-width/3.333333;
+$prote-left: $promo-width/6.087;
+$proteYcookie-bottom: $promo-height/4.5;
+$cookie-right:$promo-width/5.957;
+
+
+
 
 
 .lead_container{
@@ -55,6 +65,44 @@ $primary-color: #88C542;
     width: 150px;
     margin: 0 auto;
 }
+.img_container {
+    max-width:$img_container_max-width;
+    height: auto;
+    img {
+        width:100%;
+        height:auto;
+    }
+}
+.promo {
+    position: relative;
+    top:120px;
+    width:$promo-width;
+    height: $promo-height;
+    overflow:auto;
+    margin: 0 auto;
+}
+#natu, #choco, #coco, #prote, #cookie {
+    position:absolute;
+}
+#natu {
+    left:0;
+}
+#choco {
+    left: $choco-left;
+}
+#coco {
+   right: 0;
+}
+#prote {
+   bottom: $proteYcookie-bottom;
+   left: $prote-left
+}
+#cookie {
+    bottom: $proteYcookie-bottom;
+    right: $cookie-right;
+}
+
+
 .location {
     margin: 0 auto;
     display: block;
