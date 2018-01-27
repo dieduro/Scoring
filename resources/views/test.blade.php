@@ -28,36 +28,23 @@
 
             
             <h1 class="title"><img src="{{ asset('storage/hc_tit.png') }}" alt="Hardy Challenge"></h1>
-            <div><img class="date_img" src="{{ asset('storage/hc_fecha.png') }}" alt=""></div>
+            <div class="date">
+                <span> SÁBADO 3/2 + DOMINGO 4/2</span>
+            </div>
+
+            {{--  <img class="date_img" src="{{ asset('storage/hc_fecha.png') }}" alt="">  --}}
             <section class="alto section">
                 <div id="countdown">
                     <div id='tiles'></div>
                     <div class="labels">
-                        <li>Days</li>
-                        <li>Hours</li>
+                        <li>Días</li>
+                        <li>Horas</li>
                         <li>Mins</li>
                         <li>Secs</li>
                     </div>
                 </div>
             </section>
-            {{--  <div id="clockdiv">
-                <div>
-                    <span class="days"></span>
-                    <div class="smalltext">Días</div>
-                </div>
-                <div>
-                    <span class="hours"></span>
-                    <div class="smalltext">Horas</div>
-                </div>
-                <div>
-                    <span class="minutes"></span>
-                    <div class="smalltext">Minutos</div>
-                </div>
-                <div>
-                    <span class="seconds"></span>
-                    <div class="smalltext">Segundos</div>
-                </div>
-            </div>  --}}
+
             <section class="section">    
                 <div class="location">
                     <div class="inner">
@@ -68,16 +55,6 @@
                 </div>
             </section>
             
-            {{--  <div class="countdown"><p id="countdown"></p></div>  --}}
-                {{--  <div class="">
-                    <div class="thead">
-                        <div class="theading">Posición</div>
-                        <div class="theading">Equipo</div>
-                        <div class="theading">Puntaje Total</div>
-                    </div>
-                    <div class="tbody">
-                    </div>        
-                </div>  --}}
                 <section class="section">
                     <div class="social">
                         <a href="https://www.instagram.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/instagram.png') }}" alt=""></a>

@@ -126,49 +126,7 @@ $cookie-right:$promo-width/5.957;
 }
 
 // TIMER COUNTDOWN ----------
-// #countdown {
-//     font-size : 2em;
-//     font-weight : bold;
-// }
-// #clockdiv {
-//     width: 100%;
-//     margin: 50px auto;
-//     display:flex;
-//     align-items:center;
-//     justify-content: space-between;
-   
 
-// }
-// #clockdiv>div {
-//     padding: 10px;
-//     flex-basis:20%;
-//     border-radius: 3px;
-//     background: #38a9fb;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     justify-content: center;
-// }
-
-// #clockdiv div>span {
-//     padding: 15px;
-//     position: relative;
-//     margin: 0 auto;
-//     border-radius: 3px;
-//     background: #e7e7e7;
-//     display: inline-block;
-//     color: #1c1c1b;
-//     font-weight: bold;
-//     font-size: 1.5em;
-// }
-
-// .smalltext {
-//    padding-top: 5px;
-//    font-size: 20px;
-//    font-family: Roboto,
-//    sans-serif;
-//    color: #FFF;
-// }
 #countdown {
     width: 95%                     ;
     height: 140px;
@@ -316,8 +274,19 @@ $cookie-right:$promo-width/5.957;
     align-items: center;
 
 }
-.date_img {
-    width:70%;
+.date {
+    width:75%;
+    float:left;
+    background-color: #36a8fb;
+    span {
+        letter-spacing: 0.2em;
+        font-size: 0.8em;
+        color: #FFF;
+        padding: 5px;
+        margin-right: 1em;
+        float: right;
+        font-weight: 500;
+    }
 }
 .sponsor_item{
     width: 18%;
@@ -379,8 +348,42 @@ footer {
     }
 }
 
+@media (min-width: 420px) {
+    .date  {
+        width: 70%;
+        span {
+            font-size: 0.9em;
+        }
+        
+    }
+}
 @media (min-width: 620px) {
+     .date {
+         span {
+             font-size: 1em;
+         }
+     }
+    #countdown {
+
+        width:66%;
+    }
     #countdown .labels li {
     width: 17%;
+    }
+}
+
+@media (min-width: 1024px) {
+    #countdown {
+        width: 57%;
+    }
+}
+@media (min-width: 1200px) {
+    #countdown {
+        width: 50%;
+    }
+}
+@media (min-width: 1350px) {
+    #countdown {
+        width: 40%;
     }
 }
