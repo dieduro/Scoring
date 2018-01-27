@@ -49,7 +49,7 @@
             </div>
             <section class="section">    
                 <div class="location">
-                    <img id="brsq" src="{{ asset('storage/brusquitas_negro.png') }}" alt="Las Brusquitas">
+                    
                     <iframe width="600" height="450" frameborder="0" style="border:0;width: 100%;height: 400px;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
                   {{--  <img id="map" src="{{ asset('storage/brusqui_map4.jpg') }}" alt="Mapa Las Brusquitas">  --}}
                 </div>
@@ -80,18 +80,37 @@
                     </div>
                 <section class="section">
                     <div class="sponsors">
-                        <div class="sponsor_item">
-                            <img id="hpb" src="{{ asset('storage/sponsors/handpowbalm_logo.png') }}" alt="Hand Power Balm">
+                        <div class="tira">
+                            <div class="sponsor_item" id="profit">
+                                <img  src="{{ asset('storage/sponsors/profit.png') }}" alt="Taurus">
+                            </div>    
+                            <div class="sponsor_item" id="brsq">
+                                <img src="{{ asset('storage/brusquitas_negro.png') }}" alt="Las Brusquitas">
+                            </div>
+                            <div class="sponsor_item" id="trs">
+                                <img  src="{{ asset('storage/sponsors/taurus.png') }}" alt="Taurus">
+                            </div>
+                            <div class="sponsor_item" id="rbk">
+                                <img  src="{{ asset('storage/sponsors/reebok.png') }}" alt="Reebok">
+                            </div>     
+                            
+                            
                         </div>
-                        <div class="sponsor_item">
-                            <img id="ikr" src="{{ asset('storage/sponsors/ikr.png') }}" alt="IKR Indumentaria">
-                        </div>
-                        <div class="sponsor_item">
-                            <img id="rbk" src="{{ asset('storage/sponsors/reebok.png') }}" alt="Reebok">
-                        </div>
-                        <div class="sponsor_item">
-                        <img id="trs" src="{{ asset('storage/sponsors/taurus2.png') }}" alt="Taurus">
-                        </div>    
+                        <div class="tira">    
+                            <div class="sponsor_item">
+                                <img id="mariocano" src="{{ asset('storage/sponsors/mariocano.png') }}" alt="Taurus">
+                            </div>
+                            <div class="sponsor_item" id="hpb">
+                                <img  src="{{ asset('storage/sponsors/handpowbalm_logo.png') }}" alt="Hand Power Balm">
+                            </div>
+                            <div class="sponsor_item" id="ikr">
+                                <img  src="{{ asset('storage/sponsors/ikr.png') }}" alt="IKR Indumentaria">
+                            </div> 
+                            <div class="sponsor_item">
+                                <img id="fitjuice" src="{{ asset('storage/sponsors/fitjuice.png') }}" alt="Taurus">
+                            </div>
+                        </div>        
+                            
                     </div>
                 </section> 
         </div>

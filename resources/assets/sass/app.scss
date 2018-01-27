@@ -172,34 +172,66 @@ $cookie-right:$promo-width/5.957;
     bottom: 80px;
     padding: 10px;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
+}
+.tira {
+    flex-basis:98%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
 }
 .date_img {
     width:100%;
 }
 .sponsor_item{
-
+    width: 18%;
+    padding: 3%;
+    // border-right: 1px black solid;
     img {
-        height:48px;
-        width:auto;
+        width:100%;
+        height:auto;
         display:inline-block;
 
     }
 }
+.sponsor_item:nth-last-child(1){
+    border:0;
+    padding: 0 3%;
+}
 #hpb {
-    width:120px;
-    height: auto;
+    width:23%;
 }
-#ikr {
-    width: 64px;
-    height: auto;
+#ikr{
+    width:15%;
 }
+#brsq {
+    width: 30%;
+}
+#rbk {
+    width: 24%;
+}
+#profit {
+    width: 25%;
+}
+
 #trs{
-    width: auto;
+    width: 21%;
+    
 }
+// #mariocano {
+//     width:150px;
+//     height:auto;
+// }
+// #fitjuice {
+//     width:150px;
+//     height:auto;
+// }
 
 footer {
     height: 70px;
