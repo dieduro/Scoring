@@ -44,6 +44,11 @@
   height: 240px;
 }
 
+.info p {
+  margin: 0 auto;
+  font-size: 2.5em;
+}
+
 .inner {
   float: left;
   width: auto;
@@ -52,9 +57,10 @@
 }
 
 .social {
-  display: block;
-  width: 150px;
-  margin: 20px auto;
+  padding-left: 10px;
+  padding-top: 10px;
+  display: inline-block;
+  width: 35%;
 }
 
 .img_container {
@@ -334,7 +340,7 @@
 }
 
 footer {
-  height: 70px;
+  height: 100px;
   width: 100%;
   background-color: darkgray;
   position: relative;
@@ -342,13 +348,51 @@ footer {
   left: 0;
 }
 
-footer span {
-  margin-top: 10px;
-  padding: 20px;
-  float: right;
-  font-size: 1.2em;
+.h_logo {
+  padding-left: 8%;
+  width: 65%;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.h_logo .cta {
+  margin-top: 4px;
+  /* padding: 15px; */
+  font-size: 0.6em;
   font-weight: bold;
   color: #FFF;
+}
+
+.h_logo img {
+  width: 35%;
+  background-size: cover;
+}
+
+.h_logo a {
+  height: auto;
+}
+
+.firma {
+  overflow: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.firma p {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: #FFF;
+  display: inline-block;
+  float: right;
+  margin-right: 12px;
+}
+
+.firma #instagram {
+  position: absolute;
+  right: 30px;
 }
 
 @media (min-width: 420px) {
@@ -372,6 +416,12 @@ footer span {
 
   #countdown .labels li {
     width: 17%;
+  }
+}
+
+@media (min-width: 768px) {
+  .h_logo {
+    padding-left: 5%;
   }
 }
 

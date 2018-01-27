@@ -44,6 +44,14 @@
                     </div>
                 </div>
             </section>
+            {{--  <section class="section">
+                <div id="info">
+                    <p>
+                        Aca una informacion muy informacionadamente sobre cosas de la vida relacionadas al cf y a la playa , por el estilo y más allá
+                    </p>
+
+                </div>
+            </section>  --}}
 
             <section class="section">    
                 <div class="location">
@@ -55,12 +63,7 @@
                 </div>
             </section>
             
-                <section class="section">
-                    <div class="social">
-                        <a href="https://www.instagram.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/instagram.png') }}" alt=""></a>
-                        <a href="https://www.facebook.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/facebook.png') }}" alt=""></a>
-                    </div>
-                </section>
+                
                 <div class="promo">
                         <div class="img_container" id="natu"><img  src="{{ asset('storage/pote_natural-rojo.png') }}" alt=""></div>
                         <div class="img_container" id="choco"><img  src="{{ asset('storage/pote_chocolate.png') }}" alt=""></div>
@@ -105,8 +108,17 @@
                 </section> 
         </div>
         <footer>
-            <span>Powered by DMD Live Scoring</span>
-
+            <div class="social">
+                <a href="https://www.instagram.com/hardychallenge/" target="_blank"><img id="instagram" src="{{ asset('storage/instagram.png') }}" alt=""></a>
+                <a href="https://www.facebook.com/hardychallenge/" target="_blank"><img src="{{ asset('storage/facebook.png') }}" alt=""></a>
+            </div>
+            <div class="h_logo">
+                <p class="cta">Visitá nuestra web</p>
+                <a href="hardy.fit"></a><img src="{{ asset('storage/hardy.png') }}" alt="HARDY"></span>
+            </div>  
+            <div class="firma">
+                <p>DMD Live Scoring</p>
+            </div>
         </footer>
     </div>
             

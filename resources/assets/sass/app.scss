@@ -63,6 +63,12 @@ $cookie-right:$promo-width/5.957;
 .alto {
     height: 240px;
 }
+.info {
+    p {
+        margin: 0 auto;
+        font-size: 2.5em;
+    }
+}
 .inner {
     float: left;
     width: auto;
@@ -70,9 +76,11 @@ $cookie-right:$promo-width/5.957;
     margin-right: auto;
 }
 .social {
-    display: block;
-    width: 150px;
-    margin: 20px auto;
+    padding-left: 10px;
+    padding-top: 10px;
+    display: inline-block;
+    width: 35%;
+    
 }
 .img_container {
     max-width:$img_container_max-width;
@@ -326,20 +334,64 @@ $cookie-right:$promo-width/5.957;
 
 
 footer {
-    height: 70px;
+    height: 100px;
     width:100%;
     background-color: darkgray;
+    // display:flex;
+    // flex-direction: row;
     position:relative;
     bottom:0;
     left:0;
-    span{
-        margin-top:10px;
-        padding:20px;
-        float:right;
-        font-size:1.2em;
+    // div {
+    //     flex-basis:33%;
+
+    // }
+    
+} 
+
+.h_logo {
+    padding-left: 8%;
+    width: 65%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    .cta {
+       margin-top:4px;
+        /* padding: 15px; */
+        font-size: 0.6em;
         font-weight: bold;
-        color:#FFF;
+        color: #FFF;
     }
+    img{
+        width:35%;
+        background-size: cover;
+
+    }
+    a{
+        height:auto;
+    }
+   
+}
+.firma {
+    overflow: auto;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+   p {
+          font-size: 0.8em;
+          font-weight: bold;
+          color: #FFF;
+          display: inline-block;
+          float: right;
+          margin-right: 12px;
+   }
+   #instagram {
+       position: absolute;
+       right: 30px;
+   }
+    
 }
 
 @media (min-width: 420px) {
@@ -365,6 +417,12 @@ footer {
     width: 17%;
     }
 }
+@media (min-width: 768px) {
+    .h_logo {
+        padding-left:5%;
+    }
+}
+
 
 @media (min-width: 1024px) {
     #countdown {
