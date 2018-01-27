@@ -51,7 +51,7 @@
                         <img src="{{ asset('storage/location.png') }}" alt="Location">
                         <span><strong>Las Brusquitas</strong>, Club de Playa</span>
                     </div>
-                    <iframe width="600" height="450" frameborder="0" style="border:0;width: 100%;height: 400px;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
+                    <iframe width="600" height="300" frameborder="0" style="border:0;width: 95%;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
                 </div>
             </section>
             

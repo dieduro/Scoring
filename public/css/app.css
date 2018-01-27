@@ -177,9 +177,9 @@
 #countdown #tiles > span {
   width: 20%;
   max-width: 92px;
-  font: bold 48px 'Droid Sans', Arial, sans-serif;
+  font: bold 2.5em 'Droid Sans', Arial, sans-serif;
   text-align: center;
-  color: #111;
+  color: #111111;
   background-color: #ddd;
   background-image: -o-linear-gradient(top, #bbb, #eee);
   border-top: 1px solid #fff;
@@ -279,6 +279,7 @@
 .date {
   width: 75%;
   float: left;
+  margin-top: 15px;
   background-color: #36a8fb;
 }
 
@@ -294,7 +295,7 @@
 
 .sponsor_item {
   width: 18%;
-  padding: 3%;
+  padding: 0 3%;
 }
 
 .sponsor_item img {
@@ -362,7 +363,7 @@ footer span {
 
 @media (min-width: 620px) {
   .date span {
-    font-size: 1em;
+    font-size: 1.2em;
   }
 
   #countdown {

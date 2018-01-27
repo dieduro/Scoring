@@ -192,9 +192,9 @@ $cookie-right:$promo-width/5.957;
 #countdown #tiles>span {
     width: 20%;
     max-width: 92px;
-    font: bold 48px 'Droid Sans', Arial, sans-serif;
+    font: bold 2.5em 'Droid Sans', Arial, sans-serif;
     text-align: center;
-    color: #111;
+    color: rgb(17, 17, 17);
     background-color: #ddd;
     background-image: -webkit-linear-gradient(top, #bbb, #eee);
     background-image: -moz-linear-gradient(top, #bbb, #eee);
@@ -277,6 +277,7 @@ $cookie-right:$promo-width/5.957;
 .date {
     width:75%;
     float:left;
+    margin-top: 15px;
     background-color: #36a8fb;
     span {
         letter-spacing: 0.2em;
@@ -290,7 +291,7 @@ $cookie-right:$promo-width/5.957;
 }
 .sponsor_item{
     width: 18%;
-    padding: 3%;
+    padding: 0 3%;
     img {
         width:100%;
         height:auto;
@@ -322,14 +323,7 @@ $cookie-right:$promo-width/5.957;
     width: 21%;
     
 }
-// #mariocano {
-//     width:150px;
-//     height:auto;
-// }
-// #fitjuice {
-//     width:150px;
-//     height:auto;
-// }
+
 
 footer {
     height: 70px;
@@ -360,7 +354,7 @@ footer {
 @media (min-width: 620px) {
      .date {
          span {
-             font-size: 1em;
+             font-size: 1.2em;
          }
      }
     #countdown {
