@@ -1,7 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.lead_container {
   width: 100vw;
   min-height: 1000px;
-  padding: 20px;
   position: relative;
   margin: 0 auto;
   background-color: #ffffff;
@@ -69,7 +68,7 @@
 }
 
 .img_container {
-  max-width: 117.87819253px;
+  max-width: 7.85854617em;
   height: auto;
 }
 
@@ -78,20 +77,36 @@
   height: auto;
 }
 
-.promo {
+#promo_sec {
+  background-color: #36a8fb;
+  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.potes {
   position: relative;
-  width: 300px;
-  height: 193.5483871px;
+  width: 20em;
+  height: 12.90322581em;
   overflow: auto;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .leyenda {
   width: 75%;
   display: inline-block;
   position: relative;
-  bottom: 40px;
+  bottom: 25px;
   margin: 0 auto;
+  color: #FFF;
+  text-shadow: 2px 2px 4px #000000;
   font-size: 1.6em;
   line-height: 1em;
   font-weight: bold;
@@ -110,7 +125,7 @@
 }
 
 #choco {
-  left: 90.000009px;
+  left: 6.0000006em;
 }
 
 #coco {
@@ -118,13 +133,13 @@
 }
 
 #prote {
-  bottom: 43.01075269px;
-  left: 49.28536225px;
+  bottom: 2.86738351em;
+  left: 3.28569082em;
 }
 
 #cookie {
-  bottom: 43.01075269px;
-  right: 50.36091993px;
+  bottom: 2.86738351em;
+  right: 3.35739466em;
 }
 
 .location {
@@ -483,10 +498,6 @@ footer {
 }
 
 @media (min-width: 1024px) {
-  .leyenda {
-    width: 30%;
-  }
-
   .date span {
     font-size: 1.6em;
   }

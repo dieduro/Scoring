@@ -10,7 +10,7 @@
 
 $primary-color: #88C542;
 
-$promo-width: 300px;
+$promo-width: 20em;
 $promo-height:$promo-width/1.55;
 $img_container_max-width: $promo-width/2.545;
 $choco-left:$promo-width/3.333333;
@@ -26,7 +26,6 @@ $cookie-right:$promo-width/5.957;
 .lead_container{
     width:100vw;
     min-height:1000px;
-    padding: 20px;
     position:relative;
     margin: 0 auto;
     background-color:#ffffff;
@@ -95,19 +94,31 @@ $cookie-right:$promo-width/5.957;
         height:auto;
     }
 }
+#promo_sec {
+    background-color: #36a8fb;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .promo {
+
+}
+.potes {
     position: relative;
     width:$promo-width;
     height: $promo-height;
     overflow:auto;
-    margin: 0 auto;
+    margin: auto;
 }
 .leyenda {
     width: 75%;
     display: inline-block;
     position: relative;
-    bottom: 40px;
+    bottom: 25px;
     margin: 0 auto;
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
     font-size: 1.6em;
     line-height: 1em;
     font-weight: bold;
@@ -469,9 +480,6 @@ footer {
 
 
 @media (min-width: 1024px) {
-    .leyenda {
-    width: 30%;
-    }
     .date {
         span {
             font-size: 1.6em;
