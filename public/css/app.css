@@ -32,6 +32,7 @@
 }
 
 .section {
+  margin-top: 30px;
   width: 100%;
   height: auto;
   position: relative;
@@ -56,15 +57,19 @@
   margin-right: auto;
 }
 
+.inner span {
+  font-size: 1.4em;
+}
+
 .social {
   padding-left: 10px;
-  padding-top: 10px;
+  padding-top: 20px;
   display: inline-block;
   width: 35%;
 }
 
 .img_container {
-  max-width: 137.52455796px;
+  max-width: 117.87819253px;
   height: auto;
 }
 
@@ -75,10 +80,21 @@
 
 .promo {
   position: relative;
-  width: 350px;
-  height: 225.80645161px;
+  width: 300px;
+  height: 193.5483871px;
   overflow: auto;
   margin: 0 auto;
+}
+
+.leyenda {
+  width: 75%;
+  display: inline-block;
+  position: relative;
+  bottom: 40px;
+  margin: 0 auto;
+  font-size: 1.6em;
+  line-height: 1em;
+  font-weight: bold;
 }
 
 #natu,
@@ -94,7 +110,7 @@
 }
 
 #choco {
-  left: 105.0000105px;
+  left: 90.000009px;
 }
 
 #coco {
@@ -102,13 +118,13 @@
 }
 
 #prote {
-  bottom: 50.17921147px;
-  left: 57.49958929px;
+  bottom: 43.01075269px;
+  left: 49.28536225px;
 }
 
 #cookie {
-  bottom: 50.17921147px;
-  right: 58.75440658px;
+  bottom: 43.01075269px;
+  right: 50.36091993px;
 }
 
 .location {
@@ -118,11 +134,6 @@
 
 .location #brsq {
   width: 35%;
-  height: auto;
-}
-
-.location #map {
-  width: 100%;
   height: auto;
 }
 
@@ -241,6 +252,10 @@
   display: inline-block;
 }
 
+.map {
+  width: 95%;
+}
+
 .sponsors {
   height: auto;
   width: 100%;
@@ -263,6 +278,7 @@
 }
 
 .tira {
+  margin-top: 12px;
   -ms-flex-preferred-size: 98%;
       flex-basis: 98%;
   display: -webkit-box;
@@ -300,7 +316,7 @@
 }
 
 .sponsor_item {
-  width: 18%;
+  width: 24%;
   padding: 0 3%;
 }
 
@@ -316,27 +332,18 @@
 }
 
 #hpb {
-  width: 23%;
+  width: 28%;
 }
 
 #ikr {
-  width: 15%;
-}
-
-#brsq {
-  width: 30%;
-}
-
-#rbk {
-  width: 24%;
-}
-
-#profit {
-  width: 25%;
-}
-
-#trs {
   width: 21%;
+}
+
+#profit,
+#brsq,
+#trs,
+#rbk {
+  width: 48%;
 }
 
 footer {
@@ -349,7 +356,6 @@ footer {
 }
 
 .h_logo {
-  padding-left: 8%;
   width: 65%;
   position: absolute;
   top: 0;
@@ -358,14 +364,13 @@ footer {
 
 .h_logo .cta {
   margin-top: 4px;
-  /* padding: 15px; */
-  font-size: 0.6em;
+  font-size: 0.8em;
   font-weight: bold;
   color: #FFF;
 }
 
 .h_logo img {
-  width: 35%;
+  width: 50%;
   background-size: cover;
 }
 
@@ -406,8 +411,20 @@ footer {
 }
 
 @media (min-width: 620px) {
+  .leyenda {
+    width: 60%;
+  }
+
   .date span {
     font-size: 1.2em;
+  }
+
+  .inner {
+    padding: 0 10px;
+  }
+
+  .map {
+    width: 80%;
   }
 
   #countdown {
@@ -417,17 +434,73 @@ footer {
   #countdown .labels li {
     width: 17%;
   }
+
+  .sponsor_item {
+    width: 18%;
+  }
+
+  #hpb {
+    width: 23%;
+  }
+
+  #ikr {
+    width: 15%;
+  }
+
+  #brsq {
+    width: 30%;
+  }
+
+  #rbk {
+    width: 24%;
+  }
+
+  #profit {
+    width: 25%;
+  }
+
+  #trs {
+    width: 21%;
+  }
+
+  .h_logo img {
+    width: 40%;
+  }
 }
 
 @media (min-width: 768px) {
-  .h_logo {
-    padding-left: 5%;
+  .leyenda {
+    width: 50%;
+  }
+
+  .date span {
+    font-size: 1.4em;
+  }
+
+  .h_logo img {
+    width: 35%;
   }
 }
 
 @media (min-width: 1024px) {
+  .leyenda {
+    width: 30%;
+  }
+
+  .date span {
+    font-size: 1.6em;
+  }
+
+  .map {
+    width: 60%;
+  }
+
   #countdown {
     width: 57%;
+  }
+
+  .h_logo img {
+    width: 25%;
   }
 }
 
@@ -440,6 +513,14 @@ footer {
 @media (min-width: 1350px) {
   #countdown {
     width: 40%;
+  }
+
+  .h_logo {
+    padding-left: 5%;
+  }
+
+  .h_logo img {
+    width: 20%;
   }
 }
 

@@ -10,13 +10,14 @@
 
 $primary-color: #88C542;
 
-$promo-width: 350px;
+$promo-width: 300px;
 $promo-height:$promo-width/1.55;
 $img_container_max-width: $promo-width/2.545;
 $choco-left:$promo-width/3.333333;
 $prote-left: $promo-width/6.087;
 $proteYcookie-bottom: $promo-height/4.5;
 $cookie-right:$promo-width/5.957;
+
 
 
 
@@ -53,6 +54,7 @@ $cookie-right:$promo-width/5.957;
     }
 }
 .section {
+    margin-top:30px;
     width: 100%;
     height: auto;
     position: relative;
@@ -74,10 +76,13 @@ $cookie-right:$promo-width/5.957;
     width: auto;
     padding: 10px;
     margin-right: auto;
+    span {
+        font-size:1.4em;
+    }
 }
 .social {
     padding-left: 10px;
-    padding-top: 10px;
+    padding-top: 20px;
     display: inline-block;
     width: 35%;
     
@@ -96,6 +101,16 @@ $cookie-right:$promo-width/5.957;
     height: $promo-height;
     overflow:auto;
     margin: 0 auto;
+}
+.leyenda {
+    width: 75%;
+    display: inline-block;
+    position: relative;
+    bottom: 40px;
+    margin: 0 auto;
+    font-size: 1.6em;
+    line-height: 1em;
+    font-weight: bold;
 }
 #natu, #choco, #coco, #prote, #cookie {
     position:absolute;
@@ -126,10 +141,7 @@ $cookie-right:$promo-width/5.957;
         width:35%;
         height:auto;
     }
-    #map {
-        width:100%;
-        height: auto;
-    }
+    
 
 }
 
@@ -261,6 +273,9 @@ $cookie-right:$promo-width/5.957;
 }
 
 // ----------------------------
+.map {
+    width: 95%;
+}
 
 .sponsors{
     height: auto;
@@ -274,6 +289,7 @@ $cookie-right:$promo-width/5.957;
     align-items: center;
 }
 .tira {
+    margin-top:12px;
     flex-basis:98%;
     display: flex;
     flex-wrap: wrap;
@@ -298,7 +314,7 @@ $cookie-right:$promo-width/5.957;
     }
 }
 .sponsor_item{
-    width: 18%;
+    width: 24%;
     padding: 0 3%;
     img {
         width:100%;
@@ -312,58 +328,41 @@ $cookie-right:$promo-width/5.957;
     padding: 0 3%;
 }
 #hpb {
-    width:23%;
+    width:28%;
 }
 #ikr{
-    width:15%;
-}
-#brsq {
-    width: 30%;
-}
-#rbk {
-    width: 24%;
-}
-#profit {
-    width: 25%;
+    width:21%;
 }
 
-#trs{
-    width: 21%;
-    
+#profit,#brsq,#trs,#rbk {
+    width: 48%;
 }
+
 
 
 footer {
     height: 100px;
     width:100%;
     background-color: darkgray;
-    // display:flex;
-    // flex-direction: row;
     position:relative;
     bottom:0;
     left:0;
-    // div {
-    //     flex-basis:33%;
-
-    // }
-    
+   
 } 
 
 .h_logo {
-    padding-left: 8%;
     width: 65%;
     position: absolute;
     top: 0;
     right: 0;
     .cta {
        margin-top:4px;
-        /* padding: 15px; */
-        font-size: 0.6em;
+        font-size: 0.8em;
         font-weight: bold;
         color: #FFF;
     }
     img{
-        width:35%;
+        width:50%;
         background-size: cover;
 
     }
@@ -404,10 +403,19 @@ footer {
     }
 }
 @media (min-width: 620px) {
-     .date {
+    .leyenda {
+    width: 60%;
+    }
+    .date {
          span {
              font-size: 1.2em;
          }
+     }
+     .inner {
+         padding: 0 10px;
+     }
+    .map {
+         width:80%;
      }
     #countdown {
 
@@ -416,17 +424,69 @@ footer {
     #countdown .labels li {
     width: 17%;
     }
+    .sponsor_item {
+    width: 18%;
+    }
+    #hpb {
+        width: 23%;
+    }
+    #ikr {
+        width: 15%;
+    }
+    #brsq {
+        width: 30%;
+    }
+    #rbk {
+        width: 24%;
+    }
+    #profit {
+        width: 25%;
+    }
+    #trs {
+        width: 21%;
+    }
+    .h_logo {
+        img {
+            width:40%;
+        }
+    }
 }
 @media (min-width: 768px) {
+   .leyenda {
+       width: 50%;
+   }
+   .date {
+       span {
+           font-size: 1.4em;
+       }
+   }
     .h_logo {
-        padding-left:5%;
+        img {
+            width: 35%;
+        }
     }
 }
 
 
 @media (min-width: 1024px) {
+    .leyenda {
+    width: 30%;
+    }
+    .date {
+        span {
+            font-size: 1.6em;
+        }
+    }
+    .map {
+        width: 60%;
+    }
     #countdown {
         width: 57%;
+    }
+    .h_logo {
+        img {
+            width: 25%;
+        }
     }
 }
 @media (min-width: 1200px) {
@@ -437,5 +497,11 @@ footer {
 @media (min-width: 1350px) {
     #countdown {
         width: 40%;
+    }
+    .h_logo {
+        padding-left:5%;
+        img {
+            width: 20%;
+        }
     }
 }

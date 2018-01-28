@@ -69,18 +69,22 @@
                         <img src="{{ asset('storage/location.png') }}" alt="Location">
                         <span><strong>Las Brusquitas</strong>, Club de Playa</span>
                     </div>
-                    <iframe width="600" height="300" frameborder="0" style="border:0;width: 95%;" src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
+                    {{--  style="border:0;width: 95%;"  --}}
+                    <iframe class="map" height="300" frameborder="0"  src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
                 </div>
             </section>
             
-                
-                <div class="promo">
+                <section class="section">
+                    <div class="promo">
                         <div class="img_container" id="natu"><img  src="{{ asset('storage/pote_natural-rojo.png') }}" alt=""></div>
                         <div class="img_container" id="choco"><img  src="{{ asset('storage/pote_chocolate.png') }}" alt=""></div>
                         <div class="img_container" id="coco"><img  src="{{ asset('storage/pote_coco.png') }}" alt=""></div>
                         <div class="img_container" id="prote"><img  src="{{ asset('storage/pote_proteica.png') }}" alt=""></div>
                         <div class="img_container" id="cookie"><img  src="{{ asset('storage/pote_cookie-cream.png') }}" alt=""></div>
                     </div>
+                    <span class="leyenda">Probá nuestras nuevas variedades en el stand!</span>
+                </section>
+                    
                 <section class="section">
                     <div class="sponsors">
                         <div class="tira">
@@ -124,7 +128,7 @@
             </div>
             <div class="h_logo">
                 <p class="cta">Visitá nuestra web</p>
-                <a href="hardy.fit"></a><img src="{{ asset('storage/hardy.png') }}" alt="HARDY"></span>
+                <a href="http://www.hardy.fit"><img src="{{ asset('storage/hardy.png') }}" alt="HARDY"></a>
             </div>  
             <div class="firma">
                 <p>DMD Live Scoring</p>
