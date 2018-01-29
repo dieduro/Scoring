@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Hardy Challenge 2018</title>
-    <meta name="description" content="Vení a la primera competencia de CrossFit organizada por Hardy crema de maní, en un alucinante club de playa en Miramar. Sábado 3 y Domingo 4 de Febrero te esperamos para pasar un fin de semana a puro CrossFit y plata!."/>
+    <meta name="description" content="Vení a la primera competencia de CrossFit organizada por Hardy crema de maní, en un alucinante club de playa en Miramar. Sábado 3 y Domingo 4 de Febrero te esperamos para pasar un fin de semana a puro CrossFit y playa!."/>
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
@@ -27,7 +27,6 @@
     gtag('config', 'UA-113206459-1');
     </script>
 
-    <title>Leaderboards</title>
 </head>
 <body>
     <div>

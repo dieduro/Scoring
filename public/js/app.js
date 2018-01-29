@@ -15818,7 +15818,6 @@ var EventScores = function (_Component) {
     value: function setScore(teamScore) {
       var _this4 = this;
 
-      console.log(this.convertToSeconds(teamScore.score));
       if (this.validateTeamId(teamScore.team)) {
         var category_id = this.state.event.category_id;
         teamScore.category_id = category_id;
@@ -15891,7 +15890,6 @@ var EventScores = function (_Component) {
     key: 'storePositions',
     value: function storePositions() {
       var teams = this.setPositions();
-      console.log(teams);
       var event_id = this.state.event.id;
       var teamArray = [];
       teams.forEach(function (team) {

@@ -97,7 +97,6 @@ class EventScores extends Component {
   }
   
   setScore(teamScore) {
-    console.log(this.convertToSeconds(teamScore.score))
     if (this.validateTeamId(teamScore.team)){
       let category_id = this.state.event.category_id
       teamScore.category_id = category_id
@@ -149,7 +148,6 @@ class EventScores extends Component {
   }
   storePositions() {
     let teams = this.setPositions()
-    console.log(teams)
     let event_id = this.state.event.id
     let teamArray =[]
     teams.forEach((team)=>{
