@@ -107,7 +107,7 @@ class EventScores extends Component {
             team.show=false
         }
       }) 
-      const url = '/api/event/' + this.state.event.id+'/cargarScore/'
+      const url = '/api/event/' + this.state.event.id+'/cargarScore'
       axios.post(url,teamScore).then(response=> {
         this.fetchUpdatedTeams(this.state.event.id)
       }).catch(function(error) {
@@ -121,7 +121,6 @@ class EventScores extends Component {
     }else {
        alert("El equipo ingresado no existe en esta categoría")
     }
-
   }
   setPositions(){
     let teams = this.state.updatedTeams

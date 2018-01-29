@@ -42,8 +42,6 @@
             <div class="date">
                 <span> SÁBADO 3/2 + DOMINGO 4/2</span>
             </div>
-
-            {{--  <img class="date_img" src="{{ asset('storage/hc_fecha.png') }}" alt="">  --}}
             <section class="alto section">
                 <div id="countdown">
                     <div id='tiles'></div>

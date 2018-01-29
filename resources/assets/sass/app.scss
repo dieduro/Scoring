@@ -314,6 +314,7 @@ $cookie-right:$promo-width/5.957;
     float:left;
     margin-top: 15px;
     background-color: #36a8fb;
+    border-radius: 3px;
     span {
         letter-spacing: 0.2em;
         font-size: 0.8em;
@@ -482,7 +483,7 @@ footer {
 @media (min-width: 1024px) {
     .date {
         span {
-            font-size: 1.6em;
+            font-size: 2em;
         }
     }
     .map {

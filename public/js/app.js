@@ -15828,7 +15828,7 @@ var EventScores = function (_Component) {
             team.show = false;
           }
         });
-        var url = '/api/event/' + this.state.event.id + '/cargarScore/';
+        var url = '/api/event/' + this.state.event.id + '/cargarScore';
         __WEBPACK_IMPORTED_MODULE_8_axios___default.a.post(url, teamScore).then(function (response) {
           _this4.fetchUpdatedTeams(_this4.state.event.id);
         }).catch(function (error) {});

@@ -49,12 +49,10 @@ class EventScoresController extends Controller
             "required" => "El :attribute es requerido!",
         ];
         
-
         $team = EventScores::where([
             ['team_id','=', $team_id],
             ['event_id','=', $event_id]
         ])->first();
-        
         
         if ($team) {
             $team->score = $score;
@@ -94,8 +92,6 @@ class EventScoresController extends Controller
             ];
         }
         return response($updatedTeams, 200);
-  
-        
     }
 
 

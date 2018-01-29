@@ -14,9 +14,10 @@ class EventController extends Controller
 
         $eventsArray = [];
         foreach ($allEvents as $event){
+
             $eventsArray[] = [
                 'id' => $event->id,
-                'category' => $event->category->sexo.' '.$event->category->nivel ,
+                'category' => $event->category->sexo .' '. $event->category->nivel ,
                 'name' => $event->name,
                 'wod' =>$event->wod,
                 'eventNumber' => $event->eventNumber,
