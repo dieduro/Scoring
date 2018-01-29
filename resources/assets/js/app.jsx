@@ -54,7 +54,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Scoring App</h1>
+          <h1 className="App-title">DMD Live Scoring</h1>
         </header>
       <div className="leftNav">
         <Btn text="Equipos" funcion={this.teamSection.bind(this)}/>

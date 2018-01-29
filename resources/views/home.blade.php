@@ -41,7 +41,7 @@
             <div class="date">
                 <span> SÁBADO 3/2 + DOMINGO 4/2</span>
             </div>
-            <section class="alto section">
+            {{--  <section class="alto section">
                 <div id="countdown">
                     <div id='tiles'></div>
                     <div class="labels">
@@ -51,7 +51,7 @@
                         <li>Secs</li>
                     </div>
                 </div>
-            </section>
+            </section>  --}}
             {{--  <section class="section">
                 <div id="info">
                     <p>
@@ -61,16 +61,22 @@
                 </div>
             </section>  --}}
 
-            <section class="section">    
+            {{--  <section class="section">    
                 <div class="location">
                     <div class="inner">
                         <img src="{{ asset('storage/location.png') }}" alt="Location">
                         <span><strong>Las Brusquitas</strong>, Club de Playa</span>
                     </div>
-                    {{--  style="border:0;width: 95%;"  --}}
+                   
                     <iframe class="map" height="300" frameborder="0"  src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
                 </div>
-            </section>
+            </section>  --}}
+            <section class="section">
+                 {{--  <div  id="root2"> 
+
+                 </div>
+                <script src="{{mix('js/app.js')}}" ></script>  --}}
+            </section>    
             
                 <section class="section" id="promo_sec">
                     <div class="promo">

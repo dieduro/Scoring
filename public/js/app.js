@@ -36200,7 +36200,7 @@ var App = function (_Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'h1',
             { className: 'App-title' },
-            'Scoring App'
+            'DMD Live Scoring'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
