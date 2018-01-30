@@ -27,7 +27,7 @@ $cookie-right:$promo-width/5.957;
 
 .lead_container{
     width:100vw;
-   
+    min-height: 60vh;
     position:relative;
     margin: 0 auto;
     background-color:#ffffff;
@@ -72,7 +72,9 @@ $cookie-right:$promo-width/5.957;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-
+}
+.noshow {
+    display:none !important;
 }
 .flex-col-center {
     display: flex;
@@ -462,6 +464,7 @@ footer {
     position:relative;
     bottom:0;
     left:0;
+    margin-top:20px;
    
 } 
 

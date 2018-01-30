@@ -65,39 +65,29 @@
                         </div>
                     </div>
                 </div>
+            
+
+                <div class="noshow leaderboard flex-col-center">
+                    {{--  <div class="heading flex-row-center">
+                        <div class="position">
+                            <span>Posición</span>
+                        </div>
+                        <div class="team">
+                            <span>Equipo</span>
+                        </div>
+                    </div>  --}}
+                    <div class=" noshow teams">
+                        <div class="noshow flex-row-center" id="team-row">
+                            <div class="position"><span></span></div>
+                            <div class="team "><span></span></div>
+                            <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                        </div>
+
+                </div>
             </section>
-
-            <div class="leaderboard flex-col-center">
-                {{--  <div class="heading flex-row-center">
-                    <div class="position">
-                        <span>Posición</span>
-                    </div>
-                    <div class="team">
-                        <span>Equipo</span>
-                    </div>
-                </div>  --}}
-                <div class="teams">
-                    <div class="flex-row-center" id="team-row">
-                        <div class="position"><span></span></div>
-                        <div class="team "><span></span></div>
-                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
-                    </div>
-                    {{--  <div class="flex-row-center">
-                        <div class="position"><span>2</span></div>
-                        <div class="team "><span>Lo' Pibitos (34pts)</span></div>
-                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
-                    </div> 
-                    <div class="flex-row-center">
-                        <div class="position"><span>3</span></div>
-                        <div class="team "><span>Lo' Pibitos (34pts)</span></div>
-                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
-                    </div>     
-                </div>  --}}
-
-            </div>
             
                     
-            {{--  <section class="section">
+            <section class="section">
                 <div class="sponsors">
                     <div class="tira">
                         <div class="sponsor_item" id="profit">
@@ -131,7 +121,7 @@
                     </div>        
                         
                 </div>
-            </section>   --}}
+            </section> 
         </div>
         <footer>
             <div class="social">
