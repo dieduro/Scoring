@@ -1,6 +1,9 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.lead_container {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.web_container {
+  height: 100vh;
+}
+
+.lead_container {
   width: 100vw;
-  min-height: 1000px;
   position: relative;
   margin: 0 auto;
   background-color: #ffffff;
@@ -9,7 +12,7 @@
 .header {
   height: 75px;
   width: 100%;
-  background-color: darkgray;
+  background-color: #656565;
 }
 
 .header .logo {
@@ -150,6 +153,95 @@
 .location #brsq {
   width: 35%;
   height: auto;
+}
+
+.categorias {
+  width: 90%;
+  height: auto;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.cat {
+  -ms-flex-preferred-size: 48%;
+      flex-basis: 48%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.nivel {
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #ff6e5a;
+  border: 1.2px solid #ed4630;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.nivel span {
+  font-size: 1.3em;
+  font-family: Roboto, sans-serif;
+  font-weight: bold;
+}
+
+.sexo_outer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.sexo_inner {
+  -ms-flex-preferred-size: 48%;
+      flex-basis: 48%;
+  height: 50px;
+  border: 0.6px solid #226ca1;
+  background-color: #36a8fb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.sexo_inner span {
+  color: #FFF;
+  text-shadow: 1px 1px 4px #000000;
+  font-size: 1em;
+}
+
+.sexo_inner :hover {
+  cursor: pointer;
 }
 
 #countdown {
@@ -365,8 +457,8 @@
 footer {
   height: 100px;
   width: 100%;
-  background-color: darkgray;
-  position: relative;
+  background-color: #656565;
+  position: absolute;
   bottom: 0;
   left: 0;
 }
@@ -427,6 +519,10 @@ footer {
 }
 
 @media (min-width: 620px) {
+  .title {
+    width: 45%;
+  }
+
   .leyenda {
     width: 60%;
   }
@@ -499,6 +595,10 @@ footer {
 }
 
 @media (min-width: 1024px) {
+  .title {
+    width: 35%;
+  }
+
   .date span {
     font-size: 2em;
   }

@@ -21,7 +21,7 @@
 
 </head>
 <body>
-    <div>
+    <div class="web_container">
         <header class="header">  
             <img class="logo" src="{{ asset('storage/hc_logo.png') }}" alt="Hardy Challenge Logo">
         </header>
@@ -36,13 +36,38 @@
 
             <section class="section">
                 <h2>Leaderboards</h2>
-                <div>
-                    <button type="button" id="cat1">Hombres RXD</button>
+                <div class="categorias">
+                    <div class="cat">
+                        <div class="nivel" id="rxd">
+                            <span>RXD</span>
+                        </div>
+                        <div class="sexo_outer">
+                            <div class="sexo_inner" id="1">
+                                <span>HOMBRES</span>
+                            </div>
+                            <div class="sexo_inner" id="2">
+                                <span>MUJERES</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cat">
+                        <div class="nivel" id="rxd">
+                            <span>SCALED</span>
+                        </div>
+                        <div class="sexo_outer">
+                            <div class="sexo_inner" id="3">
+                                <span>HOMBRES</span>
+                            </div>
+                            <div class="sexo_inner" id="4">
+                                <span>MUJERES</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
             
                     
-            <section class="section">
+            {{--  <section class="section">
                 <div class="sponsors">
                     <div class="tira">
                         <div class="sponsor_item" id="profit">
@@ -76,7 +101,7 @@
                     </div>        
                         
                 </div>
-            </section> 
+            </section>   --}}
         </div>
         <footer>
             <div class="social">

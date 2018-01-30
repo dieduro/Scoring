@@ -21,11 +21,13 @@ $cookie-right:$promo-width/5.957;
 
 
 
-
+.web_container{
+ height:100vh;
+}
 
 .lead_container{
     width:100vw;
-    min-height:1000px;
+   
     position:relative;
     margin: 0 auto;
     background-color:#ffffff;
@@ -34,7 +36,7 @@ $cookie-right:$promo-width/5.957;
 .header {
     height: 75px;
     width:100%;
-    background-color: darkgray;
+    background-color: #656565;
     .logo{
         height:75px;
         width:auto;
@@ -154,6 +156,60 @@ $cookie-right:$promo-width/5.957;
     }
     
 
+}
+.categorias {
+    width:90%;
+    height:auto;
+    margin:0 auto;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    
+}
+
+.cat {
+    flex-basis: 48%;
+    display:flex;
+    flex-direction: column;
+    
+}
+.nivel{
+    height:40px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ff6e5a;
+    border: 1.2px solid #ed4630;
+    border-radius: 4px;
+    margin:10px 0;
+    span {
+        font-size: 1.3em;
+        font-family: Roboto, sans-serif;
+        font-weight: bold;
+    }
+}
+.sexo_outer {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+       
+.sexo_inner {
+    flex-basis: 48%;
+    height: 50px;
+    border: 0.6px solid #226ca1;
+    background-color: #36a8fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    span{
+        color:#FFF;
+        text-shadow: 1px 1px 4px #000000;
+        font-size: 1em;
+    }
+    :hover {
+        cursor:pointer;
+    }
 }
 
 // TIMER COUNTDOWN ----------
@@ -355,8 +411,8 @@ $cookie-right:$promo-width/5.957;
 footer {
     height: 100px;
     width:100%;
-    background-color: darkgray;
-    position:relative;
+    background-color: #656565;
+    position:absolute;
     bottom:0;
     left:0;
    
@@ -415,6 +471,9 @@ footer {
     }
 }
 @media (min-width: 620px) {
+    .title{
+        width:45%;
+    }
     .leyenda {
     width: 60%;
     }
@@ -481,6 +540,9 @@ footer {
 
 
 @media (min-width: 1024px) {
+    .title {
+        width: 35%;
+    }
     .date {
         span {
             font-size: 2em;
