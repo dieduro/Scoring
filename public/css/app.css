@@ -1,4 +1,6 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.web_container {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+.web_container {
   height: 100vh;
 }
 
@@ -458,7 +460,7 @@ footer {
   height: 100px;
   width: 100%;
   background-color: #656565;
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
 }

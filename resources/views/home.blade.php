@@ -29,7 +29,7 @@
 
 </head>
 <body>
-    <div>
+    <div class="web_container">
         <header class="header">  
             <img class="logo" src="{{ asset('storage/hc_logo.png') }}" alt="Hardy Challenge Logo">
         </header>
