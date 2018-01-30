@@ -243,9 +243,8 @@ $cookie-right:$promo-width/5.957;
     width: 100%;
     background-color:#eee;
 }
-.position, .team, .plus {
+.position, .plus {
      padding: 15px 5px;
-     font-size: 1.6em;
 }
 .position {
     padding-left: 20px;
@@ -255,11 +254,53 @@ $cookie-right:$promo-width/5.957;
 
 .team {
     flex-basis: 75%;
+    position:relative;
+    padding: 10px 5px 5px;
+    span {
+        text-align: left;
+        margin:3px;
+    }
 }
+#team-row {
+    border-bottom: 1px solid black;
+}
+.teamName {
+    font-weight: bold;
+    font-size: 1.3em;
+    position: absolute;
+    left: 5px;
+    top: 10px;
+}
+.points {
+    float:right;
+    font-size: 1.2em;
+}
+.athNames {
+    display:block;
+    position:relative;
+    bottom: 0;
+    left:0;
+    clear: both;
+    font-size: 1em;
+}
+
 .plus {   
     flex-basis: 15%;
     img {
         width: 50%;
+    }
+}
+.main-info {
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+.eventScores {
+    width: 100%;
+    height: 60px;
+    background-color: #aca8a8;
+    flex-wrap: wrap;
+    span {
+        flex-basis: 33%;
     }
 }
 

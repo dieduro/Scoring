@@ -77,10 +77,24 @@
                         </div>
                     </div>  --}}
                     <div class=" noshow teams" >
-                        <div class="noshow flex-row-center" id="team-row">
-                            <div class="position"><span></span></div>
-                            <div class="team "><span></span></div>
-                            <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                        <div class="noshow flex-col-center" id="team-row">
+                            <div class="main-info flex-row-center">
+                                <div class="position"><span></span></div>
+                                <div class="team ">
+                                    <span class="teamName"></span>
+                                    <span class="points"></span>
+                                    <span class="athNames"></span>
+                                </div>
+                                <div class="plus flex-row-center "><img class="plus-click" src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                            </div>
+                            <div class="noshow eventScores flex-row-center">
+                                <span id="ev1"></span>
+                                <span id="ev2"></span>
+                                <span id="ev3"></span>
+                                <span id="ev4"></span>
+                                <span id="ev5"></span>
+                                <span id="ev6"></span>
+                            </div>
                         </div>
 
                 </div>

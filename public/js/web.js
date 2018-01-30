@@ -86,6 +86,7 @@ window.onload = function()
                     var leaderboard = document.querySelector(".leaderboard")
                     leaderboard.classList.remove("noshow");
                     var teamRow = document.querySelector("#team-row");
+            
                     var teamList = document.querySelector(".teams");
                     var newList = teamList.cloneNode(true);
                     leaderboard.appendChild(newList)
@@ -96,11 +97,38 @@ window.onload = function()
                     data.forEach(
                         element => {
                         var row = teamRow.cloneNode(true);
-                        var position = row.children[0];
-                        var teamCell = row.children[1];
+                        var mainInfo = row.children[0];
+                        var eventScores = row.children[1];
+                        var position = mainInfo.children[0];
+                        var teamCell = mainInfo.children[1];
+                        var plus = mainInfo.children[2];
+                        
                         position.innerHTML = element.position;
-                        teamCell.innerHTML = element.team.name;
+                        teamCell.children[0].innerHTML = element.team.name;
+                        teamCell.children[2].innerHTML = element.team.ath1 + " & " + element.team.ath2;
+                        teamCell.children[1].innerHTML = '(' + element.team.totalScore + 'pts)';
+                       
+                        var arrayScores = eventScores.children;
+                        for (var i=0; i<arrayScores.length; i++){
+                            element.eventScores[i] ? (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + element.eventScores[i].score) : (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + "--"); 
+                        }
+                        
+                        mainInfo.setAttribute('id', element.team.id)
+                        eventScores.setAttribute('id', 'ev'+element.team.id)
+                        plus.addEventListener(
+                          "click",function() {
+                            evScoreDiv = document.querySelector('#ev' + plus.parentNode.id);
+                            if (evScoreDiv.classList.contains('noshow')){
+                                evScoreDiv.classList.remove("noshow");
+                            } 
+                            else {
+                                evScoreDiv.classList.add("noshow");
+                            }
+                          }
+                        );
                         row.classList.remove( "noshow");
+                        row.appendChild(mainInfo);
+                        row.appendChild(eventScores);
                         newList.appendChild(row);
                         }
                     );
@@ -116,24 +144,14 @@ window.onload = function()
 
     var fillLeaderboard = function() {
         var category_id
-        // document.addEventListener("click", function(event) {
-        //     if (event.target.classList.contains("sexo_inner") || event.target.classList.contains("clickable")) {
-        //       console.log(event.target.id);
-        //       //  switch(event){
-
-        //       //  }
-        //     }
-        //   }, false);
         var cat1 = document.querySelector("#cat1");
         var cat2 = document.querySelector("#cat2");
         var cat3 = document.querySelector("#cat3");
         var cat4 = document.querySelector("#cat4");
         
         cat1.addEventListener("click", function(){
-            
             category_id = 1;
             fetchData(category_id);
-            
         });
         cat2.addEventListener("click", function(){
             category_id = 2;
@@ -145,15 +163,16 @@ window.onload = function()
         });
         cat4.addEventListener("click", function(){
             category_id = 4;
-            // if (document.querySelector('"#" + category_id')) {
-            //     var cat4_data = document.querySelector("#" + category_id);
-            //     cat4_data.classList.remove("noshow");
-            // } else {
                 fetchData(category_id);
-            // }
-        
         });
     }
+
+    // var plus = document.querySelector('.main-info');
+    // if (plus){
+
+       
+    // }
+  
     
     fillLeaderboard();
 }
