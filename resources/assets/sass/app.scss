@@ -76,6 +76,9 @@ $cookie-right:$promo-width/5.957;
 .noshow {
     display:none !important;
 }
+.nopointer {
+    pointer-events: none;
+}
 .flex-col-center {
     display: flex;
     flex-direction: column;

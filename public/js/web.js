@@ -58,44 +58,57 @@ window.onload = function()
 
     var ajax = function(category_id) {
         
-        var url = "api/leaderboard/"+category_id;
+        
         var teamDivs = document.querySelectorAll('.teams');
+        var shouldAjax = false;
+        var hasData = false
         teamDivs.forEach (element => {
-            if (element.id != category_id){
-                element.classList.add('noshow');
-            }
+            if (element.id){
+                if (element.id == "teams" + category_id) {
+                    element.classList.remove("noshow");
+                    hasData = true;
+            
+                }
+                else  {
+                  element.classList.add("noshow");
+                } 
+            } 
         })
-        console.log(teamDivs)
-        var xmlhttp = new XMLHttpRequest();
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        if (!hasData) {
+            shouldAjax = true;
+        }
+        if (shouldAjax) {
+            var url = "api/leaderboard/" + category_id;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-                var leaderboard = document.querySelector(".leaderboard")
-                leaderboard.classList.remove("noshow");
-                var teamRow = document.querySelector("#team-row");
-                var teamList = document.querySelector(".teams");
-                var newList = teamList.cloneNode(true);
-                // console.log(newList)
-                leaderboard.appendChild(newList)
-                newList.classList.remove('noshow')
-                newList.setAttribute('id', category_id)
-                var data = JSON.parse(xmlhttp.responseText);
+                    var leaderboard = document.querySelector(".leaderboard")
+                    leaderboard.classList.remove("noshow");
+                    var teamRow = document.querySelector("#team-row");
+                    var teamList = document.querySelector(".teams");
+                    var newList = teamList.cloneNode(true);
+                    leaderboard.appendChild(newList)
+                    newList.classList.remove('noshow')
+                    newList.setAttribute('id', 'teams'+category_id)
+                    var data = JSON.parse(xmlhttp.responseText);
 
-                data.forEach(
-                    element => {
-                    var row = teamRow.cloneNode(true);
-                    var position = row.children[0];
-                    var teamCell = row.children[1];
-                    position.innerHTML = element.position;
-                    teamCell.innerHTML = element.team.name;
-                    row.classList.remove( "noshow");
-                    newList.appendChild(row);
-                    }
-                );
-            }
-        };
-        xmlhttp.open("GET", url, true);
-        xmlhttp.send();
+                    data.forEach(
+                        element => {
+                        var row = teamRow.cloneNode(true);
+                        var position = row.children[0];
+                        var teamCell = row.children[1];
+                        position.innerHTML = element.position;
+                        teamCell.innerHTML = element.team.name;
+                        row.classList.remove( "noshow");
+                        newList.appendChild(row);
+                        }
+                    );
+                }
+            };
+            xmlhttp.open("GET", url, true);
+            xmlhttp.send();
+        }
     };
     var fetchData = function(category_id) {
         ajax(category_id);
@@ -103,14 +116,24 @@ window.onload = function()
 
     var fillLeaderboard = function() {
         var category_id
+        // document.addEventListener("click", function(event) {
+        //     if (event.target.classList.contains("sexo_inner") || event.target.classList.contains("clickable")) {
+        //       console.log(event.target.id);
+        //       //  switch(event){
+
+        //       //  }
+        //     }
+        //   }, false);
         var cat1 = document.querySelector("#cat1");
         var cat2 = document.querySelector("#cat2");
         var cat3 = document.querySelector("#cat3");
         var cat4 = document.querySelector("#cat4");
         
         cat1.addEventListener("click", function(){
+            
             category_id = 1;
             fetchData(category_id);
+            
         });
         cat2.addEventListener("click", function(){
             category_id = 2;
@@ -122,7 +145,12 @@ window.onload = function()
         });
         cat4.addEventListener("click", function(){
             category_id = 4;
-            fetchData(category_id);
+            // if (document.querySelector('"#" + category_id')) {
+            //     var cat4_data = document.querySelector("#" + category_id);
+            //     cat4_data.classList.remove("noshow");
+            // } else {
+                fetchData(category_id);
+            // }
         
         });
     }

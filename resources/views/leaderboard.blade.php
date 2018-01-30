@@ -44,10 +44,10 @@
                         </div>
                         <div class="sexo_outer">
                             <div class="sexo_inner" id="cat1">
-                                <span>HOMBRES</span>
+                                <span class="clickable">HOMBRES</span>
                             </div>
                             <div class="sexo_inner" id="cat2">
-                                <span>MUJERES</span>
+                                <span class="clickable">MUJERES</span>
                             </div>
                         </div>
                     </div>
@@ -57,10 +57,10 @@
                         </div>
                         <div class="sexo_outer">
                             <div class="sexo_inner" id="cat3">
-                                <span>HOMBRES</span>
+                                <span class="clickable">HOMBRES</span>
                             </div>
                             <div class="sexo_inner" id="cat4">
-                                <span>MUJERES</span>
+                                <span class="clickable">MUJERES</span>
                             </div>
                         </div>
                     </div>
@@ -76,7 +76,7 @@
                             <span>Equipo</span>
                         </div>
                     </div>  --}}
-                    <div class=" noshow teams">
+                    <div class=" noshow teams" >
                         <div class="noshow flex-row-center" id="team-row">
                             <div class="position"><span></span></div>
                             <div class="team "><span></span></div>

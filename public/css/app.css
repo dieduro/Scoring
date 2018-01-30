@@ -68,6 +68,10 @@
   display: none !important;
 }
 
+.nopointer {
+  pointer-events: none;
+}
+
 .flex-col-center {
   display: -webkit-box;
   display: -ms-flexbox;
