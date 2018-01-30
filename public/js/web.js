@@ -106,7 +106,7 @@ window.onload = function()
                         position.innerHTML = element.position;
                         teamCell.children[0].innerHTML = element.team.name;
                         teamCell.children[2].innerHTML = element.team.ath1 + " & " + element.team.ath2;
-                        teamCell.children[1].innerHTML = '(' + element.team.totalScore + 'pts)';
+                        element.team.totalScore ? teamCell.children[1].innerHTML = "(" + element.team.totalScore + " pts)" : teamCell.children[1].innerHTML = "(0 pts)";
                        
                         var arrayScores = eventScores.children;
                         for (var i=0; i<arrayScores.length; i++){
