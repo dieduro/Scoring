@@ -17,6 +17,9 @@ Route::get('/', function () {
 Route::get('/app1507havana',function () {
     return view('app');
 });
+Route::get('/leaderboard',function () {
+    return view('leaderboard');
+});
 
 Route::get('/events', 'EventController@index');
 Route::get('/event/{id}', 'EventScoresController@index');
