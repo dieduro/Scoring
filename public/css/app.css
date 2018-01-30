@@ -1,6 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
-.web_container {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.web_container {
   height: 100vh;
 }
 
@@ -47,6 +45,38 @@
 
 .alto {
   height: 240px;
+}
+
+.flex-row-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.flex-col-center {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .info p {
@@ -173,8 +203,8 @@
 }
 
 .cat {
-  -ms-flex-preferred-size: 48%;
-      flex-basis: 48%;
+  -ms-flex-preferred-size: 49%;
+      flex-basis: 49%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -195,8 +225,8 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #ff6e5a;
-  border: 1.2px solid #ed4630;
+  background-color: #ffebe9;
+  border: 2px solid #ed4630;
   border-radius: 4px;
   margin: 10px 0;
 }
@@ -220,10 +250,11 @@
 }
 
 .sexo_inner {
-  -ms-flex-preferred-size: 48%;
-      flex-basis: 48%;
+  -ms-flex-preferred-size: 49%;
+      flex-basis: 49%;
   height: 50px;
-  border: 0.6px solid #226ca1;
+  border: 1px solid #226ca1;
+  border-radius: 4px;
   background-color: #36a8fb;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -244,6 +275,46 @@
 
 .sexo_inner :hover {
   cursor: pointer;
+}
+
+.leaderboard {
+  margin: 20px auto;
+  width: 90%;
+  border: 1.5px solid black;
+}
+
+.heading,
+.teams {
+  width: 100%;
+  background-color: #eee;
+}
+
+.position,
+.team,
+.plus {
+  padding: 15px 5px;
+  font-size: 1.6em;
+}
+
+.position {
+  padding-left: 20px;
+  font-size: 2em;
+  -ms-flex-preferred-size: 15%;
+      flex-basis: 15%;
+}
+
+.team {
+  -ms-flex-preferred-size: 75%;
+      flex-basis: 75%;
+}
+
+.plus {
+  -ms-flex-preferred-size: 15%;
+      flex-basis: 15%;
+}
+
+.plus img {
+  width: 50%;
 }
 
 #countdown {

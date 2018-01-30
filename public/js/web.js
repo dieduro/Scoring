@@ -37,13 +37,19 @@ window.onload = function() {
         }
     }                        
 
-    var ajax = function(){
+    var ajax = function(position, teamCell){
         var url = 'api/leaderboard/1';
         var xmlhttp = new XMLHttpRequest();
         xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-        console.log(xmlhttp.responseText);
-        //Mi código
+        // console.log(xmlhttp.responseText);
+
+        var data = JSON.parse(xmlhttp.responseText); 
+        console.log(data[0])
+        data.forEach(element => {
+            position.innerHTML = element.position;
+            teamCell.innerHTML = element.team.name;
+        });
         }
         };
         xmlhttp.open("GET", url, true);
@@ -57,10 +63,19 @@ window.onload = function() {
     }
 
 
-    var cat1 = document.querySelector("#cat1");
-    if (cat1){
-        cat1.addEventListener("click", function() {
-          ajax();
-        });
+    var fillLeaderboard = function(){
+        var teamRow = document.querySelector("#team-row");
+        console.log(teamRow.children[1]);
+        var position = teamRow.children[0];
+        var teamCell = teamRow.children[1];
+        var cat1 = document.querySelector("#cat1");
+        if (cat1) {
+          cat1.addEventListener("click", function() {
+            ajax(position, teamCell);
+          });
+        }
+         
     }
+    fillLeaderboard();
+   
 }

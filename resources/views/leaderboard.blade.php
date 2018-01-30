@@ -21,7 +21,7 @@
 
 </head>
 <body>
-    <div class="web_container">
+    {{--  <div class="web_container">  --}}
         <header class="header">  
             <img class="logo" src="{{ asset('storage/hc_logo.png') }}" alt="Hardy Challenge Logo">
         </header>
@@ -36,16 +36,17 @@
 
             <section class="section">
                 <h2>Leaderboards</h2>
+                <p>¡Consultá en vivo las tablas de posiciones!</p>
                 <div class="categorias">
                     <div class="cat">
                         <div class="nivel" id="rxd">
                             <span>RXD</span>
                         </div>
                         <div class="sexo_outer">
-                            <div class="sexo_inner" id="1">
+                            <div class="sexo_inner" id="cat1">
                                 <span>HOMBRES</span>
                             </div>
-                            <div class="sexo_inner" id="2">
+                            <div class="sexo_inner" id="cat2">
                                 <span>MUJERES</span>
                             </div>
                         </div>
@@ -55,16 +56,45 @@
                             <span>SCALED</span>
                         </div>
                         <div class="sexo_outer">
-                            <div class="sexo_inner" id="3">
+                            <div class="sexo_inner" id="cat3">
                                 <span>HOMBRES</span>
                             </div>
-                            <div class="sexo_inner" id="4">
+                            <div class="sexo_inner" id="cat4">
                                 <span>MUJERES</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+
+            <div class="leaderboard flex-col-center">
+                {{--  <div class="heading flex-row-center">
+                    <div class="position">
+                        <span>Posición</span>
+                    </div>
+                    <div class="team">
+                        <span>Equipo</span>
+                    </div>
+                </div>  --}}
+                <div class="teams">
+                    <div class="flex-row-center" id="team-row">
+                        <div class="position"><span></span></div>
+                        <div class="team "><span></span></div>
+                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                    </div>
+                    {{--  <div class="flex-row-center">
+                        <div class="position"><span>2</span></div>
+                        <div class="team "><span>Lo' Pibitos (34pts)</span></div>
+                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                    </div> 
+                    <div class="flex-row-center">
+                        <div class="position"><span>3</span></div>
+                        <div class="team "><span>Lo' Pibitos (34pts)</span></div>
+                        <div class="plus flex-row-center"><img src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                    </div>     
+                </div>  --}}
+
+            </div>
             
                     
             {{--  <section class="section">
@@ -116,7 +146,7 @@
                 <p>DMD Live Scoring</p>
             </div>
         </footer>
-    </div>
+    {{--  </div>  --}}
             
 
   <script type="text/javascript" src="{{ asset('js/web.js') }}"></script>

@@ -29,7 +29,7 @@
 
 </head>
 <body>
-    <div class="web_container">
+    {{--  <div class="web_container">  --}}
         <header class="header">  
             <img class="logo" src="{{ asset('storage/hc_logo.png') }}" alt="Hardy Challenge Logo">
         </header>
@@ -135,7 +135,7 @@
                 <p>DMD Live Scoring</p>
             </div>
         </footer>
-    </div>
+    {{--  </div>  --}}
             
 
   <script type="text/javascript" src="{{ asset('js/web.js') }}"></script>
