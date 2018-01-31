@@ -29,7 +29,7 @@ body {
 
 .lead_container{
     width:100vw;
-    min-height: 60vh;
+    min-height: 81vh;
     position:relative;
     margin: 0 auto;
     background-color:#ffffff;
@@ -67,6 +67,9 @@ body {
 }
 .alto {
     height: 240px;
+}
+.padding10 {
+    padding:10px;
 }
 
 .flex-row-center {
@@ -212,6 +215,7 @@ body {
     flex-basis: 49%;
     display:flex;
     flex-direction: column;
+    padding: 10px 0;
     
 }
 .nivel{
@@ -220,14 +224,30 @@ body {
     align-items: center;
     justify-content: center;
     background-color: #ffffff;
-    border: 2px solid #ed4630;
+    border-bottom: 2px solid #ed4630;
     border-radius: 4px;
     margin:10px 0;
     span {
-        font-size: 1.3em;
+        font-size: 1.4em;
         font-family: 'Raleway', sans-serif;
         font-weight: bold;
     }
+}
+.btn-rojo {
+     height:40px;
+     display:flex;
+     align-items: center;
+     justify-content: center;
+     background-color: #ffffff;
+     border: 2px solid #ed4630;
+     border-radius: 4px;
+     margin:10px 0;
+     span {
+         font-size: 1.3em;
+         font-family: 'Raleway', sans-serif;
+         font-weight: bold;
+     }
+
 }
 .sexo_outer {
     display:flex;
@@ -258,6 +278,12 @@ body {
 
 .clicked {
      background-color: #2470a7;
+}
+.before-leaderboards {
+    margin: 20px 0;
+   img {
+       width:90%;
+   }
 }
 
 .leaderboard {
@@ -465,6 +491,7 @@ body {
     width: 95%;
 }
 
+
 .sponsors{
     height: auto;
     width:100%;
@@ -563,7 +590,7 @@ footer {
 }
 .bloque {
     position: relative;
-    
+
 }
 .firma {
     overflow: auto;

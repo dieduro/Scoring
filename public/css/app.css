@@ -8,7 +8,7 @@
 
 .lead_container {
   width: 100vw;
-  min-height: 60vh;
+  min-height: 81vh;
   position: relative;
   margin: 0 auto;
   background-color: #ffffff;
@@ -50,6 +50,10 @@
 
 .alto {
   height: 240px;
+}
+
+.padding10 {
+  padding: 10px;
 }
 
 .flex-row-center {
@@ -246,9 +250,33 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  padding: 10px 0;
 }
 
 .nivel {
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #ffffff;
+  border-bottom: 2px solid #ed4630;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+.nivel span {
+  font-size: 1.4em;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+
+.btn-rojo {
   height: 40px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -265,7 +293,7 @@
   margin: 10px 0;
 }
 
-.nivel span {
+.btn-rojo span {
   font-size: 1.3em;
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
@@ -314,6 +342,14 @@
 
 .clicked {
   background-color: #2470a7;
+}
+
+.before-leaderboards {
+  margin: 20px 0;
+}
+
+.before-leaderboards img {
+  width: 90%;
 }
 
 .leaderboard {

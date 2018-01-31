@@ -89,7 +89,7 @@
                     </section>
 
                     
-                <section class="section">
+                <section class="section ">
                     <div class="sponsors">
                         <div class="tira">
                             <div class="sponsor_item" id="profit">
@@ -125,7 +125,7 @@
                     </div>
                 </section>
                 <div class="bloque" id="goToLeaderboards">
-                <div class="nivel" id="rxd">
+                <div class="btn-rojo" id="rxd">
                     <span>Ir a Leaderboards</span>
                 </div>
             </div> 

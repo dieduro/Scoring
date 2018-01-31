@@ -35,8 +35,8 @@
             </div>
 
             <section class="section">
-                <h2 class="subheading">LEADERBOARDS</h2>
-                <p class="leyenda2">¡Consultá en vivo las tablas de posiciones!</p>
+                <h2 class="subheading padding10">LEADERBOARDS</h2>
+                <p class="leyenda2 padding10">¡Consultá las tablas de posiciones en VIVO!</p>
                 <div class="categorias">
                     <div class="cat">
                         <div class="nivel" id="rxd">
@@ -65,17 +65,12 @@
                         </div>
                     </div>
                 </div>
-            
+                <div class="before-leaderboards">
+                    <img src="http://hardy.fit/wp-content/uploads/2017/11/slider-4.jpg" alt="">
+
+                </div>
 
                 <div class="noshow leaderboard flex-col-center">
-                    {{--  <div class="heading flex-row-center">
-                        <div class="position">
-                            <span>Posición</span>
-                        </div>
-                        <div class="team">
-                            <span>Equipo</span>
-                        </div>
-                    </div>  --}}
                     <div class=" noshow teams" >
                         <div class="noshow flex-col-center" id="team-row">
                             <div class="main-info flex-row-center">
@@ -101,7 +96,7 @@
             </section>
             
                     
-            <section class="section">
+            <section class="section ">
                 <div class="sponsors">
                     <div class="tira">
                         <div class="sponsor_item" id="profit">

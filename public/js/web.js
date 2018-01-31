@@ -163,6 +163,17 @@ window.onload = function()
             }
         })
     }
+    var scrollToTop = function(){
+        var categorias = document.querySelector('.categorias')
+        categorias.scrollIntoView()
+        // var toScroll = categorias.scrollTop;
+        // console.log(toScroll)
+        //  window.scrollTo(0,550)
+    }
+    var hideImage = function() {
+        var bef_lead = document.querySelector('.before-leaderboards');
+        bef_lead.classList.add('noshow')
+    }
 
     var fillLeaderboard = function() {
         var category_id
@@ -172,28 +183,36 @@ window.onload = function()
         var cat4 = document.querySelector("#cat4");
         
         cat1.addEventListener("click", function(){
+            hideImage()
             category_id = 1;
             unclick();
             cat1.classList.add('clicked');
             fetchData(category_id);
+            scrollToTop()
         });
         cat2.addEventListener("click", function(){
+            hideImage();
             category_id = 2;
             unclick();
             cat2.classList.add("clicked");
             fetchData(category_id);
+            scrollToTop();
         });
         cat3.addEventListener("click", function(){
+            hideImage();
             category_id = 3;
             unclick();
             cat3.classList.add("clicked");
             fetchData(category_id);
+            scrollToTop();
         });
         cat4.addEventListener("click", function(){
+            hideImage();
             category_id = 4;
             unclick();
             cat4.classList.add("clicked");
             fetchData(category_id);
+            scrollToTop();
         });
     }
 
