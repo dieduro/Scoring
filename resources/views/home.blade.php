@@ -124,10 +124,10 @@
                             
                     </div>
                 </section>
-                <div class="bloque" id="goToLeaderboards">
+                {{--  <div class="bloque" id="goToLeaderboards">
                 <div class="btn-rojo" id="rxd">
                     <span>Ir a Leaderboards</span>
-                </div>
+                </div>  --}}
             </div> 
         </div>
         <footer>

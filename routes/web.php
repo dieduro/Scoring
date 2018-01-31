@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('/app1507havana',function () {
     return view('app');
 });
-Route::get('/leaderboard',function () {
+Route::get('/XleaderboardX',function () {
     return view('leaderboard');
 });
 
