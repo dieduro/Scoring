@@ -19,7 +19,9 @@ $proteYcookie-bottom: $promo-height/4.5;
 $cookie-right:$promo-width/5.957;
 
 
-
+body {
+    font-family: 'Raleway', sans-serif
+}
 
 .web_container{
  height:100vh;
@@ -132,6 +134,14 @@ $cookie-right:$promo-width/5.957;
     overflow:auto;
     margin: auto;
 }
+.subheading {
+    font-family: 'Raleway',
+    sans-serif;
+    font-size: 2em;
+    letter-spacing: 1.2px;
+    color: #ed4630;
+    font-weight: 600;
+}
 .leyenda {
     width: 75%;
     display: inline-block;
@@ -141,8 +151,20 @@ $cookie-right:$promo-width/5.957;
     color: #FFF;
     text-shadow: 2px 2px 4px #000000;
     font-size: 1.6em;
-    line-height: 1em;
+    line-height: 1.2em;
     font-weight: bold;
+}
+.leyenda2 {
+        width: 75%;
+        display: inline-block;
+        letter-spacing: 1.5px;
+        bottom: 25px;
+        margin: 0 auto;
+        color: #000000;
+        text-shadow: 2px 2px 4px #bebebe;
+        font-size: 1.6em;
+        line-height: 1.3em;
+        font-weight: bold;
 }
 #natu, #choco, #coco, #prote, #cookie {
     position:absolute;
@@ -203,7 +225,7 @@ $cookie-right:$promo-width/5.957;
     margin:10px 0;
     span {
         font-size: 1.3em;
-        font-family: Roboto, sans-serif;
+        font-family: 'Raleway', sans-serif;
         font-weight: bold;
     }
 }
@@ -224,6 +246,8 @@ $cookie-right:$promo-width/5.957;
     justify-content: center;
     span{
         color:#FFF;
+        font-family: 'Raleway',
+        sans-serif;
         text-shadow: 1px 1px 4px #000000;
         font-size: 1em;
     }
@@ -428,7 +452,7 @@ $cookie-right:$promo-width/5.957;
 
 #countdown .labels li {
     width: 24%;
-    font: bold 15px 'Droid Sans', Arial, sans-serif;
+    font: bold 15px 'Raleway', Arial, sans-serif;
     color: #ff7361e8;
     text-shadow: 1px 1px 0px #000;
     text-align: center;

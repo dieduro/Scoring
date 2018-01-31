@@ -1,4 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);.web_container {
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);body {
+  font-family: 'Raleway', sans-serif;
+}
+
+.web_container {
   height: 100vh;
 }
 
@@ -143,6 +147,14 @@
   margin: auto;
 }
 
+.subheading {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2em;
+  letter-spacing: 1.2px;
+  color: #ed4630;
+  font-weight: 600;
+}
+
 .leyenda {
   width: 75%;
   display: inline-block;
@@ -152,7 +164,20 @@
   color: #FFF;
   text-shadow: 2px 2px 4px #000000;
   font-size: 1.6em;
-  line-height: 1em;
+  line-height: 1.2em;
+  font-weight: bold;
+}
+
+.leyenda2 {
+  width: 75%;
+  display: inline-block;
+  letter-spacing: 1.5px;
+  bottom: 25px;
+  margin: 0 auto;
+  color: #000000;
+  text-shadow: 2px 2px 4px #bebebe;
+  font-size: 1.6em;
+  line-height: 1.3em;
   font-weight: bold;
 }
 
@@ -242,7 +267,7 @@
 
 .nivel span {
   font-size: 1.3em;
-  font-family: Roboto, sans-serif;
+  font-family: 'Raleway', sans-serif;
   font-weight: bold;
 }
 
@@ -278,6 +303,7 @@
 
 .sexo_inner span {
   color: #FFF;
+  font-family: 'Raleway', sans-serif;
   text-shadow: 1px 1px 4px #000000;
   font-size: 1em;
 }
@@ -487,7 +513,7 @@
 
 #countdown .labels li {
   width: 24%;
-  font: bold 15px 'Droid Sans', Arial, sans-serif;
+  font: bold 15px 'Raleway', Arial, sans-serif;
   color: #ff7361e8;
   text-shadow: 1px 1px 0px #000;
   text-align: center;

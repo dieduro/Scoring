@@ -35,8 +35,8 @@
             </div>
 
             <section class="section">
-                <h2>Leaderboards</h2>
-                <p>¡Consultá en vivo las tablas de posiciones!</p>
+                <h2 class="subheading">LEADERBOARDS</h2>
+                <p class="leyenda2">¡Consultá en vivo las tablas de posiciones!</p>
                 <div class="categorias">
                     <div class="cat">
                         <div class="nivel" id="rxd">
