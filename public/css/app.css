@@ -234,7 +234,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  background-color: #ffebe9;
+  background-color: #ffffff;
   border: 2px solid #ed4630;
   border-radius: 4px;
   margin: 10px 0;
@@ -284,6 +284,10 @@
 
 .sexo_inner :hover {
   cursor: pointer;
+}
+
+.clicked {
+  background-color: #2470a7;
 }
 
 .leaderboard {
@@ -364,13 +368,14 @@
 
 .eventScores {
   width: 100%;
-  height: 60px;
+  height: 80px;
   background-color: #aca8a8;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .eventScores span {
+  font-size: 1.2em;
   -ms-flex-preferred-size: 33%;
       flex-basis: 33%;
 }

@@ -88,12 +88,12 @@
                                 <div class="plus flex-row-center "><img class="plus-click" src="https://png.icons8.com/material/50/333333/menu.png"></div>
                             </div>
                             <div class="noshow eventScores flex-row-center">
-                                <span id="ev1"></span>
-                                <span id="ev2"></span>
-                                <span id="ev3"></span>
-                                <span id="ev4"></span>
-                                <span id="ev5"></span>
-                                <span id="ev6"></span>
+                                <span id="e1"></span>
+                                <span id="e2"></span>
+                                <span id="e3"></span>
+                                <span id="e4"></span>
+                                <span id="e5"></span>
+                                <span id="e6"></span>
                             </div>
                         </div>
 

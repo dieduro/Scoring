@@ -110,7 +110,7 @@ window.onload = function()
                        
                         var arrayScores = eventScores.children;
                         for (var i=0; i<arrayScores.length; i++){
-                            element.eventScores[i] ? (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + element.eventScores[i].score) : (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + "--"); 
+                            element.eventScores[i] ? (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + element.eventScores[i].score + " (" + element.eventScores[i].points + 'º)') : (arrayScores[i].innerHTML = "Ev #" + (i + 1) + ": " + "--"); 
                         }
                         
                         mainInfo.setAttribute('id', element.team.id)
@@ -123,6 +123,7 @@ window.onload = function()
                             } 
                             else {
                                 evScoreDiv.classList.add("noshow");
+
                             }
                           }
                         );
@@ -141,6 +142,15 @@ window.onload = function()
     var fetchData = function(category_id) {
         ajax(category_id);
     };
+    
+    var unclick = function() {
+        var btns = document.querySelectorAll('.sexo_inner');
+        btns.forEach(btn => {
+            if (btn.classList.contains('clicked')){
+                btn.classList.remove('clicked')
+            }
+        })
+    }
 
     var fillLeaderboard = function() {
         var category_id
@@ -151,19 +161,27 @@ window.onload = function()
         
         cat1.addEventListener("click", function(){
             category_id = 1;
+            unclick();
+            cat1.classList.add('clicked');
             fetchData(category_id);
         });
         cat2.addEventListener("click", function(){
             category_id = 2;
+            unclick();
+            cat2.classList.add("clicked");
             fetchData(category_id);
         });
         cat3.addEventListener("click", function(){
             category_id = 3;
+            unclick();
+            cat3.classList.add("clicked");
             fetchData(category_id);
         });
         cat4.addEventListener("click", function(){
             category_id = 4;
-                fetchData(category_id);
+            unclick();
+            cat4.classList.add("clicked");
+            fetchData(category_id);
         });
     }
 
