@@ -2,6 +2,18 @@ window.onload = function()
 {
     // ---------  HOME FUNCTIONS  -----------
 
+    var goToLdb = document.querySelector("#goToLeaderboards");
+    if (goToLdb) {
+        goToLdb.addEventListener(
+        "click",
+        function() {
+        window.location.replace(
+            "/leaderboard"
+        );
+        }
+    );
+
+    }
     var timer = document.querySelector("#countdown");
     if (timer) {
     var today = new Date();
@@ -42,17 +54,17 @@ window.onload = function()
     }
     }
 
-    var ldbrd = document.querySelector("#ldbrd");
-    if (ldbrd) {
-    ldbrd.addEventListener(
-        "click",
-        function() {
-        window.location.replace(
-            "/leaderboard"
-        );
-        }
-    );
-    }
+    // var ldbrd = document.querySelector("#ldbrd");
+    // if (ldbrd) {
+    // ldbrd.addEventListener(
+    //     "click",
+    //     function() {
+    //     window.location.replace(
+    //         "/leaderboard"
+    //     );
+    //     }
+    // );
+    // }
 
     // ---------  LEADERBOARD FUNCTIONS  -----------
 

@@ -649,6 +649,10 @@ footer {
   height: auto;
 }
 
+.bloque {
+  position: relative;
+}
+
 .firma {
   overflow: auto;
   width: 100%;

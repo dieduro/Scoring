@@ -41,6 +41,8 @@
             <div class="date">
                 <span> SÁBADO 3/2 + DOMINGO 4/2</span>
             </div>
+
+            
             <section class="alto section">
                 <div id="countdown">
                     <div id='tiles'></div>
@@ -85,6 +87,7 @@
                         <span class="leyenda">Probá nuestras nuevas variedades en el stand!</span>
                     </div>   
                     </section>
+
                     
                 <section class="section">
                     <div class="sponsors">
@@ -120,7 +123,12 @@
                         </div>        
                             
                     </div>
-                </section> 
+                </section>
+                <div class="bloque" id="goToLeaderboards">
+                <div class="nivel" id="rxd">
+                    <span>Ir a Leaderboards</span>
+                </div>
+            </div> 
         </div>
         <footer>
             <div class="social">
