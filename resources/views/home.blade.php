@@ -43,8 +43,71 @@
                 <img src="{{ asset('storage/date-tirita.jpg') }}" alt="">
             </div>
 
+
+             <section class="section">
+                <h2 class="subheading padding10">LEADERBOARDS</h2>
+                <p class="leyenda2 padding10">¡Consultá las tablas de posiciones en VIVO!</p>
+                <div class="categorias">
+                    <div class="cat">
+                        <div class="nivel" id="rxd">
+                            <span>RXD</span>
+                        </div>
+                        <div class="sexo_outer">
+                            <div class="sexo_inner" id="cat1">
+                                <span class="clickable">HOMBRES</span>
+                            </div>
+                            <div class="sexo_inner" id="cat2">
+                                <span class="clickable">MUJERES</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cat">
+                        <div class="nivel" id="rxd">
+                            <span>SCALED</span>
+                        </div>
+                        <div class="sexo_outer">
+                            <div class="sexo_inner" id="cat3">
+                                <span class="clickable">HOMBRES</span>
+                            </div>
+                            <div class="sexo_inner" id="cat4">
+                                <span class="clickable">MUJERES</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="before-leaderboards">
+                    <img src="http://hardy.fit/wp-content/uploads/2017/11/slider-4.jpg" alt="">
+
+                </div>
+
+                <div class="noshow leaderboard flex-col-center">
+                    <div class=" noshow teams" >
+                        <div class="noshow flex-col-center" id="team-row">
+                            <div class="main-info flex-row-center">
+                                <div class="position"><span></span></div>
+                                <div class="team ">
+                                    <span class="teamName"></span>
+                                    <span class="points"></span>
+                                    <span class="athNames"></span>
+                                </div>
+                                <div class="plus flex-row-center "><img class="plus-click" src="https://png.icons8.com/material/50/333333/menu.png"></div>
+                            </div>
+                            <div class="noshow eventScores flex-row-center">
+                                <span id="e1"></span>
+                                <span id="e2"></span>
+                                <span id="e3"></span>
+                                <span id="e4"></span>
+                                <span id="e5"></span>
+                                <span id="e6"></span>
+                            </div>
+                        </div>
+
+                </div>
+            </section>
             
-            <section class="alto section">
+
+            
+            {{--  <section class="alto section">
                 <div id="countdown">
                     <div id='tiles'></div>
                     <div class="labels">
@@ -54,7 +117,7 @@
                         <li>Secs</li>
                     </div>
                 </div>
-            </section>  
+            </section>    --}}
             {{--  <section class="section">
                 <div id="info">
                     <p>
@@ -109,12 +172,7 @@
                             
                         </div>
                         <div class="tira">    
-                            <div class="sponsor_item">
-                                <img id="mariocano" src="{{ asset('storage/sponsors/mariocano.png') }}" alt="Taurus">
-                            </div>
-                            <div class="sponsor_item" id="hpb">
-                                <img  src="{{ asset('storage/sponsors/handpowbalm_logo.png') }}" alt="Hand Power Balm">
-                            </div>
+                           
                             <div class="sponsor_item" id="ikr">
                                 <img  src="{{ asset('storage/sponsors/ikr.png') }}" alt="IKR Indumentaria">
                             </div> 
