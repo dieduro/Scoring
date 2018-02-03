@@ -62555,7 +62555,7 @@ var CreateTeamForm = function (_React$Component) {
         value: function createTeam(e) {
             //verifica {team} e invoca la funcion create() del parent, con parametro teamData
             e.preventDefault();
-            var codigo = this.refs.name.value;
+            var codigo = this.refs.codigo.value;
             var name = this.refs.name.value;
             var ath1 = this.refs.ath1.value;
             var ath2 = this.refs.ath2.value;
@@ -62567,12 +62567,13 @@ var CreateTeamForm = function (_React$Component) {
             } else {
                 this.setState({ error: null });
                 var teamData = {
+                    codigo: codigo,
                     name: name,
                     ath1: ath1,
                     ath2: ath2,
                     box: box,
-                    category_id: category_id,
-                    codigo: codigo
+                    category_id: category_id
+
                 };
                 this.props.create(teamData); //invoca método del parent component
                 this.setState(this.state);

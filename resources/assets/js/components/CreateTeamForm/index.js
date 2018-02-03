@@ -49,7 +49,7 @@ export default class CreateTeamForm extends React.Component {
 
     createTeam(e) { //verifica {team} e invoca la funcion create() del parent, con parametro teamData
         e.preventDefault();
-        let codigo = this.refs.name.value;
+        let codigo = this.refs.codigo.value;
         let name = this.refs.name.value;
         let ath1 = this.refs.ath1.value;
         let ath2 = this.refs.ath2.value;
@@ -62,12 +62,13 @@ export default class CreateTeamForm extends React.Component {
         }else {       
             this.setState({error: null })
             const teamData = {
+                codigo,
                 name, 
                 ath1,
                 ath2,
                 box,
                 category_id,
-                codigo
+                
             }
             this.props.create(teamData); //invoca método del parent component
             this.setState(this.state)
