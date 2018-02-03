@@ -48332,7 +48332,7 @@ var Team = function (_Component) {
                     'p',
                     { className: 'id' },
                     '#',
-                    this.props.data.codigo,
+                    this.props.data.id,
                     ' '
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
