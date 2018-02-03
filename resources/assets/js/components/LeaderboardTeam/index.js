@@ -17,7 +17,7 @@ export default class LeaderboardTeam extends Component {
         let ev4 = data.eventScores[3] ? `${data.eventScores[3].points} pts - ${data.eventScores[3].score}`  : '--'
         let ev5 = data.eventScores[4] ? `${data.eventScores[4].points} pts - ${data.eventScores[4].score}`  : '--'
       
-        let ts = data.team.totalScore ? data.team.totalScore : "--";
+        let ts = data.team.totalScore != null ? data.team.totalScore : "--";
 
         
         

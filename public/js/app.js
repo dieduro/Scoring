@@ -59944,7 +59944,7 @@ var LeaderboardTeam = function (_Component) {
       var ev4 = data.eventScores[3] ? data.eventScores[3].points + ' pts - ' + data.eventScores[3].score : '--';
       var ev5 = data.eventScores[4] ? data.eventScores[4].points + ' pts - ' + data.eventScores[4].score : '--';
 
-      var ts = data.team.totalScore ? data.team.totalScore : "--";
+      var ts = data.team.totalScore != null ? data.team.totalScore : "--";
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
