@@ -62,7 +62,6 @@ export default class CreateTeamForm extends React.Component {
         }else {       
             this.setState({error: null })
             const teamData = {
-                codigo,
                 name, 
                 ath1,
                 ath2,
@@ -74,7 +73,7 @@ export default class CreateTeamForm extends React.Component {
             this.setState(this.state)
     
             //RESETEAMOS EL VALUE DE LOS INPUTS
-            this.refs.codigo.value = "";
+            
             this.refs.name.value = "";
             this.refs.ath1.value = "" ;
             this.refs.ath2.value = "" ;
@@ -100,7 +99,7 @@ export default class CreateTeamForm extends React.Component {
                 <input type="radio" name="category" value="scaled" /> Scaled<br />
               </div>
               <div>
-                <input type="text" ref="codigo" placeholder="Código" />
+              
                 <input type="text" ref="name" placeholder="Nombre del Equipo" />
                 <input type="text" ref="ath1" placeholder="Atleta #1" />
                 <input type="text" ref="ath2" placeholder="Atleta #2" />

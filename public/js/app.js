@@ -62567,7 +62567,6 @@ var CreateTeamForm = function (_React$Component) {
             } else {
                 this.setState({ error: null });
                 var teamData = {
-                    codigo: codigo,
                     name: name,
                     ath1: ath1,
                     ath2: ath2,
@@ -62579,7 +62578,7 @@ var CreateTeamForm = function (_React$Component) {
                 this.setState(this.state);
 
                 //RESETEAMOS EL VALUE DE LOS INPUTS
-                this.refs.codigo.value = "";
+
                 this.refs.name.value = "";
                 this.refs.ath1.value = "";
                 this.refs.ath2.value = "";
@@ -62636,7 +62635,6 @@ var CreateTeamForm = function (_React$Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         null,
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'codigo', placeholder: 'C\xF3digo' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'name', placeholder: 'Nombre del Equipo' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'ath1', placeholder: 'Atleta #1' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'ath2', placeholder: 'Atleta #2' }),

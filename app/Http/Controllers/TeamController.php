@@ -57,7 +57,6 @@ class TeamController extends Controller
         $request->validate($rules, $messages);
     
         $team = \App\Team::create([
-            'codigo' => $request->input('codigo'),
             'name' => $request->input('name'),
             "ath1" => $request->input('ath1'),
             "ath2" => $request->input('ath2'),
