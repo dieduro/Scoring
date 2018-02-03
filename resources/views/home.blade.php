@@ -52,13 +52,11 @@
                         <div class="nivel" id="rxd">
                             <span>RXD</span>
                         </div>
-                        <div class="sexo_outer">
-                            <div class="sexo_inner" id="cat1">
-                                <span class="clickable">HOMBRES</span>
+                        <div class="sexo_outer" style="justify-content: center;">
+                            <div class="sexo_inner" style="flex-basis: 80%;" id="cat1">
+                                <span class="clickable">RXD</span>
                             </div>
-                            <div class="sexo_inner" id="cat2">
-                                <span class="clickable">MUJERES</span>
-                            </div>
+                           
                         </div>
                     </div>
                     <div class="cat">

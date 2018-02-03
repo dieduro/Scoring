@@ -44,12 +44,9 @@
                         </div>
                         <div class="sexo_outer">
                             <div class="sexo_inner" id="cat1">
-                                <span class="clickable">HOMBRES</span>
+                                <span class="clickable">RXD</span>
                             </div>
-                            <div class="sexo_inner" id="cat2">
-                                <span class="clickable">MUJERES</span>
-                            </div>
-                        </div>
+                            
                     </div>
                     <div class="cat">
                         <div class="nivel" id="rxd">
