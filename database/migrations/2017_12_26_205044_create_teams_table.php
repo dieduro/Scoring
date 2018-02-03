@@ -15,11 +15,13 @@ class CreateTeamsTable extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('codigo');
             $table->string('name');
             $table->string('ath1');
             $table->string('ath2');
             $table->string('box')->nullable();
             $table->integer('category_id');
+            
             $table->integer('totalScore')->nullable();
             $table->timestamps();
         });

@@ -49,6 +49,7 @@ export default class CreateTeamForm extends React.Component {
 
     createTeam(e) { //verifica {team} e invoca la funcion create() del parent, con parametro teamData
         e.preventDefault();
+        let codigo = this.refs.name.value;
         let name = this.refs.name.value;
         let ath1 = this.refs.ath1.value;
         let ath2 = this.refs.ath2.value;
@@ -65,12 +66,14 @@ export default class CreateTeamForm extends React.Component {
                 ath1,
                 ath2,
                 box,
-                category_id
+                category_id,
+                codigo
             }
             this.props.create(teamData); //invoca método del parent component
             this.setState(this.state)
     
             //RESETEAMOS EL VALUE DE LOS INPUTS
+            this.refs.codigo.value = "";
             this.refs.name.value = "";
             this.refs.ath1.value = "" ;
             this.refs.ath2.value = "" ;
@@ -96,6 +99,7 @@ export default class CreateTeamForm extends React.Component {
                 <input type="radio" name="category" value="scaled" /> Scaled<br />
               </div>
               <div>
+                <input type="text" ref="codigo" placeholder="Código" />
                 <input type="text" ref="name" placeholder="Nombre del Equipo" />
                 <input type="text" ref="ath1" placeholder="Atleta #1" />
                 <input type="text" ref="ath2" placeholder="Atleta #2" />

@@ -13,7 +13,7 @@ export default class Team extends Component {
         
         return <div className="teamCard">
             <h2 className="teamName"> {this.props.data.name} </h2>
-            <p className="id">#{this.props.data.id} </p>
+            <p className="id">#{this.props.data.codigo} </p>
             <h3 className="athletes">
               {this.props.data.ath1} y {this.props.data.ath2}
             </h3>

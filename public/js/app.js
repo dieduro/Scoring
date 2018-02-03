@@ -48332,7 +48332,7 @@ var Team = function (_Component) {
                     'p',
                     { className: 'id' },
                     '#',
-                    this.props.data.id,
+                    this.props.data.codigo,
                     ' '
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -62555,6 +62555,7 @@ var CreateTeamForm = function (_React$Component) {
         value: function createTeam(e) {
             //verifica {team} e invoca la funcion create() del parent, con parametro teamData
             e.preventDefault();
+            var codigo = this.refs.name.value;
             var name = this.refs.name.value;
             var ath1 = this.refs.ath1.value;
             var ath2 = this.refs.ath2.value;
@@ -62570,12 +62571,14 @@ var CreateTeamForm = function (_React$Component) {
                     ath1: ath1,
                     ath2: ath2,
                     box: box,
-                    category_id: category_id
+                    category_id: category_id,
+                    codigo: codigo
                 };
                 this.props.create(teamData); //invoca método del parent component
                 this.setState(this.state);
 
                 //RESETEAMOS EL VALUE DE LOS INPUTS
+                this.refs.codigo.value = "";
                 this.refs.name.value = "";
                 this.refs.ath1.value = "";
                 this.refs.ath2.value = "";
@@ -62632,6 +62635,7 @@ var CreateTeamForm = function (_React$Component) {
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                         'div',
                         null,
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'codigo', placeholder: 'C\xF3digo' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'name', placeholder: 'Nombre del Equipo' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'ath1', placeholder: 'Atleta #1' }),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', ref: 'ath2', placeholder: 'Atleta #2' }),
