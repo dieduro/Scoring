@@ -51,56 +51,35 @@ class App extends Component {
   }
 
  render() {  
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">DMD Live Scoring</h1>
-        </header>
-      <div className="leftNav">
-        <Btn text="Equipos" funcion={this.teamSection.bind(this)}/>
-        <Btn text="Eventos" funcion={this.eventSection.bind(this)}/>
-        <Btn text="Leaderboards" funcion={this.leaderboardSection.bind(this)}/>
-      </div>
-      <div className="sectionContainer">
-        { (()=>{ switch (this.state.section){
-          case 1: 
-            return <Teams  backToApp={this.backToThis.bind(this)}/>;
-            break;
-          case 2: 
-            return <EventsDash  backToApp={this.backToThis.bind(this)}/>
-            break;
-          case 3:
-            return <LeaderboardDash />
-            break;
-          default:
-            return null   
-        }
-        })()}
-      </div>
-        
-        
-        {/* <div>
-          <Col className="column" md={3} sm={3}>
-            <h2>Hombres RXD</h2>
-            <List  entries={leaderboard_cat1}/>
-          </Col>
-          <Col className="column" md={3} sm={3}>
-            <h2>Mujeres RXD</h2>
-            <List  entries={leaderboard_cat2}/>
-          </Col>
-          <Col className="column" md={3} sm={3}>
-            <h2>Hombres Scaled</h2>
-            <List  entries={leaderboard_cat3}/>
-          </Col>
-          <Col className="column" md={3} sm={3}>
-            <h2>Mujeres Scaled</h2>
-            <List  entries={leaderboard_cat4}/>
-          </Col>
-        </div> */}
-      
-       </div>
-     
-    )
+    return <div className="app-container">
+        <div className="App">
+          <header className="App-header">
+            <h1 className="App-title">DMD Live Scoring</h1>
+          </header>
+          <div className="leftNav">
+            <Btn text="Equipos" class="btn btn_leftNav" funcion={this.teamSection.bind(this)} />
+            <Btn text="Eventos" class="btn btn_leftNav" funcion={this.eventSection.bind(this)} />
+            <Btn text="Leaderboards" class="btn btn_leftNav" funcion={this.leaderboardSection.bind(this)} />
+          </div>
+          <div className="sectionContainer">
+            {(() => {
+              switch (this.state.section) {
+                case 1:
+                  return <Teams backToApp={this.backToThis.bind(this)} />;
+                  break;
+                case 2:
+                  return <EventsDash backToApp={this.backToThis.bind(this)} />;
+                  break;
+                case 3:
+                  return <LeaderboardDash />;
+                  break;
+                default:
+                  return null;
+              }
+            })()}
+          </div>
+        </div>
+      </div>;
     
   }
 }

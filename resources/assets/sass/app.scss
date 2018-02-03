@@ -513,12 +513,19 @@ body {
     align-items: center;
 
 }
+.date-tirita {
+    margin-top: 50px;
+     img {
+         width: 70%;
+     }
+}
 .date {
     width:75%;
     float:left;
     margin-top: 15px;
     background-color: #36a8fb;
     border-radius: 3px;
+   
     span {
         letter-spacing: 0.2em;
         font-size: 0.8em;
@@ -676,6 +683,11 @@ footer {
     }
 }
 @media (min-width: 768px) {
+    .date-tirita {
+        img {
+            width: 60%;
+        }
+    }
    .leyenda {
        width: 50%;
    }
@@ -689,12 +701,20 @@ footer {
             width: 35%;
         }
     }
+    .section {
+        margin-top: 60px;
+    }
 }
 
 
 @media (min-width: 1024px) {
+    .date-tirita {
+        img {
+            width: 35%;
+        }
+    }
     .title {
-        width: 35%;
+        width: 25%;
     }
     .date {
         span {

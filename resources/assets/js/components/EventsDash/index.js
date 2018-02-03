@@ -34,29 +34,27 @@ class EventsDash extends Component {
 
 
     render(){
-        return(
-            <div className="section">
-                <div>
-                    <Btn text="Administrar Eventos" funcion={this.eventAdminSection.bind(this)}/>
-                    <Btn text="Cargar Resultados" funcion={this.scoresSection.bind(this)}/>
-                </div>
-                <div className="Ev_section">
-                    { (()=>{ switch (this.state.section){
-                    case 1: 
-                        return <EventMenu backToApp={this.backToThis.bind(this)} />
-                        break;
-                    case 2: 
-                        return <EventsAdmin />
-                        
-                        break;
-                    default:
-                        return null   
-                    }
-                    })()}
-                </div>
+        return <div className="section">
+            <div>
+              <Btn text="Administrar Eventos" class="btn btn_section" funcion={this.eventAdminSection.bind(this)} />
+              <Btn text="Cargar Resultados" class="btn btn_section" funcion={this.scoresSection.bind(this)} />
             </div>
-            
-        )
+            <div className="Ev_section">
+              {(() => {
+                switch (this.state.section) {
+                  case 1:
+                    return <EventMenu backToApp={this.backToThis.bind(this)} />;
+                    break;
+                  case 2:
+                    return <EventsAdmin />;
+
+                    break;
+                  default:
+                    return null;
+                }
+              })()}
+            </div>
+          </div>;
 
     }
 }

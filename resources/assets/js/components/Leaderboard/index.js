@@ -13,6 +13,7 @@ class Leaderboard extends Component {
     
     render(){
         const leaderboard = this.props.data
+        console.log(leaderboard)
          
         return (
             <div>

@@ -7067,7 +7067,7 @@ var Btn = function (_Component) {
                 { style: style },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'button',
-                    { type: 'button', className: 'btn btn_section', onClick: this.props.funcion },
+                    { type: 'button', className: this.props.class, onClick: this.props.funcion },
                     ' ',
                     this.props.text,
                     ' '
@@ -15818,15 +15818,28 @@ var EventScores = function (_Component) {
     value: function setScore(teamScore) {
       var _this4 = this;
 
+      console.log(this.state.event.midePor);
       if (this.validateTeamId(teamScore.team)) {
         var category_id = this.state.event.category_id;
         teamScore.category_id = category_id;
+        var timeCapSecs = this.state.event.timeCap * 60;
+        console.log(timeCapSecs);
+        var fullSecs = this.convertToSeconds(teamScore.score);
+        console.log(fullSecs);
+        if (this.state.event.midePor == 'time') {
+          if (fullSecs > timeCapSecs) {
+
+            var repsLeft = fullSecs - timeCapSecs;
+            teamScore.score = 'TC +' + repsLeft;
+          }
+        }
 
         this.state.nonUpdatedTeams.forEach(function (team) {
           if (team.id == teamScore.team) {
             team.show = false;
           }
         });
+        console.log(teamScore);
         var url = '/api/event/' + this.state.event.id + '/cargarScore';
         __WEBPACK_IMPORTED_MODULE_8_axios___default.a.post(url, teamScore).then(function (response) {
           _this4.fetchUpdatedTeams(_this4.state.event.id);
@@ -15918,10 +15931,10 @@ var EventScores = function (_Component) {
     value: function sortTeams(event, updatedTeams) {
       var eventScores = this;
       updatedTeams = updatedTeams.sort(function (a, b) {
-
         switch (event.midePor) {
           case 'time':
-            if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)) {
+
+            if (a.scoreSecs > b.scoreSecs) {
               return 1;
             } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)) {
               if (event.tiebreak) {
@@ -15949,6 +15962,8 @@ var EventScores = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this5 = this;
+
       var event = this.state.event;
 
       var nonUpdatedTeams = this.state.nonUpdatedTeams;
@@ -15959,6 +15974,18 @@ var EventScores = function (_Component) {
       }
       var updatedTeams = this.state.updatedTeams;
       if (updatedTeams) {
+        updatedTeams.forEach(function (team) {
+          if (isNaN(_this5.convertToSeconds(team.score))) {
+            var repsLeft = team.score.substring(4);
+            var timeCapSecs = _this5.state.event.timeCap * 60;
+            var totalSecs = parseInt(timeCapSecs) + parseInt(repsLeft);
+            team.scoreSecs = totalSecs;
+            console.log(team.score);
+          } else {
+            team.scoreSecs = parseInt(_this5.convertToSeconds(team.score));
+          }
+        });
+        console.log(updatedTeams);
         this.sortTeams(event, updatedTeams);
       }
 
@@ -16022,6 +16049,24 @@ var EventScores = function (_Component) {
 }(__WEBPACK_IMPORTED_MODULE_1_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (EventScores);
+// if(isNaN(eventScores.convertToSeconds(a.score))){
+//   const repsLeft = a.score.substring(4);
+//   const timeCapSecs = eventScores.state.event.timeCap * 60;
+//   const totalSecs = timeCapSecs + repsLeft;
+//   a.scoreSecs = totalSecs
+//   console.log(a.score)
+// }else {
+//   a.scoreSecs = a.score
+// }
+// if (isNaN(eventScores.convertToSeconds(b.score))) {
+//   const repsLeft = b.score.substring(4);
+//   const timeCapSecs = eventScores.state.event.timeCap * 60;
+//   const totalSecs = timeCapSecs + repsLeft;
+//   b.scoreSecs = totalSecs;
+//   console.log(b.score);
+// } else {
+//   b.scoreSecs = b.score;
+// }
 
 /***/ }),
 /* 136 */
@@ -20331,17 +20376,17 @@ var EventsAdmin = function (_Component) {
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'theading' },
-                            'Nombre'
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'div',
-                            { className: 'theading' },
                             'Workout'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
                             { className: 'theading' },
                             'Mide por'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'theading' },
+                            'Time Cap'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',
@@ -35763,6 +35808,8 @@ var Event = function (_Component) {
         key: 'render',
         value: function render() {
             var event = this.props.data;
+            var timeCap = void 0;
+            event.timeCap == null ? timeCap = '--' : timeCap = event.timeCap;
             var tiebreak = null;
             if (event.tiebreak == 1) {
                 tiebreak = 'Sí';
@@ -35784,11 +35831,6 @@ var Event = function (_Component) {
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { className: 'cell', id: 'name' },
-                    event.name
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
                     { className: 'cell', id: 'wod' },
                     event.wod
                 ),
@@ -35796,6 +35838,11 @@ var Event = function (_Component) {
                     'div',
                     { className: 'cell', id: 'type' },
                     event.midePor
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'cell', id: 'timeCap' },
+                    timeCap
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
@@ -36193,41 +36240,45 @@ var App = function (_Component) {
 
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
         'div',
-        { className: 'App' },
+        { className: 'app-container' },
         __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'header',
-          { className: 'App-header' },
+          'div',
+          { className: 'App' },
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-            'h1',
-            { className: 'App-title' },
-            'DMD Live Scoring'
+            'header',
+            { className: 'App-header' },
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+              'h1',
+              { className: 'App-title' },
+              'DMD Live Scoring'
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'div',
+            { className: 'leftNav' },
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Equipos', 'class': 'btn btn_leftNav', funcion: this.teamSection.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Eventos', 'class': 'btn btn_leftNav', funcion: this.eventSection.bind(this) }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Leaderboards', 'class': 'btn btn_leftNav', funcion: this.leaderboardSection.bind(this) })
+          ),
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'div',
+            { className: 'sectionContainer' },
+            function () {
+              switch (_this3.state.section) {
+                case 1:
+                  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Teams__["a" /* default */], { backToApp: _this3.backToThis.bind(_this3) });
+                  break;
+                case 2:
+                  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_EventsDash__["a" /* default */], { backToApp: _this3.backToThis.bind(_this3) });
+                  break;
+                case 3:
+                  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__components_LeaderboardDash__["a" /* default */], null);
+                  break;
+                default:
+                  return null;
+              }
+            }()
           )
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          { className: 'leftNav' },
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Equipos', funcion: this.teamSection.bind(this) }),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Eventos', funcion: this.eventSection.bind(this) }),
-          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__components_Btn__["a" /* default */], { text: 'Leaderboards', funcion: this.leaderboardSection.bind(this) })
-        ),
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          'div',
-          { className: 'sectionContainer' },
-          function () {
-            switch (_this3.state.section) {
-              case 1:
-                return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__components_Teams__["a" /* default */], { backToApp: _this3.backToThis.bind(_this3) });
-                break;
-              case 2:
-                return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5__components_EventsDash__["a" /* default */], { backToApp: _this3.backToThis.bind(_this3) });
-                break;
-              case 3:
-                return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__components_LeaderboardDash__["a" /* default */], null);
-                break;
-              default:
-                return null;
-            }
-          }()
         )
       );
     }
@@ -48227,7 +48278,7 @@ exports = module.exports = __webpack_require__(170)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n/* #88C542  verde\n#30499B  azul\n#EB7B2D  naranja  */\n\n.App {\n  text-align: center;\n  \n}\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #2e6da4;\n  height: 150px;\n  padding: 20px;\n  color: #FFF;\n}\n\n.App-title {\n  font-weight: bold;\n  font-size: 2.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n.teamCard {\n width: 100%;\n height: 80px;\n border: 1.5px solid #2e6da4;\n margin: 5px 0;\n position: relative;\n background-color: rgb(246, 252, 240);\n box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),\n 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n \n}\n.teamCard h2,\n.teamCard h3,\n.teamCard .id,\n.teamCard .score {\n  color: rgba(65, 63, 63, 0.966)\n}\n.teamCard .teamName {\n  font-size: 1.2em;\n  font-weight: bold;\n  margin: 0px;\n  position: relative;\n  top: 0;\n  left: 0;\n  padding: 5px;\n}\n  .teamCard .athletes {\n  font-size: 1em;\n  margin: 5px 0;\n  padding: 5px;\n}\n.teamCard .id{\n  font-size: 1em;\n  margin: 0px;\n  display: inline;\n  position: absolute;\n  top: 0;\n  right: 5px;\n  padding: 5px;\n}\n.teamCard .score {\n   font-size: 1em;\n   margin: 0px;\n   display: inline;\n   position: absolute;\n   bottom: 0;\n   right: 0;\n   padding: 5px;\n}\n\n\n.eventForm {\n  position: relative;\n  width: 100%;\n  margin: 0;\n  padding: 0 15px;\n  height: auto;\n  display: flex;\n  flex-wrap: wrap;\n  font-size: 1.05em;\n  overflow: hidden;\n  border: 1px solid black;\n}\n.eventFormField {\n  flex-basis: 37%;\n  margin:0 15px;\n  padding: 5px;\n}\n.eventFormField label {\n  float: left;\n  margin: 0 10px;\n  padding: 10px 0;\n}\n.eventFormField .input {\n  margin: 10px;\n  float: left;\n}\n#tiebreakCheck {\n  position: relative;\n  top: 5px;\n  right: 5px;\n}\n.qtiebreaks {\n position: absolute;\n bottom: 75px;\n left: 170px;\n}\n.submitEvent {\n  width: 50%;\n  margin: 0 auto;\n}\n\n.flex-around {\n  display: flex;\n  justify-content: space-around;\n}\n\n.radioTeam {\n  display:inline-block;\n  margin: 10px 20px;\n}\n\n/* .leaderboard_table {\n  background-color:#91C3FF;\n} */\n.btn_leaderboard {\n  font-size: 1.6em;\n}\n\n.btn_section {\n  display:block;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #2e6da4;\n  margin: 0 auto;\n  width: 80%;\n}\n\n.theList {\n  padding: 0px;\n  margin: 0px;\n  width:100%;\n}\n\n.listItem {\n  list-style: none;\n  border-bottom: 1px solid black;\n}\n.listItem:nth-child(2n) {\n  background-color: lavender;\n}\n.listItem:nth-child(2n+1) {\n  background-color: #F2F1EF;\n}\n.listItem:nth-last-child(1) {\n  border-bottom: 0px solid #FFF;\n}\n.itemDiv {\n  display:flex;\n  \n}\n.tiebreakCell {\n  flex-basis: 5%;\n}\n#wod {\n  overflow: hidden;\n}\n\n.leftNav {\n  width: 20%;\n  height: 100vh;\n  position: fixed;\n  float: left;\n}\n.sectionContainer {\n  width: 75%;\n  float: right;\n  margin-right: 5%;\n}\n\n.section {\n  margin: 0 auto;\n  \n}\n\n.teamHeading {\n  height:66px;\n}\n.gridEvents {\n  display: grid !important;\n  grid-template-columns: 15% 10% 15% 40% 10% 10%;\n}\n\n.table {\n  /* width:80%; */\n  border: 1px solid black;\n  margin-top: 30px;\n}\n.thead {\n  position: relative;\n  top:0;\n  left:0;\n  display:flex;\n  justify-content: space-between;\n  border-bottom: 1px solid black;\n}\n.tbody {\n  position: relative;\n  top: 0;\n  left: 0;\n  display: flex;\n  justify-content: space-between;\n}\n\n.theading {\n  flex-basis: 15%;\n  display:inline-block;\n  font-weight: 600;\n  padding:10px;\n \n}\n  .theading:nth-last-child(1),\n.cell:nth-last-child(1) {\n  flex-basis: 10%;\n}\n  .theading:nth-child(1),\n.cell:nth-child(1) {\n  flex-basis: 10%;\n}\n  .theading:nth-child(2),\n.cell:nth-child(2) {\n  flex-basis: 25%;\n}\n\n.trow {\n  display:flex;\n}\n#teamName {\n  font-weight: bold;\n}\n.cell {\n flex-basis: 15%;\n display: flex;\n padding: 10px;\n overflow: hidden;\n border-right: 1px solid black;\n overflow: hidden;\n justify-content: center;\n align-items: center;\n}\n\n.cell:nth-last-child(1) {\n  border-right: 0 solid #FFF;\n}\n.cell:nth-first-child(1) {\n  flex-basis: 8%; \n}\n\n", ""]);
+exports.push([module.i, "\n\n/* #88C542  verde\n#30499B  azul\n#EB7B2D  naranja  */\n\nbody {\n  font-family: 'Lato', sans-serif;\n}\n.app-container {\n      overflow: auto;\n      background-color: #bebebedb;\n      padding: 20px;\n      height: 100vh;\n      position:relative;\n      \n}\n.App {\n  text-align: center;\n  \n}\n.App-logo {\n  animation: App-logo-spin infinite 20s linear;\n  height: 80px;\n}\n\n.App-header {\n  background-color: #2e6da4;\n  height: 150px;\n  padding: 20px;\n  color: #FFF;\n}\n\n.App-title {\n  font-weight: bold;\n  font-size: 2.5em;\n}\n\n.App-intro {\n  font-size: large;\n}\n.teamCard {\n width: 100%;\n height: 80px;\n border: 1.5px solid #2e6da4;\n margin: 5px 0;\n position: relative;\n background-color: rgb(246, 252, 240);\n box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),\n 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n \n}\n.teamCard h2,\n.teamCard h3,\n.teamCard .id,\n.teamCard .score {\n  color: rgba(65, 63, 63, 0.966)\n}\n.teamCard .teamName {\n  font-size: 1.2em;\n  font-weight: bold;\n  margin: 0px;\n  position: relative;\n  top: 0;\n  left: 0;\n  padding: 5px;\n}\n  .teamCard .athletes {\n  font-size: 1em;\n  margin: 5px 0;\n  padding: 5px;\n}\n.teamCard .id{\n  font-size: 1em;\n  margin: 0px;\n  display: inline;\n  position: absolute;\n  top: 0;\n  right: 5px;\n  padding: 5px;\n}\n.teamCard .score {\n   font-size: 1em;\n   margin: 0px;\n   display: inline;\n   position: absolute;\n   bottom: 0;\n   right: 0;\n   padding: 5px;\n}\n\n\n.eventForm {\n  position: relative;\n  width: 100%;\n  margin: 0;\n  padding: 0 15px;\n  height: auto;\n  display: flex;\n  flex-wrap: wrap;\n  font-size: 1.35em;\n  overflow: hidden;\n  border: 1px solid black;\n}\n.eventFormField {\n  flex-basis: 37%;\n  margin:0 15px;\n  padding: 5px;\n}\n.eventFormField label {\n  float: left;\n  margin: 0 10px;\n  padding: 10px 0;\n}\n.eventFormField .input {\n  margin: 10px;\n  float: left;\n}\n#tiebreakCheck {\n  position: relative;\n  top: 5px;\n  right: 5px;\n}\n.qtiebreaks {\n position: absolute;\n bottom: 75px;\n left: 170px;\n}\n.submitEvent {\n  width: 50%;\n  margin: 0 auto;\n}\n\n.flex-around {\n  display: flex;\n  justify-content: space-around;\n}\n\n.radioTeam {\n  display:inline-block;\n  margin: 10px 20px;\n}\n\n/* .leaderboard_table {\n  background-color:#91C3FF;\n} */\n.btn_leaderboard {\n  font-size: 1.6em;\n}\n\n.btn_leftNav {\n  display:block;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #2e6da4;\n  margin: 0 auto;\n  width: 80%;\n  font-size:1.4em;\n}\n.btn_section {\n  display:block;\n  color: #fff;\n  background-color: #337ab7;\n  border-color: #2e6da4;\n  margin: 0 auto;\n  width: 30%;\n  font-size: 1.3em;\n}\n\n.theList {\n  padding: 0px;\n  margin: 0px;\n  width:100%;\n}\n\n.listItem {\n  list-style: none;\n  border-bottom: 1px solid black;\n}\n.listItem:nth-child(2n) {\n  background-color: lavender;\n}\n.listItem:nth-child(2n+1) {\n  background-color: #F2F1EF;\n}\n.listItem:nth-last-child(1) {\n  border-bottom: 0px solid #FFF;\n}\n.itemDiv {\n  display:flex;\n  \n}\n.tiebreakCell {\n  flex-basis: 5%;\n}\n#wod {\n  overflow: hidden;\n}\n\n.leftNav {\n  width: 20%;\n  height: 100vh;\n  position: absolute;\n  float: left;\n  margin-top: 30px;\n}\n.sectionContainer {\n  width: 75%;\n  float: right;\n  margin-right: 5%;\n}\n\n.section {\n  margin: 0 auto;\n  background-color: #ffffff;\n  min-height: 80vh;\n  \n}\n\n.teamHeading {\n  height:66px;\n}\n.gridEvents {\n  display: grid !important;\n  grid-template-columns: 15% 10% 15% 40% 10% 10%;\n}\n\n.table {\n  /* width:80%; */\n  border: 1px solid black;\n  margin-top: 30px;\n  font-size: 1.3em;\n}\n.thead {\n  position: relative;\n  top:0;\n  left:0;\n  display:flex;\n  justify-content: space-between;\n  border-bottom: 1px solid black;\n}\n.tbody {\n  position: relative;\n  top: 0;\n  left: 0;\n  display: flex;\n  justify-content: space-between;\n}\n\n.theading {\n  flex-basis: 15%;\n  display:inline-block;\n  font-weight: 600;\n  padding:10px;\n \n}\n  .theading:nth-last-child(1),\n.cell:nth-last-child(1) {\n  flex-basis: 10%;\n}\n  .theading:nth-child(1),\n.cell:nth-child(1) {\n  flex-basis: 10%;\n}\n  .theading:nth-child(2),\n.cell:nth-child(2) {\n  flex-basis: 25%;\n}\n\n.trow {\n  display:flex;\n}\n#teamName {\n  font-weight: bold;\n}\n.cell {\n flex-basis: 15%;\n display: flex;\n padding: 10px;\n overflow: hidden;\n border-right: 1px solid black;\n overflow: hidden;\n justify-content: center;\n align-items: center;\n}\n\n.cell:nth-last-child(1) {\n  border-right: 0 solid #FFF;\n}\n.cell:nth-first-child(1) {\n  flex-basis: 8%; \n}\n\n", ""]);
 
 // exports
 
@@ -59885,6 +59936,7 @@ var LeaderboardTeam = function (_Component) {
     key: 'render',
     value: function render() {
       var data = this.props.data;
+      console.log(data.eventScores[3]);
 
       var ev1 = data.eventScores[0] ? data.eventScores[0].points + ' pts - ' + data.eventScores[0].score : '--';
       var ev2 = data.eventScores[1] ? data.eventScores[1].points + ' pts - ' + data.eventScores[1].score : '--';
@@ -61645,9 +61697,11 @@ var CreateTeamForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (CreateTeamForm.__proto__ || Object.getPrototypeOf(CreateTeamForm)).call(this, props));
 
     _this.tiebreakHandler = _this.tiebreakHandler.bind(_this);
+    _this.timeCapHandler = _this.timeCapHandler.bind(_this);
     _this.state = {
       error: null,
-      hasTiebreak: false
+      hasTiebreak: false,
+      timeType: false
     };
     return _this;
   }
@@ -61663,6 +61717,17 @@ var CreateTeamForm = function (_React$Component) {
       }
     }
   }, {
+    key: "timeCapHandler",
+    value: function timeCapHandler() {
+      var typeSelect = document.querySelector('select[name="midePor"]');
+      var type = typeSelect.options[typeSelect.selectedIndex].value;
+      if (type == 'time') {
+        this.setState({ timeType: true });
+      } else {
+        this.setState({ timeType: false });
+      }
+    }
+  }, {
     key: "createEvent",
     value: function createEvent() {
       var category_id = this.refs.category.value;
@@ -61671,6 +61736,7 @@ var CreateTeamForm = function (_React$Component) {
       var wod = this.refs.wod.value;
       var tiebreakCheck = document.querySelector('input[name="tiebreak"]');
       var tiebreak = void 0;
+      var timeCap = void 0;
       var qTiebreaks = 0;
       if (tiebreakCheck.checked) {
         tiebreak = 1;
@@ -61683,8 +61749,12 @@ var CreateTeamForm = function (_React$Component) {
           qTiebreaks = 1;
         }
       }
+      if (this.state.timeType) {
+        timeCap = this.refs.timeCap.value;
+      }
       var midePor = this.refs.midePor.value;
-      var event = { category_id: category_id, eventNumber: eventNumber, name: name, wod: wod, tiebreak: tiebreak, qTiebreaks: qTiebreaks, midePor: midePor };
+      var event = { category_id: category_id, eventNumber: eventNumber, name: name, wod: wod, tiebreak: tiebreak, qTiebreaks: qTiebreaks, midePor: midePor, timeCap: timeCap };
+      console.log(event);
       this.props.storeEvent(event);
       this.refs.category.value = 0;
       this.refs.eventNumber.value = 0;
@@ -61779,6 +61849,11 @@ var CreateTeamForm = function (_React$Component) {
                 "option",
                 { value: "5" },
                 "5"
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "option",
+                { value: "6" },
+                "Final"
               )
             )
           ),
@@ -61832,7 +61907,12 @@ var CreateTeamForm = function (_React$Component) {
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               "select",
-              { className: "input", name: "midePor", id: "midePor", ref: "midePor" },
+              { className: "input", name: "midePor", id: "midePor", ref: "midePor", onChange: this.timeCapHandler },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "option",
+                { value: "" },
+                " -- "
+              ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 "option",
                 { value: "time" },
@@ -61848,6 +61928,16 @@ var CreateTeamForm = function (_React$Component) {
                 { value: "weight" },
                 "Peso"
               )
+            ),
+            this.state.timeType && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              "div",
+              { className: "timeCap" },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                "label",
+                { htmlFor: "timeCap" },
+                "Time Cap: "
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement("input", { type: "number", ref: "timeCap", name: "timeCap", id: "timeCap", min: "1", max: "60" })
             )
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -61902,74 +61992,74 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var EventsDash = function (_Component) {
-    _inherits(EventsDash, _Component);
+  _inherits(EventsDash, _Component);
 
-    function EventsDash(props) {
-        _classCallCheck(this, EventsDash);
+  function EventsDash(props) {
+    _classCallCheck(this, EventsDash);
 
-        var _this = _possibleConstructorReturn(this, (EventsDash.__proto__ || Object.getPrototypeOf(EventsDash)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EventsDash.__proto__ || Object.getPrototypeOf(EventsDash)).call(this, props));
 
-        _this.state = {
+    _this.state = {
 
-            section: 0
+      section: 0
 
-        };
-        return _this;
+    };
+    return _this;
+  }
+
+  _createClass(EventsDash, [{
+    key: 'backToThis',
+    value: function backToThis() {
+      this.setState({
+        section: 0
+      });
     }
+  }, {
+    key: 'scoresSection',
+    value: function scoresSection() {
+      this.state.section == 1 ? this.setState({ section: 0 }) : this.setState({ section: 1 });
+    }
+  }, {
+    key: 'eventAdminSection',
+    value: function eventAdminSection() {
+      this.state.section == 2 ? this.setState({ section: 0 }) : this.setState({ section: 2 });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
 
-    _createClass(EventsDash, [{
-        key: 'backToThis',
-        value: function backToThis() {
-            this.setState({
-                section: 0
-            });
-        }
-    }, {
-        key: 'scoresSection',
-        value: function scoresSection() {
-            this.state.section == 1 ? this.setState({ section: 0 }) : this.setState({ section: 1 });
-        }
-    }, {
-        key: 'eventAdminSection',
-        value: function eventAdminSection() {
-            this.state.section == 2 ? this.setState({ section: 0 }) : this.setState({ section: 2 });
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            var _this2 = this;
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        { className: 'section' },
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Btn__["a" /* default */], { text: 'Administrar Eventos', 'class': 'btn btn_section', funcion: this.eventAdminSection.bind(this) }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Btn__["a" /* default */], { text: 'Cargar Resultados', 'class': 'btn btn_section', funcion: this.scoresSection.bind(this) })
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'Ev_section' },
+          function () {
+            switch (_this2.state.section) {
+              case 1:
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__EventMenu__["a" /* default */], { backToApp: _this2.backToThis.bind(_this2) });
+                break;
+              case 2:
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__EventsAdmin__["a" /* default */], null);
 
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                { className: 'section' },
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    null,
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Btn__["a" /* default */], { text: 'Administrar Eventos', funcion: this.eventAdminSection.bind(this) }),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Btn__["a" /* default */], { text: 'Cargar Resultados', funcion: this.scoresSection.bind(this) })
-                ),
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                    'div',
-                    { className: 'Ev_section' },
-                    function () {
-                        switch (_this2.state.section) {
-                            case 1:
-                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__EventMenu__["a" /* default */], { backToApp: _this2.backToThis.bind(_this2) });
-                                break;
-                            case 2:
-                                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6__EventsAdmin__["a" /* default */], null);
+                break;
+              default:
+                return null;
+            }
+          }()
+        )
+      );
+    }
+  }]);
 
-                                break;
-                            default:
-                                return null;
-                        }
-                    }()
-                )
-            );
-        }
-    }]);
-
-    return EventsDash;
+  return EventsDash;
 }(__WEBPACK_IMPORTED_MODULE_0_react__["Component"]);
 
 /* harmony default export */ __webpack_exports__["a"] = (EventsDash);
@@ -62776,6 +62866,7 @@ var Leaderboard = function (_Component) {
         key: 'render',
         value: function render() {
             var leaderboard = this.props.data;
+            console.log(leaderboard);
 
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',

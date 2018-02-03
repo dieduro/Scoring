@@ -97,15 +97,28 @@ class EventScores extends Component {
   }
   
   setScore(teamScore) {
+    console.log(this.state.event.midePor);
     if (this.validateTeamId(teamScore.team)){
       let category_id = this.state.event.category_id
       teamScore.category_id = category_id
+      const timeCapSecs = this.state.event.timeCap*60
+      console.log(timeCapSecs);
+      const fullSecs = this.convertToSeconds(teamScore.score);
+      console.log(fullSecs)
+      if (this.state.event.midePor == 'time'){
+        if (fullSecs > timeCapSecs) {
+          
+          let repsLeft = fullSecs - timeCapSecs;
+          teamScore.score = 'TC +'+repsLeft;
+        }
+      }
       
       this.state.nonUpdatedTeams.forEach((team)=>{
         if(team.id == teamScore.team){
             team.show=false
         }
       }) 
+      console.log(teamScore)
       const url = '/api/event/' + this.state.event.id+'/cargarScore'
       axios.post(url,teamScore).then(response=> {
         this.fetchUpdatedTeams(this.state.event.id)
@@ -175,51 +188,62 @@ class EventScores extends Component {
   sortTeams(event, updatedTeams) {
     const eventScores = this
     updatedTeams = updatedTeams.sort(function(a, b){
-
       switch (event.midePor){
         case 'time':
-          if (eventScores.convertToSeconds(a.score) > eventScores.convertToSeconds(b.score)){
-            return 1
-          } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)){
-            if (event.tiebreak) {
-              if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)){
-                return 1
-              } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
-                return -1
-              } else {
-                return 0
-              }
+        
+        if (a.scoreSecs > b.scoreSecs){
+          return 1
+        } else if (eventScores.convertToSeconds(a.score) == eventScores.convertToSeconds(b.score)){
+          if (event.tiebreak) {
+            if (eventScores.convertToSeconds(a.tiebreak) > eventScores.convertToSeconds(b.tiebreak)){
+              return 1
+            } else if (eventScores.convertToSeconds(a.tiebreak) < eventScores.convertToSeconds(b.tiebreak)) {
+              return -1
+            } else {
+              return 0
             }
-          } else {
-            return -1
           }
-          break;
+        } else {
+          return -1
+        }
+        break;
         case 'reps':
         case 'peso':
         return parseInt(b.score,10) - parseInt(a.score,10)
-          break;
-      default:
-      return $score
+        break;
+        default:
+        return $score
       }
     })
-
-  }
-
- render() {  
-  const event = this.state.event
-
-  let nonUpdatedTeams = this.state.nonUpdatedTeams
-  if (nonUpdatedTeams) {
-    nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
-      return (team.show === true);
-    });
-  
-  }
-  const updatedTeams = this.state.updatedTeams
-  if (updatedTeams){
-    this.sortTeams(event, updatedTeams)
+    
   }
   
+  render() {  
+    const event = this.state.event
+    
+    let nonUpdatedTeams = this.state.nonUpdatedTeams
+    if (nonUpdatedTeams) {
+      nonUpdatedTeams = this.state.nonUpdatedTeams.filter(function (team) {
+        return (team.show === true);
+      });
+    }
+    const updatedTeams = this.state.updatedTeams
+    if (updatedTeams){
+      updatedTeams.forEach(team=>{
+        if (isNaN(this.convertToSeconds(team.score))) {
+          const repsLeft = team.score.substring(4);
+          const timeCapSecs = this.state.event.timeCap * 60;
+          const totalSecs = parseInt(timeCapSecs) + parseInt(repsLeft);
+          team.scoreSecs = totalSecs;
+          console.log(team.score);
+        } else {
+          team.scoreSecs = parseInt(this.convertToSeconds(team.score));
+        }
+      })
+      console.log(updatedTeams)
+      this.sortTeams(event, updatedTeams)
+    }
+    
     return (
       <div>
           <h1 className="App-title">Cargar Resultados</h1>
@@ -231,7 +255,7 @@ class EventScores extends Component {
          
          { nonUpdatedTeams.length == 0 && 
           <Btn text="Guardar Posiciones" funcion={this.storePositions.bind(this)}/>
-         }
+        }
   
         </Jumbotron>
       }
@@ -243,7 +267,7 @@ class EventScores extends Component {
           </Col>
         </div>
           :
-        <div>
+          <div>
           <h3>Cargando Equipos y Resultados</h3> 
         </div>
         }
@@ -254,13 +278,7 @@ class EventScores extends Component {
             <List entries={updatedTeams} itemType='team'/>   
           </Col>
         </div>
-        }
-        
-       
-      
-      
-
-        
+        } 
        </div>
      
     )
@@ -268,3 +286,21 @@ class EventScores extends Component {
   }
 }
 export default EventScores;
+          // if(isNaN(eventScores.convertToSeconds(a.score))){
+          //   const repsLeft = a.score.substring(4);
+          //   const timeCapSecs = eventScores.state.event.timeCap * 60;
+          //   const totalSecs = timeCapSecs + repsLeft;
+          //   a.scoreSecs = totalSecs
+          //   console.log(a.score)
+          // }else {
+          //   a.scoreSecs = a.score
+          // }
+          // if (isNaN(eventScores.convertToSeconds(b.score))) {
+          //   const repsLeft = b.score.substring(4);
+          //   const timeCapSecs = eventScores.state.event.timeCap * 60;
+          //   const totalSecs = timeCapSecs + repsLeft;
+          //   b.scoreSecs = totalSecs;
+          //   console.log(b.score);
+          // } else {
+          //   b.scoreSecs = b.score;
+          // }

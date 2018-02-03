@@ -7,9 +7,11 @@ export default class CreateTeamForm extends React.Component {
     constructor(props) {
         super(props);
         this.tiebreakHandler = this.tiebreakHandler.bind(this);
+        this.timeCapHandler = this.timeCapHandler.bind(this);
         this.state = {
         error: null,
-        hasTiebreak:false
+        hasTiebreak:false,
+        timeType: false
         };
     }
     tiebreakHandler() {
@@ -20,6 +22,15 @@ export default class CreateTeamForm extends React.Component {
                 this.setState({ hasTiebreak: false })
             }
     }
+    timeCapHandler() {
+          const typeSelect = document.querySelector('select[name="midePor"]');
+          const type = typeSelect.options[typeSelect.selectedIndex].value;
+          if (type == 'time') {
+            this.setState({ timeType: true });
+          } else {
+            this.setState({ timeType: false });
+          }
+    }
 
     createEvent(){
         let category_id = this.refs.category.value;
@@ -28,6 +39,7 @@ export default class CreateTeamForm extends React.Component {
         let wod = this.refs.wod.value;
         let tiebreakCheck = document.querySelector('input[name="tiebreak"]');
         let tiebreak
+        let timeCap;
         let qTiebreaks = 0;
         if (tiebreakCheck.checked) {
           tiebreak = 1;
@@ -40,8 +52,13 @@ export default class CreateTeamForm extends React.Component {
             qTiebreaks = 1;
           }
         }
+        if (this.state.timeType){
+          timeCap = this.refs.timeCap.value;
+          
+        }
         let midePor = this.refs.midePor.value;
-        const event = { category_id, eventNumber, name, wod, tiebreak, qTiebreaks, midePor };
+        const event = { category_id, eventNumber, name, wod, tiebreak, qTiebreaks, midePor, timeCap };
+        console.log(event)
         this.props.storeEvent(event)
         this.refs.category.value= 0;
         this.refs.eventNumber.value = 0;
@@ -74,6 +91,7 @@ export default class CreateTeamForm extends React.Component {
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
+              <option value="6">Final</option>
             </select>
           </div>
           <div className="eventFormField">
@@ -94,11 +112,16 @@ export default class CreateTeamForm extends React.Component {
             </div>}
           <div className="eventFormField">
             <label htmlFor="midePor">Mide por:</label>
-            <select className="input" name="midePor" id="midePor" ref="midePor">
+            <select className="input" name="midePor" id="midePor" ref="midePor" onChange={this.timeCapHandler}>
+              <option value=""> -- </option>
               <option value="time">Tiempo</option>
               <option value="reps">Reps</option>
               <option value="weight">Peso</option>
             </select>
+            {this.state.timeType && <div className="timeCap">
+                <label htmlFor="timeCap">Time Cap: </label>
+                <input type="number" ref="timeCap" name="timeCap" id="timeCap" min="1" max="60" />
+              </div>}
           </div>
           <div className="submitEvent">
             <Btn text="Guardar Evento" funcion={this.createEvent.bind(this)} />

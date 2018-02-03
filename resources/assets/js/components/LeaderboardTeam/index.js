@@ -9,6 +9,7 @@ export default class LeaderboardTeam extends Component {
 
     render() {
         const data = this.props.data
+        console.log(data.eventScores[3]);
 
         let ev1 = data.eventScores[0] ? `${data.eventScores[0].points} pts - ${data.eventScores[0].score}`  : '--'
         let ev2 = data.eventScores[1] ? `${data.eventScores[1].points} pts - ${data.eventScores[1].score}`  : '--'

@@ -22,6 +22,7 @@ class EventController extends Controller
                 'wod' =>$event->wod,
                 'eventNumber' => $event->eventNumber,
                 'tiebreak' => $event->tiebreak,
+                'timeCap' => $event->timeCap,
                 'qTiebreaks' => $event->qTiebreaks,
                 'midePor' => $event->midePor,
             ];
@@ -59,7 +60,8 @@ class EventController extends Controller
             'eventNumber' => $request->input('eventNumber'),
             'tiebreak' => $request->input('tiebreak'),
             'qTiebreaks' => $request->input('qTiebreaks'),
-            'midePor' => $request->input('midePor')
+            'midePor' => $request->input('midePor'),
+            'timeCap' => $request->input('timeCap')
         ]);
         
       

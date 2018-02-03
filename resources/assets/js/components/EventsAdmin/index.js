@@ -60,9 +60,9 @@ class EventsAdmin extends Component {
               <div className="gridEvents thead">
                 <div className="theading">Categoria</div>
                 <div className="theading">Evento Nº</div>
-                <div className="theading">Nombre</div>
                 <div className="theading">Workout</div>
                 <div className="theading">Mide por</div>
+                <div className="theading">Time Cap</div>
                 <div className="theading">TieBreak</div>
               </div>
               <div className="tbody">

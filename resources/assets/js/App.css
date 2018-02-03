@@ -4,6 +4,17 @@
 #30499B  azul
 #EB7B2D  naranja  */
 
+body {
+  font-family: 'Lato', sans-serif;
+}
+.app-container {
+      overflow: auto;
+      background-color: #bebebedb;
+      padding: 20px;
+      height: 100vh;
+      position:relative;
+      
+}
 .App {
   text-align: center;
   
@@ -87,7 +98,7 @@
   height: auto;
   display: flex;
   flex-wrap: wrap;
-  font-size: 1.05em;
+  font-size: 1.35em;
   overflow: hidden;
   border: 1px solid black;
 }
@@ -137,13 +148,23 @@
   font-size: 1.6em;
 }
 
-.btn_section {
+.btn_leftNav {
   display:block;
   color: #fff;
   background-color: #337ab7;
   border-color: #2e6da4;
   margin: 0 auto;
   width: 80%;
+  font-size:1.4em;
+}
+.btn_section {
+  display:block;
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  margin: 0 auto;
+  width: 30%;
+  font-size: 1.3em;
 }
 
 .theList {
@@ -179,8 +200,9 @@
 .leftNav {
   width: 20%;
   height: 100vh;
-  position: fixed;
+  position: absolute;
   float: left;
+  margin-top: 30px;
 }
 .sectionContainer {
   width: 75%;
@@ -190,6 +212,8 @@
 
 .section {
   margin: 0 auto;
+  background-color: #ffffff;
+  min-height: 80vh;
   
 }
 
@@ -205,6 +229,7 @@
   /* width:80%; */
   border: 1px solid black;
   margin-top: 30px;
+  font-size: 1.3em;
 }
 .thead {
   position: relative;

@@ -38,8 +38,9 @@
 
             
             <h1 class="title"><img src="{{ asset('storage/hc_tit.png') }}" alt="Hardy Challenge"></h1>
-            <div class="date">
-                <span> SÁBADO 3/2 + DOMINGO 4/2</span>
+            <div class="date-tirita">
+                {{--  <span> SÁBADO 3/2 + DOMINGO 4/2</span>  --}}
+                <img src="{{ asset('storage/date-tirita.jpg') }}" alt="">
             </div>
 
             

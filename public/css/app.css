@@ -603,6 +603,14 @@
           align-items: center;
 }
 
+.date-tirita {
+  margin-top: 50px;
+}
+
+.date-tirita img {
+  width: 70%;
+}
+
 .date {
   width: 75%;
   float: left;
@@ -784,6 +792,10 @@ footer {
 }
 
 @media (min-width: 768px) {
+  .date-tirita img {
+    width: 60%;
+  }
+
   .leyenda {
     width: 50%;
   }
@@ -795,11 +807,19 @@ footer {
   .h_logo img {
     width: 35%;
   }
+
+  .section {
+    margin-top: 60px;
+  }
 }
 
 @media (min-width: 1024px) {
-  .title {
+  .date-tirita img {
     width: 35%;
+  }
+
+  .title {
+    width: 25%;
   }
 
   .date span {

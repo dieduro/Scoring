@@ -11,6 +11,8 @@ export default class Event extends Component {
 
     render() {
         const event = this.props.data
+        let timeCap
+        event.timeCap == null ? timeCap='--' : timeCap=event.timeCap
         let tiebreak = null
         if (event.tiebreak== 1){
             tiebreak = 'Sí'
@@ -21,9 +23,9 @@ export default class Event extends Component {
             <div className="gridEvents itemDiv">
                 <div className="cell" id="category">{event.category}</div>
                 <div className="cell" id="eventNumber">{event.eventNumber}</div>
-                <div className="cell" id="name">{event.name}</div>
                 <div className="cell" id="wod">{event.wod}</div>
                 <div className="cell" id="type">{event.midePor}</div>
+                <div className="cell" id="timeCap">{timeCap}</div>
                 <div className="tiebreakCell cell " id="tiebreak">{tiebreak}</div>
                
             </div>    
