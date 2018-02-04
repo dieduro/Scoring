@@ -240,7 +240,7 @@ class EventScores extends Component {
           team.scoreSecs = parseInt(this.convertToSeconds(team.score));
         }
       })
-      console.log(updatedTeams)
+     
       this.sortTeams(event, updatedTeams)
     }
     
