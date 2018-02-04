@@ -15955,7 +15955,7 @@ var EventScores = function (_Component) {
             return parseInt(b.score, 10) - parseInt(a.score, 10);
             break;
           default:
-            return $score;
+            return score;
         }
       });
     }
@@ -59936,13 +59936,14 @@ var LeaderboardTeam = function (_Component) {
     key: 'render',
     value: function render() {
       var data = this.props.data;
-      console.log(data.eventScores[3]);
+      console.log(data.eventScores);
 
       var ev1 = data.eventScores[0] ? data.eventScores[0].points + ' pts - ' + data.eventScores[0].score : '--';
       var ev2 = data.eventScores[1] ? data.eventScores[1].points + ' pts - ' + data.eventScores[1].score : '--';
       var ev3 = data.eventScores[2] ? data.eventScores[2].points + ' pts - ' + data.eventScores[2].score : '--';
       var ev4 = data.eventScores[3] ? data.eventScores[3].points + ' pts - ' + data.eventScores[3].score : '--';
-      var ev5 = data.eventScores[4] ? data.eventScores[4].points + ' pts - ' + data.eventScores[4].score : '--';
+      var ev5 = data.eventScores[4] ? data.eventScores[4].points + ' pts - ' + data.eventScores[4].score : "--";
+      var ev6 = data.eventScores[5] ? data.eventScores[5].points + ' pts - ' + data.eventScores[5].score : "--";
 
       var ts = data.team.totalScore != null ? data.team.totalScore : "--";
 
@@ -59983,6 +59984,11 @@ var LeaderboardTeam = function (_Component) {
           'div',
           { className: 'cell', name: 'eventScores', id: 'ev5' },
           ev5
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'cell', name: 'eventScores', id: 'ev5' },
+          ev6
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
@@ -62774,6 +62780,7 @@ var LeaderboardDash = function (_Component) {
         key: 'render',
         value: function render() {
             var leaderboard = this.state.leaderboard;
+            // console.log(leaderboard)
             var category = this.state.category;
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'div',
@@ -62917,6 +62924,11 @@ var Leaderboard = function (_Component) {
                             'div',
                             { className: 'theading' },
                             'Evento #5'
+                        ),
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'div',
+                            { className: 'theading' },
+                            'Evento #6'
                         ),
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                             'div',

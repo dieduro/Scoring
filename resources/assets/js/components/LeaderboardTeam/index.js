@@ -9,13 +9,14 @@ export default class LeaderboardTeam extends Component {
 
     render() {
         const data = this.props.data
-        console.log(data.eventScores[3]);
+        console.log(data.eventScores);
 
         let ev1 = data.eventScores[0] ? `${data.eventScores[0].points} pts - ${data.eventScores[0].score}`  : '--'
         let ev2 = data.eventScores[1] ? `${data.eventScores[1].points} pts - ${data.eventScores[1].score}`  : '--'
         let ev3 = data.eventScores[2] ? `${data.eventScores[2].points} pts - ${data.eventScores[2].score}`  : '--'
         let ev4 = data.eventScores[3] ? `${data.eventScores[3].points} pts - ${data.eventScores[3].score}`  : '--'
-        let ev5 = data.eventScores[4] ? `${data.eventScores[4].points} pts - ${data.eventScores[4].score}`  : '--'
+        let ev5 = data.eventScores[4] ? `${data.eventScores[4].points} pts - ${data.eventScores[4].score}` : "--";
+        let ev6 = data.eventScores[5] ? `${data.eventScores[5].points} pts - ${data.eventScores[5].score}` : "--"; 
       
         let ts = data.team.totalScore != null ? data.team.totalScore : "--";
 
@@ -42,6 +43,9 @@ export default class LeaderboardTeam extends Component {
             </div>
             <div className="cell" name="eventScores" id="ev5">
               {ev5}
+            </div>
+            <div className="cell" name="eventScores" id="ev5">
+              {ev6}
             </div>
 
             <div className="cell" id="wod">

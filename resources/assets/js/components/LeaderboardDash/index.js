@@ -71,6 +71,7 @@ class LeaderboardDash extends Component {
 
     render(){
         const leaderboard = this.state.leaderboard
+        // console.log(leaderboard)
         const category = this.state.category
         return <div>
             <Jumbotron>

@@ -212,7 +212,7 @@ class EventScores extends Component {
         return parseInt(b.score,10) - parseInt(a.score,10)
         break;
         default:
-        return $score
+        return score
       }
     })
     

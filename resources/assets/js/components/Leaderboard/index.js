@@ -26,6 +26,7 @@ class Leaderboard extends Component {
                         <div className="theading">Evento #3</div>
                         <div className="theading">Evento #4</div>
                         <div className="theading">Evento #5</div>
+                        <div className="theading">Evento #6</div>
                         <div className="theading">Puntaje Total</div>
                     </div>
                     <div className="tbody">
