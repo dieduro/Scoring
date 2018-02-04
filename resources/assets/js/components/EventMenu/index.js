@@ -27,10 +27,13 @@ class EventMenu extends Component {
     }
 
     showEvent() {
+
        let event_id = this.refs.event_id.value
+       console.log(event_id)
        let events = this.state.events
        let findEvent = (event) => event.id == event_id
        let eventChosen = events.find(findEvent)
+       console.log(eventChosen)
         this.setState({
             event : eventChosen
         })
