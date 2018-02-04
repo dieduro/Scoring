@@ -125,7 +125,7 @@
                 </div>
             </section>  --}}
 
-            <section class="section">    
+            {{--  <section class="section">    
                 <div class="location">
                     <div class="inner">
                         <img src="{{ asset('storage/location.png') }}" alt="Location">
@@ -134,7 +134,7 @@
                    
                     <iframe class="map" height="300" frameborder="0"  src="https://www.google.com/maps/embed/v1/view?zoom=17&center=-38.2453%2C-57.7790&key=AIzaSyBVaPFM8AaBlY9Jx9ci41Bf6vr0jX8E3Wo" allowfullscreen></iframe>
                 </div>
-            </section>
+            </section>  --}}
             
         
                 <section class="section" id="promo_sec">

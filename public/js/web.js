@@ -190,14 +190,14 @@ window.onload = function()
             fetchData(category_id);
             scrollToTop()
         });
-        cat2.addEventListener("click", function(){
-            hideImage();
-            category_id = 2;
-            unclick();
-            cat2.classList.add("clicked");
-            fetchData(category_id);
-            scrollToTop();
-        });
+        // cat2.addEventListener("click", function(){
+        //     hideImage();
+        //     category_id = 2;
+        //     unclick();
+        //     cat2.classList.add("clicked");
+        //     fetchData(category_id);
+        //     scrollToTop();
+        // });
         cat3.addEventListener("click", function(){
             hideImage();
             category_id = 3;
