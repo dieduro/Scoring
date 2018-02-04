@@ -46,7 +46,8 @@
 
              <section class="section">
                 <h2 class="subheading padding10">LEADERBOARDS</h2>
-                <p class="leyenda2 padding10">¡Consultá las tablas de posiciones en VIVO!</p>
+                {{--  <p class="leyenda2 padding10">¡Consultá las tablas de posiciones en VIVO!</p>  --}}
+                <p class="leyenda2 padding10">¡Procesando los resultados de la final para la entrega de premios!</p>
                 <div class="categorias">
                     <div class="cat">
                         <div class="nivel" id="rxd">

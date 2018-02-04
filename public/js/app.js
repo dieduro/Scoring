@@ -15985,7 +15985,7 @@ var EventScores = function (_Component) {
             team.scoreSecs = parseInt(_this5.convertToSeconds(team.score));
           }
         });
-        console.log(updatedTeams);
+
         this.sortTeams(event, updatedTeams);
       }
 
@@ -62128,12 +62128,15 @@ var EventMenu = function (_Component) {
     }, {
         key: 'showEvent',
         value: function showEvent() {
+
             var event_id = this.refs.event_id.value;
+            console.log(event_id);
             var events = this.state.events;
             var findEvent = function findEvent(event) {
                 return event.id == event_id;
             };
             var eventChosen = events.find(findEvent);
+            console.log(eventChosen);
             this.setState({
                 event: eventChosen
             });
